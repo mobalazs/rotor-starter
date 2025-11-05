@@ -1,0 +1,12 @@
+namespace Models
+    class PreloaderModel extends Rotor.Model
+
+        state = {
+            maxHit: 0,
+            counter: 0,
+            resourcesReady: false
+        }
+
+    end class
+
+end namespace

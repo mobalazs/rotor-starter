@@ -1,0 +1,97 @@
+' utils
+import "pkg:/source/roku_modules/rotorframework/utils/GeneralUtils.bs"
+import "pkg:/source/roku_modules/rotorframework/utils/NodeUtils.bs"
+import "pkg:/source/roku_modules/rotorframework/utils/ArrayUtils.bs"
+
+class ParserFactory
+
+
+
+    function getParser(requestKey as String)
+        if requestKey = "home:feed"
+            return new HomeFeedParser()
+        end if
+
+        return invalid
+    end function
+
+
+end class
+
+
+
+class HomeFeedParser
+
+    fakeContentCounter as integer
+    realContentIds as object
+
+    function parse(data) as object
+
+        cardCount = 0
+
+        contentTable = {}
+        for each content in data.contents
+            contentTable[content.contentId] = content
+        end for
+
+        ' helper vars for dummy images
+        m.fakeContentCounter = 100
+        m.realContentIds = []
+
+        ' Generate carousel compatible data structure
+        contentList = []
+        data.rows.SortBy("sort")
+        for each row in data.rows
+            cards = m.getCards(row.contentList, contentTable, row.displayType)
+            cardCount += cards.Count()
+            contentList.push(Rotor.Utils.createContentNode({
+                contentList: cards,
+                contentId: row.rowId,
+                displayType: row.displayType,
+                title: row.title
+            }, "RowContentNode"))
+        end for
+
+        responseContentNode = Rotor.Utils.createContentNode({
+            contentList: contentList,
+            cardCount: cardCount
+        }, "HomeContentNode")
+
+        return responseContentNode
+    end function
+
+    function getCards(contentList, contentTable, rowDisplayType) as object
+        cardList = []
+        for each contentId in contentList
+
+            ' Create a clone (reason: There should be more content for demo what we have)
+            contentTableId = contentId.split("_")[0]
+            parsedContent = {}
+            parsedContent.append(contentTable[contentTableId])
+            ' Dummy images injection
+            if parsedContent.contentType <> "promo"
+                if -1 < Rotor.Utils.findInArray(m.realContentIds, contentTableId)
+                    parsedContent.thumbnailUrl = `https://picsum.photos/id/${m.fakeContentCounter}/200/300`
+                    parsedContent.previewPosterUrl = `https://picsum.photos/id/${m.fakeContentCounter}/970/546`
+                    m.fakeContentCounter++
+                else
+                    m.realContentIds.push(contentTableId)
+                end if
+            end if
+            ' Add carousel specific props
+            parsedContent.append({
+                contentId: contentId,
+                itemId: parsedContent.contentId,
+                displayType: parsedContent.displayType ?? rowDisplayType
+            })
+            if rowDisplayType = "trending"
+                if RND(2) = 1
+                    parsedContent.isRecentlyAdded = true
+                end if
+            end if
+            cardList.push(Rotor.Utils.createContentNode(parsedContent, "CardContentNode"))
+
+        end for
+        return cardList
+    end function
+end class

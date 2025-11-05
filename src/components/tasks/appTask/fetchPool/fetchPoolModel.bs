@@ -1,0 +1,12 @@
+namespace Models
+
+    class FetchPoolModel extends Rotor.Model
+
+        state = {
+            response: invalid,
+            requestKey: ""
+        }
+
+    end class
+
+end namespace

@@ -1,0 +1,62 @@
+{
+	"name": "rotor-starter",
+	"version": "0.1.0",
+	"description": "Rotor boilerplate project for Roku applications",
+	"scripts": {
+		"precompiler": "ts-node-cwd scripts/generateBsConstFromJs.ts",
+		"build-dev": "npm run precompiler && bsc  --project bsconfig-dev.json --createPackage=false",
+		"build-tests": "npm run precompiler && bsc --project bsconfig-tests.json --createPackage=false",
+		"build-prod": "npm run precompiler && bsc  --project bsconfig-prod.json --createPackage=false",
+		"coverage": "npm run precompiler && node scripts/collect-coverage.js",
+		"lint": "npx bslint --project bsconfig.json  --lintConfig bslint.json",
+		"release": "npm run precompiler && bsc --createPackage=false",
+		"package": "npm run precompiler && bsc --create-package"
+	},
+	"ropm": {
+		"rootDir": "src",
+		"noprefix": [
+			"rotor-framework",
+			"roku-requests"
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mobalazs/magic-whitelabel.git"
+	},
+	"keywords": [
+		"roku",
+		"template",
+		"starter",
+		"brightscript",
+		"brighterscript",
+		"rotor",
+		"framework",
+		"mvi",
+		"state-management",
+		"ui-framework",
+		"view-builder",
+		"ropm"
+	],
+	"author": "Balázs Molnár",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/mobalazs/magic-whitelabel/issues"
+	},
+	"homepage": "https://github.com/mobalazs/magic-whitelabel#readme",
+	"devDependencies": {
+		"@rokucommunity/bslint": "1.0.0-alpha.48",
+		"@rokucommunity/promises": "^0.6.6",
+		"@types/node": "^20.8.2",
+		"brighterscript": "1.0.0-alpha.48",
+		"obj-keypath": "^1.1.0",
+		"rooibos-roku": "^5.10.0",
+		"ts-node": "^10.9.1",
+		"ts-node-cwd": "^10.9.2",
+		"typescript": "^5.2.2"
+	},
+	"dependencies": {
+		"roku-requests": "^1.2.0",
+		"rotor-framework": "^0.3.4"
+	},
+	"main": "index.js"
+}

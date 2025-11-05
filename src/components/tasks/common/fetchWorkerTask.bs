@@ -1,0 +1,29 @@
+import "requestRouter.bs"
+import "parserFactory.bs"
+import "pkg:/source/roku_modules/rokurequests/Requests.brs"
+
+sub init()
+    m.top.functionName = "fetch"
+    m.parserFactory = new ParserFactory()
+end sub
+
+sub fetch()
+
+    request = m.top.request
+
+    m.httpRouter = new HttpRouter(request)
+
+    response = m.httpRouter.Requests().get(request.endpoint)
+
+    parser = m.parserFactory.getParser(request.requestKey)
+
+    parsedResponse = parser.parse(response.json)
+
+    m.top.response = parsedResponse
+
+end sub
+
+
+
+
+

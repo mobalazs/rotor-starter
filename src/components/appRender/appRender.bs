@@ -1,0 +1,74 @@
+
+' Framework
+import "pkg:/source/roku_modules/rotorframework/RotorFramework.bs"
+
+' Assets
+import "pkg:/assets/generated/bsTheme.bs"
+
+' Constants and IntentTypes
+import "pkg:/components/common/constants.bs"
+import "pkg:/components/common/intentTypes.bs"
+
+' ViewModel
+
+sub init()
+end sub
+
+sub initApplication(payload = {} as object)
+
+    m.appFw = new Rotor.Framework({
+        tasks: ["AppTask"],
+        onReady: onTaskReady, ' optional - called when all tasks are ready
+        debug: {
+            autoSetNodeId: true ' If true, you can find nodes in RALE much easier. (Available only in debug mode.)
+        }
+    })
+
+    m.appFw.render({
+        nodeType: "Rectangle",
+        fields: {
+            width: m.roDeviceInfo.GetDisplayWidth()
+            height: m.roDeviceInfo.GetDisplayHeight()
+        }
+    })
+end sub
+
+
+' Below optional callback function can be provided to be notified when the tasks are ready.
+sub onTaskReady()
+    ' Get user's theme and language preference
+    m.userDispatcher = m.appFw.getDispatcher("user")
+    userState = m.userDispatcher.getState()
+
+    ' Load translation file synchronously
+    translationJson = ReadAsciiFile("pkg:/assets/generated/en_US.translation.json")
+    translation = ParseJson(translationJson)
+    m.appFw.i18nService.setL10n(translation)
+end sub
+
+
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    result = m.appFw.plugins.focus.onKeyEventHandler(key, press)
+
+    if press = true
+
+        if result.handled = true
+
+            if result.isSelected = true
+                ' additional handler
+            end if
+            return result.handled
+
+        else
+            return true
+        end if
+
+    end if
+    return false
+end function
+
+
+sub destroyApplication(payload as object)
+    m.appFw.destroy()
+end sub

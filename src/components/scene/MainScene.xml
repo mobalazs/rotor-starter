@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="MainScene" extends="Scene">
+
+    <interface>
+        <!-- Exits channel if set to true -->
+        <field id="exitChannel" type="bool" alwaysNotify="true" />
+        <!-- Deep linking launch arguments will be passed via this field to Show() function -->
+        <field id="launch_args" type="assocarray" onChange="LaunchArgumentsReceived" />
+        <!-- roInput deep linking arguments will be passed via this field to Input() function -->
+        <field id="input_args" type="assocarray" onChange="InputArgumentsReceived" />
+
+
+        <field id="appRoot" type="node" />
+
+    </interface>
+
+</component>

@@ -1,0 +1,46 @@
+namespace IntentTypes
+
+    enum AppStore
+        LOAD_REMOTE_APP_CONFIG = "app_load_remote_config"
+        SET_ACTIVE_PAGE_KEY = "app_set_new_page_key"
+    end enum
+
+    enum Preloader
+        START_PRELOAD_RESOURCES = "preloader_start_preload_resources"
+        ADD_ITEM = "preloader_add_item"
+        COMPLETED_ITEM = "preloader_completed_item"
+        READY = "preloader_ready"
+    end enum
+
+    enum User
+        SET_ACTIVE_LANGUAGE_KEY = "user_set_active_language"
+        SET_ACTIVE_THEME_KEY = "user_set_active_theme"
+    end enum
+
+    enum Sleep
+        START = "sleep_start"
+        COMPLETED = "sleep_completed"
+    end enum
+
+    enum ContentReader
+        LOAD_CONTENT = "load_content"
+        PARSE_CONTENT = "parse_content"
+        CONTENT_LOADED = "content_loaded"
+    end enum
+
+    enum HomePage
+        SET_FOCUSED_TILE = "home_page_set_focused_tile"
+        SET_SELECTED_TILE = "home_page_set_selected_tile"
+    end enum
+
+    enum FetchPool
+        FETCH = "fetch"
+        FETCH_DONE = "fetch_done"
+        ERROR = "error"
+        REQUEST = "request"
+        RESPONSE = "response"
+        RESOLVE = "resolve"
+        DONE = "done"
+    end enum
+
+end namespace

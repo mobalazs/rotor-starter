@@ -1,0 +1,171 @@
+class MockupRequestFactory
+
+    sub new()
+    end sub
+
+    function get(url as string) as object
+        uri = m.urlToMockPath(url)
+
+        ' Try to read the mockup file
+        fileContent = ReadAsciifile(uri)
+
+        ' Check if file exists and is valid
+        if fileContent = invalid or fileContent = "" then
+            print "[MOCKUP] Warning: Mockup file not found: " + uri
+            print "[MOCKUP] Requested URL: " + url
+            print "[MOCKUP] Returning 404 error response"
+
+            ' Return 404 error response
+            return {
+                "body": "Mockup file not found: " + uri,
+                "cachehit": false,
+                "getfailurereason": "Not Found",
+                "getsourceidentity": 111111111,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "headersarray": [
+                    { "content-type": "application/json" }
+                ],
+                "json": {
+                    "error": "Mockup file not found",
+                    "mockupPath": uri,
+                    "requestedUrl": url
+                },
+                "ok": false,
+                "statuscode": 404,
+                "target_ip": "<mockup>",
+                "text": "Not Found",
+                "timestried": 1,
+                "url": url
+            }
+        end if
+
+        ' Parse JSON
+        json = ParseJson(fileContent)
+
+        ' Check if JSON parsing was successful
+        if json = invalid then
+            print "[MOCKUP] Error: Invalid JSON in mockup file: " + uri
+            print "[MOCKUP] Requested URL: " + url
+            print "[MOCKUP] Returning 500 error response"
+
+            ' Return 500 error response for invalid JSON
+            return {
+                "body": "Invalid JSON in mockup file",
+                "cachehit": false,
+                "getfailurereason": "Internal Server Error",
+                "getsourceidentity": 111111111,
+                "headers": {
+                    "content-type": "application/json"
+                },
+                "headersarray": [
+                    { "content-type": "application/json" }
+                ],
+                "json": {
+                    "error": "Invalid JSON in mockup file",
+                    "mockupPath": uri,
+                    "requestedUrl": url
+                },
+                "ok": false,
+                "statuscode": 500,
+                "target_ip": "<mockup>",
+                "text": "Internal Server Error",
+                "timestried": 1,
+                "url": url
+            }
+        end if
+
+        ' Success - return mockup response
+        print "[MOCKUP] Successfully loaded: " + uri
+        deviceInfoNode = CreateObject("roDeviceInfo")
+        requestid = deviceInfoNode.GetRandomUUID()
+        return {
+            "body": "<mockup>",
+            "cachehit": true,
+            "getfailurereason": "OK",
+            "getsourceidentity": 111111111,
+            "headers": {
+                "cache-control": "public, max-age=2592000",
+                "cdn-cache": "MISS",
+                "cdn-cachedat": "03/20/2024 22:50:02",
+                "cdn-edgestorageid": "<mockup>",
+                "cdn-fileserver": "<mockup>",
+                "cdn-proxyver": "1.04",
+                "cdn-pullzone": "<mockup>",
+                "cdn-requestcountrycode": "<mockup>",
+                "cdn-requestid": requestid,
+                "cdn-requestpullcode": "206",
+                "cdn-requestpullsuccess": "True",
+                "cdn-status": "200",
+                "cdn-storageserver": "<mockup>",
+                "cdn-uid": "<mockup>",
+                "content-encoding": "gzip",
+                "content-type": "application/json",
+                "date": "Wed, 20 Mar 2024 22:50:02 GMT",
+                "last-modified": "Wed, 20 Mar 2024 22:49:32 GMT",
+                "server": "<mockup>",
+                "vary": "Accept-Encoding"
+            },
+            "headersarray": [
+                { "cache-control": "public, max-age=2592000" },
+                { "cdn-cache": "MISS" },
+                { "cdn-cachedat": "03/20/2024 22:50:02" },
+                { "cdn-edgestorageid": "<mockup>" },
+                { "cdn-fileserver": "<mockup>" },
+                { "cdn-proxyver": "1.04" },
+                { "cdn-pullzone": "<mockup>" },
+                { "cdn-requestcountrycode": "<mockup>" },
+                { "cdn-requestid": requestid },
+                { "cdn-requestpullcode": "206" },
+                { "cdn-requestpullsuccess": "True" },
+                { "cdn-status": "200" },
+                { "cdn-storageserver": "<mockup>" },
+                { "cdn-uid": "<mockup>" },
+                { "content-encoding": "gzip" },
+                { "content-type": "application/json" },
+                { "date": "Wed, 20 Mar 2024 2250:02 GMT" },
+                { "last-modified": "Wed, 20 Mar 2024 22:49:32 GMT" },
+                { "server": "<mockup>" },
+                { "vary": "Accept-Encoding" }
+            ],
+            "json": json,
+            "ok": true,
+            "statuscode": 200,
+            "target_ip": "<mockup>",
+            "text": "<mockup>",
+            "timestried": 1,
+            "url": url
+        }
+    end function
+
+    private function urlToMockPath(url as string) as string
+        ' Remove protocol (https:// or http://)
+        path = url
+        if path.InStr("https://") = 0 then
+            path = path.Mid(8)
+        else if path.InStr("http://") = 0 then
+            path = path.Mid(7)
+        end if
+
+        ' Remove domain and get path only
+        slashPos = path.InStr("/")
+        if slashPos > -1 then
+            path = path.Mid(slashPos + 1)
+        else
+            path = "index"
+        end if
+
+        ' Remove .json extension if present
+        if path.InStr(".json") > -1 then
+            path = path.Left(path.Len() - 5)
+        end if
+
+        ' Replace slashes with underscores
+        path = path.Replace("/", "_")
+
+        ' Return full path to mockup file
+        return "pkg:/mockups/" + path + ".json"
+    end function
+
+end class

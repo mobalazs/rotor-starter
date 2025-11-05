@@ -1,0 +1,37 @@
+sub init()
+
+    ' #if debug
+    ' ' RALE
+    ' m.tracker = m.top.createChild("TrackerTask")
+    ' #end if
+
+    ' m.top.backgroundUri = "pkg:/assets/images/splashBg.jpg"
+    m.top.backgroundColor = "0x000000FF"
+
+end sub
+
+sub initApp(payload as object)
+    App = m.top.createChild("AppRender")
+    App@.initApplication(payload)
+end sub
+
+' launch_args interface callback
+sub LaunchArgumentsReceived()
+    ' This is safe to start channel
+    launch_args = m.top.launch_args
+    Show(launch_args)
+end sub
+
+sub InputArgumentsReceived()
+    ' input_args = m.top.input_args
+    ' Deeplink(input_args)
+end sub
+
+sub Deeplink(input_payload as object)
+    ' initApp(input_payload)
+end sub
+
+sub Show(launch_payload as object)
+    initApp(launch_payload)
+end sub
+

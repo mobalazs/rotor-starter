@@ -1,0 +1,251 @@
+namespace UI
+
+enum designResolution
+	w = 1920
+	h = 1080
+end enum
+enum safeAreaOffsets
+	x = 90
+	y = 60
+end enum
+enum colors
+	background = "0x283E30FF"
+	background_2 = "0x0F1A17FF"
+	primary = "0x3E6641FF"
+	primary_2 = "0x4CAF50FF"
+	secondary = "0x78a999FF"
+	secondary_2 = "0xFFFFFFFF"
+	error = "0xB00020FF"
+	red = "0xCB450BFF"
+	black = "0x000000FF"
+	white = "0xFFFFFFFF"
+end enum
+namespace fontStyles
+	const H1_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-semibold.ttf"
+		size: 70
+	}
+	const H2_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-light-italic.ttf"
+		size: 56
+	}
+	const H3_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-ultralight.ttf"
+		size: 40
+	}
+	const H4_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+		size: 30
+	}
+	const H5_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-semibold.ttf"
+		size: 28
+	}
+	const appTitle_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-ultralight.ttf"
+		size: 60
+	}
+	const default_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+		size: 24
+	}
+	const defaultBold_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-semibold.ttf"
+		size: 24
+	}
+	const defaultButtonText_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+		size: 22
+	}
+	const hintText_aa = {
+		uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+		size: 20
+	}
+end namespace
+namespace components
+	namespace busySpinner
+		const url = "pkg:/assets/images/spinner-inner.png"
+		enum size
+			w = 120
+			h = 120
+		end enum
+	end namespace
+	namespace layout
+		enum appBackground
+			posterUrl = "https://rotor-sample.b-cdn.net/images/bgGradient.png"
+			blendColor = "0x283E30FF"
+		end enum
+		namespace menuBackground
+			const url = "https://rotor-sample.b-cdn.net/images/left_menu_separator_bg_gradient.png"
+			enum size
+				width = 300
+				height = 1000
+			end enum
+			const color = "0x0F1A17FF"
+			const translation = [0,-40]
+		end namespace
+		namespace menuSeparatorLine
+			const height = 960
+			const width = 1.5
+			const color = "0x4CAF50FF"
+			const translation = [300,0]
+		end namespace
+		namespace appTitle
+			const translation = [325,0]
+			const color = "0x4CAF50FF"
+			const fontStyle_aa = {
+				uri: "pkg:/assets/fonts/kingsbridge-ultralight.ttf"
+				size: 60
+			}
+		end namespace
+	end namespace
+	namespace settings
+		const settingWrapperPadding = 30
+		enum languagePicker
+			marginBottom = 10
+			labelWidth = 150
+		end enum
+		namespace rcArrowIcon
+			const url = "pkg:/assets/images/icons/ic_keyboard_arrow_down.png"
+			enum size
+				width = 60
+				height = 60
+			end enum
+		end namespace
+	end namespace
+	namespace pageMenu
+		const sideBarPadding = 30
+		const fontStyle_aa = {
+			uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+			size: 24
+		}
+		const marginRight = 15
+		const labelWidth = 215
+		const marginBottom = 45
+		const labelHeight = 40
+		namespace icon
+			enum size
+				width = 40
+				height = 40
+			end enum
+		end namespace
+		enum textColor
+			default = "0x78a999FF"
+			focused = "0xFFFFFFFF"
+			active = "0x4CAF50FF"
+		end enum
+		const menuIcons_aa = {
+			home: {
+				url: "pkg:/assets/images/icons/ic_home.png"
+			}
+			movies: {
+				url: "pkg:/assets/images/icons/ic_image.png"
+			}
+			series: {
+				url: "pkg:/assets/images/icons/ic_collections.png"
+			}
+			settings: {
+				url: "pkg:/assets/images/icons/ic_settings.png"
+			}
+			exitApp: {
+				url: ""
+			}
+		}
+	end namespace
+	namespace languagePicker
+		const fontStyle_aa = {
+			uri: "pkg:/assets/fonts/kingsbridge-semibold.ttf"
+			size: 24
+		}
+		const marginBottom = 15
+		const labelWidth = 230
+		const labelHeight = 40
+		enum textColor
+			default = "0x78a999FF"
+			focused = "0xFFFFFFFF"
+			active = "0x4CAF50FF"
+		end enum
+	end namespace
+	namespace carousel
+		const animSpeed = 1.6
+		const fadeOutOpacity = 0.4
+		const focusFrameUrl = "pkg:/assets/images/carousel-focus_frame.9.png"
+		namespace row
+			const rowSpacing = 20
+			const cardSpacing = 10
+			namespace default
+				const height = 340
+				namespace card
+					const width = 200
+					const height = 300
+					const placeholderColor = "0x000000FF"
+				end namespace
+				namespace promoTripleCard
+					const width = 620
+					const height = 300
+					const placeholderColor = "0x000000FF"
+				end namespace
+				namespace title
+					const height = 40
+					const fontStyle_aa = {
+						uri: "pkg:/assets/fonts/kingsbridge-semibold.ttf"
+						size: 28
+					}
+					const textColor = "0xFFFFFFFF"
+				end namespace
+			end namespace
+			namespace hero
+				const height = 300
+				namespace card
+					const width = 200
+					const height = 300
+					const placeholderColor = "0x000000FF"
+				end namespace
+			end namespace
+		end namespace
+	end namespace
+	namespace mediaBackground
+		const animDuration = 0.4
+		const fadeOutOpacity = 0.4
+		const quarterOverLayUrl = "https://rotor-sample.b-cdn.net/images/teaserDefaultOverlayUrl.png"
+		const fullOverlayUrl = "https://rotor-sample.b-cdn.net/images/bgGradient.png"
+	end namespace
+	namespace dialogs
+		namespace defaultDialog
+			const posterUrl = "https://rotor-sample.b-cdn.net/images/bgGradient.png"
+			const overlayColor = "0x0F1A17FF"
+			const baseColor = "0x000000FF"
+			const blendColor = "0x283E30FF"
+			const titleTextFontStyle_aa = {
+				uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+				size: 30
+			}
+			const bodyTextFontStyle_aa = {
+				uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+				size: 24
+			}
+			const titleTextColor = "0xFFFFFFFF"
+			const bodyTextColor = "0x78a999FF"
+			const framePadding = 10
+			const animationDuration = 0.25
+		end namespace
+	end namespace
+	namespace buttons
+		namespace simpleButton
+			const width = 180
+			const height = 60
+			const paddingX = 20
+			const posterUrl = "pkg:/assets/images/button-rounded_rectangle.9.png"
+			const fontStyle_aa = {
+				uri: "pkg:/assets/fonts/kingsbridge-light.ttf"
+				size: 22
+			}
+			const textColor = "0xFFFFFFFF"
+			const bgColor = "0x3E6641FF"
+			const textColor_focused = "0x3E6641FF"
+			const bgColor_focused = "0xFFFFFFFF"
+		end namespace
+	end namespace
+end namespace
+end namespace
+

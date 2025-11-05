@@ -1,0 +1,141 @@
+import "pkg:/source/utils/Utils.bs"
+namespace Reducers
+
+    class PreloaderReducer extends Rotor.Reducer
+
+        homeReaderDispatcher as Rotor.Dispatcher
+        preloaderDispatcher as Rotor.Dispatcher
+        appStoreDispatcher as Rotor.Dispatcher
+
+        sub logIntent(intent)
+            Utils.BasicLogger(`[PRELOADER] dispatcherId: ${m.ownerDispatcherId}, type: ${intent.type}` + (intent?.payload?.preloadId = invalid ? "" : `, preloadId: ${intent.payload?.preloadId}`))
+        end sub
+
+        override function applyMiddlewares() as object
+            return [
+
+                ' (1) Logger middleware
+                function(intent, state) as Intent
+                    m.logIntent(intent)
+                    return intent ' NEXT
+                end function,
+
+                ' (2) Asynchronous resources
+                function(intent, state) as Intent
+                    if intent.type = IntentTypes.Preloader.START_PRELOAD_RESOURCES
+
+                        m.preloaderDispatcher = m.getDispatcher("preloader")
+                        m.appStoreDispatcher = m.getDispatcher("appStore")
+
+                        m.preloadHomeContent()
+                        m.fetchResources()
+
+                        return invalid
+                    end if
+
+                    return intent
+                end function,
+
+            ]
+        end function
+
+        override function reducer(state as Object, intent as Intent)
+
+            if intent.type = IntentTypes.Preloader.ADD_ITEM
+                state.counter++
+                state.maxHit++
+
+            else if intent.type = IntentTypes.Preloader.COMPLETED_ITEM
+                state.counter--
+            end if
+
+            if state.counter = 0
+                state.resourcesReady = true
+            else
+                return invalid ' possibly to stop refresh state
+            end if
+
+            return state
+        end function
+
+        override sub destroy()
+            m.homeReaderDispatcher.destroy()
+        end sub
+
+
+        ' Cutsom reducer methods
+
+        sub preloadHomeContent()
+            ' (1) dispatch add item
+            m.dispatch({
+                type: IntentTypes.Preloader.ADD_ITEM,
+                payload: {
+                    preloadId: "preloadHomeContent"
+                }
+            })
+
+            m.homeReaderDispatcher = m.getDispatcher("homeContent")
+
+            ' (2) dispatch completed item
+            m.homeReaderDispatcher.addListener({
+                callbackWithState: sub(state)
+                    m.dispatch({
+                        type: IntentTypes.Preloader.COMPLETED_ITEM,
+                        payload: {
+                            preloadId: "preloadHomeContent"
+                        }
+                    })
+                end sub,
+                once: true
+            })
+            ' (3) start loading home content
+            m.homeReaderDispatcher.dispatch({
+                type: IntentTypes.ContentReader.LOAD_CONTENT
+            })
+
+        end sub
+
+
+
+        sub fetchResources() ' simulation
+
+            ' (1) Dispatch add item
+            m.preloaderDispatcher.dispatch({
+                type: IntentTypes.Preloader.ADD_ITEM,
+                payload: {
+                    preloadId: "loadingScreenMinTime"
+                }
+            })
+
+            ' (2) Get minimum loading duration
+            appStoreState = m.appStoreDispatcher.getState()
+            loadingScreenMinTime = appStoreState.loadingScreenMinTime
+
+            ' (3) dispatch completed item, if done
+            sleepDispatcher = m.getDispatcher("sleep")
+            sleepDispatcher.addListener({
+                callback: sub()
+                    m.dispatch({
+                        type: IntentTypes.Preloader.COMPLETED_ITEM,
+                        payload: {
+                            preloadId: "loadingScreenMinTime"
+                        }
+                    })
+                end sub,
+                once: true
+            })
+
+            ' (4) Start async process
+            sleepDispatcher.dispatch({
+                type: IntentTypes.Sleep.START,
+                payload: {
+                    duration: loadingScreenMinTime
+                }
+            })
+
+
+        end sub
+
+    end class
+
+end namespace

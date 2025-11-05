@@ -1,0 +1,31 @@
+import "pkg:/source/utils/Utils.bs"
+namespace Reducers
+
+    class AppStoreReducer extends Rotor.Reducer
+
+    sub logIntent(intent)
+        Utils.BasicLogger(`[AppStore REDUCER][INFO] dispatcherId: ${m.ownerDispatcherId}, type: ${intent.type}` + (intent?.payload?.activePageKey <> invalid ? `, activePageKey: ${intent.payload?.activePageKey}` : ""))
+    end sub
+
+    override function applyMiddlewares()
+        return [
+            ' Logger middleware
+            function(intent, state) as Intent
+                m.logIntent(intent)
+                return intent ' NEXT
+            end function
+        ]
+    end function
+
+        override function reducer(state, intent)
+
+            if intent.type = IntentTypes.AppStore.SET_ACTIVE_PAGE_KEY
+                state.activePageKey = intent.payload.activePageKey
+            end if
+
+            return state
+        end function
+
+    end class
+
+end namespace

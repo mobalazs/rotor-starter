@@ -1,0 +1,112 @@
+import "pkg:/source/utils/Utils.bs"
+namespace Reducers
+
+    class FetchPoolReducer extends Rotor.Reducer
+
+        poolCount = 4
+        pool = []
+        requestQueue = [] ' FIFO queue of pending requests
+
+        sub new()
+            super()
+
+            for workerIndex = 0 to m.poolCount - 1
+                worker = {
+                    state: Const.FetchPoolWorkerState.NONE,
+                    taskNode: CreateObject("roSGNode", "FetchWorkerTask")
+                }
+                worker.taskNode.workerIndex = workerIndex
+
+                ' Observes "response" using the framework's shared port to trigger dispatcher's asyncReducerCallback with msg
+                worker.taskNode.observeFieldScoped("response", m.port, ["request", "workerIndex", "asyncReducerCallbackId"])
+
+                m.pool.push(worker)
+            end for
+        end sub
+
+        override sub asyncReducerCallback(msg)
+            data = msg.getData()
+            extraInfo = msg.getInfo()
+            workerIndex = extraInfo.workerIndex
+
+            ' Mark the worker as available
+            m.pool[workerIndex].state = Const.FetchPoolWorkerState.NONE
+
+            ' Dispatch FETCH_DONE event with response data
+            m.dispatch({
+                type: IntentTypes.FetchPool.FETCH_DONE,
+                payload: {
+                    response: data,
+                    requestKey: extraInfo.request.requestKey
+                }
+            })
+            ' If there is a pending request in the queue, run it
+            if m.requestQueue.count() > 0
+                nextRequest = m.requestQueue.shift()
+                m.startWorkerWithRequest(nextRequest)
+            end if
+        end sub
+
+        sub logIntent(intent)
+            Utils.BasicLogger(`[FETCH_POOL] dispatcherId: ${m.ownerDispatcherId}, type: ${intent.type}`)
+        end sub
+
+        function startWorkerWithRequest(intent as Object) as Boolean
+            for i = 0 to m.poolCount - 1
+                if m.pool[i].state = Const.FetchPoolWorkerState.NONE
+                    m.pool[i].state = Const.FetchPoolWorkerState.BUSY
+                    m.pool[i].taskNode.request = {
+                        endpoint: intent.payload.endpoint,
+                        requestKey: intent.payload.requestKey,
+                        params: intent.payload.params
+                    }
+                    m.pool[i].taskNode.control = "run"
+                    return true
+                end if
+            end for
+
+            ' No free workers, request is not dispatched
+            return false
+        end function
+
+        override function applyMiddlewares()
+            return [
+                ' (1) Logging middleware
+                function(intent, state) as Intent
+                    m.logIntent(intent)
+                    return intent
+                end function,
+
+                ' (2) Fetch dispatcher middleware
+                function(intent, state) as Intent
+                    if intent.type = IntentTypes.FetchPool.FETCH
+                        success = m.startWorkerWithRequest(intent)
+                        if not success
+                            ' All workers busy, push request to queue
+                            m.requestQueue.push(intent)
+                        end if
+
+                        return invalid ' Do not continue to reducer
+                    end if
+
+                    return intent
+                end function
+            ]
+        end function
+
+        override function reducer(state, intent)
+            if intent.type = IntentTypes.FetchPool.FETCH_DONE
+                state.response = intent.payload.response
+                state.requestKey = intent.payload.requestKey
+
+            else if intent.type = IntentTypes.FetchPool.ERROR
+                ' TODO: error handling
+                return invalid
+            end if
+
+            return state
+        end function
+
+    end class
+
+end namespace

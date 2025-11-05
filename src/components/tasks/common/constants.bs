@@ -1,0 +1,9 @@
+namespace Const
+
+    enum FetchPoolWorkerState
+        NONE = "none"
+        BUSY = "busy"
+        DONE = "done"
+    end enum
+
+end namespace

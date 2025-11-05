@@ -1,0 +1,8 @@
+{
+    "indentStyle": "spaces",
+    "indentSpaceCount": 4,
+    "keywordCase": true,
+    "compositeKeywords": "split",
+    "insertSpaceBeforeFunctionParenthesis": false
+
+}

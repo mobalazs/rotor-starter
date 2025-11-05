@@ -1,0 +1,46 @@
+' Rotor Framework Task
+import "pkg:/source/roku_modules/rotorframework/RotorFrameworkTask.bs"
+
+' Import common contants
+import "../common/constants.bs"
+import "pkg:/components/common/constants.bs"
+import "pkg:/components/common/intentTypes.bs"
+
+' Import Models and Reducers
+import "app/appStore.bs"
+import "app/appStoreReducer.bs"
+
+import "preloader/preloaderModel.bs"
+import "preloader/preloaderReducer.bs"
+
+import "fetchPool/fetchPoolModel.bs"
+import "fetchPool/fetchPoolReducer.bs"
+
+sub init()
+    m.top.functionName = "task"
+    m.appFw = new Rotor.FrameworkTask({
+        tasks: ["SleepTask"] ' optional
+    })
+end sub
+
+sub task()
+
+    ' * CREATE DISPATCHERS (Owned by this Task)
+
+    ' Fetch pool
+    fetchPoolModel = new Models.FetchPoolModel()
+    fetchPoolReducer = new Reducers.FetchPoolReducer()
+    Rotor.createDispatcher("fetchPool", fetchPoolModel, fetchPoolReducer)
+
+    ' App logic
+    appStore = new Models.AppStore()
+    appStoreReducer = new Reducers.AppStoreReducer()
+    Rotor.createDispatcher("appStore", appStore, appStoreReducer)
+
+    ' Preloader logic
+    preloadModel = new Models.PreloaderModel()
+    preloadReducer = new Reducers.PreloaderReducer()
+    Rotor.createDispatcher("preloader", preloadModel, preloadReducer)
+
+    m.appFw.sync() ' main loop of multi-thread MVI
+end sub
