@@ -1,36 +1,24 @@
 {
 	"extends": "bsconfig.json",
 	"description": "The TDD mode in Rooibos is a feature that allows you to run your tests in a Test-Driven Development (TDD) style.",
-	"files": [
-		"source/**/*",
-		"components/**/*",
-		"manifest",
-		"assets/**/*",
-		{
-			"src": "../mockups/**/*",
-			"dest": "mockups/"
-		},
-		"!source/libs/**/*.spec.bs"
-	],
 
 	"bs_const": {
 		"debug": true,
 		"unittest": true
 	},
 
-	"createPackage": false,
-	"emitDefinitions": true,
-	"sourceMap": true,
-	"plugins": [
+    "plugins": [
 		"@rokucommunity/bslint",
-		"rooibos-roku",
-		"./scripts/plugins/manifest-modifier.js"
+		"rooibos-roku"
 	],
 
 	"rooibos": {
 		"isRecordingCodeCoverage": true,
 		"printTestTimes": true,
-		"testsFilePattern": null,
+		"testsFilePattern": [
+			"**/tests/**/*.test.bs",
+			"**/*.spec.bs"
+		],
 		"tags": ["!integration", "!deprecated", "!fixme"],
 		"showOnlyFailures": true,
 		"catchCrashes": true,
@@ -38,31 +26,17 @@
 		"failFast": false,
 		"sendHomeOnFinish": false,
 
-	    "projectName": "Rotor Framework",
+	    "projectName": "Rotor Starter",
 		"collectCoverage": true,
 		"printLcov": true,
 
 		"coverageExcludedFiles": [
 			"**/*.const.bs",
-			"source/Main.brs",
 			"components/rooibos/CodeCoverage.brs",
 			"components/MainScene.bs",
 			"source/engine/Constants.bs",
 			"**/roku_modules/**/*",
-			"source/libs/**/*",
-			"source/base/BaseWidget.bs"
+			"source/libs/**/*"
 		]
-	},
-
-	"diagnosticFilters": [
-		{
-			"src": "**/roku_modules/**/*.*"
-		},
-		{
-			"src": "source/libs/**/*.spec.bs"
-		},
-		{
-			"src": "**/source/tests/**/*"
-		}
-	]
+	}
 }

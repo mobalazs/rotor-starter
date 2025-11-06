@@ -1,37 +1,60 @@
+' Framework
+import "pkg:/source/roku_modules/rotorframework/RotorFramework.bs"
+
+' Assets
+import "pkg:/assets/generated/Theme.bs"
+
+' App specific utils
+import "pkg:/source/utils/Utils.bs"
+
 sub init()
-
-    ' #if debug
-    ' ' RALE
-    ' m.tracker = m.top.createChild("TrackerTask")
-    ' #end if
-
-    ' m.top.backgroundUri = "pkg:/assets/images/splashBg.jpg"
-    m.top.backgroundColor = "0x000000FF"
-
+    ' Setup observers for launch and input events
+    m.top.observeField("launchParams", "launchEventHandler")
+    m.top.observeField("inputParams", "inputEventHandler")
 end sub
 
-sub initApp(payload as object)
-    App = m.top.createChild("AppRender")
-    App@.initApplication(payload)
+' ========== LAUNCH EVENT HANDLER ===========
+
+sub launchEventHandler(msg)
+    params = msg.getData()
+    Utils.BasicLogger(`[LAUNCH EVENT] params: ${FormatJson(params)}`)
+    InitApplication()
 end sub
 
-' launch_args interface callback
-sub LaunchArgumentsReceived()
-    ' This is safe to start channel
-    launch_args = m.top.launch_args
-    Show(launch_args)
+' ========== INPUT EVENT HANDLER ===========
+
+sub inputEventHandler(msg)
+    params = msg.getData()
+    Utils.BasicLogger(`[INPUT EVENT] params: ${FormatJson(params)}`)
 end sub
 
-sub InputArgumentsReceived()
-    ' input_args = m.top.input_args
-    ' Deeplink(input_args)
-end sub
+' =====================================================
+' Initialize and show the app driven by Rotor Framework
+' =====================================================
 
-sub Deeplink(input_payload as object)
-    ' initApp(input_payload)
-end sub
+sub InitApplication()
 
-sub Show(launch_payload as object)
-    initApp(launch_payload)
-end sub
+    m.fw = new Rotor.Framework()
 
+    ' Load English translations synchronously from JSON file
+    translationJson = ReadAsciiFile("pkg:/assets/generated/en_US.translation.json")
+    translationData = ParseJson(translationJson)
+    m.fw.i18nService.setL10n(translationData)
+    m.fw.i18nService.setLocale("en_US")
+
+    ' Render Hello World
+    m.fw.render([
+        {
+            id: "helloWorldLabel",
+            nodeType: "Label",
+            fields: {
+                text: "@l10n.helloWorld",
+                color: UI.colors.primary,
+                translation: [UI.safeArea.x, UI.safeArea.y]
+            },
+            onMountWidget: sub() typecast m as Rotor.Widget
+            end sub
+        }
+    ])
+
+end sub

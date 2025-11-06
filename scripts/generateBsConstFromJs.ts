@@ -27,7 +27,7 @@ if (fs.existsSync(translationFilePath)) {
 
 // Only generate files if data is available
 if (themesData) {
-	writeJsToBSFile(themesData, destinationPath, 'bsTheme', themeFilePath);
+	writeJsToBSFile(themesData, destinationPath, 'Theme', themeFilePath);
 }
 
 if (translationData) {

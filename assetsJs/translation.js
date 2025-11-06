@@ -3,71 +3,47 @@ module.exports = function () {
 
 	let languages = {
 		en_US: 'English',
-		// es_ES: 'Español',
-		// fr_FR: 'Français',
-		// de_DE: 'Deutsch',
-		// hu_HU: 'Magyar',
-		// it_IT: 'Italiano',
-		// nl_NL: 'Nederlands',
-		// pl_PL: 'Polski',
-		// pt_PT: 'Português',
-		// sv_SE: 'Svenska'
+		es_ES: 'Español',
+		fr_FR: 'Français',
+		hu_HU: 'Magyar',
+		nl_NL: 'Nederlands'
 	};
 
 	let en_US = {
-		appTitle: appTitle,
 		languages: languages,
+		appTitle: "Rotor Starter App",
 		helloWorld: 'Hello World!',
-		menuItems: {
-			home: {
-				text: 'Home',
-			},
-			movies: {
-				text: 'Movies',
-			},
-			series: {
-				text: 'Series',
-			},
-			settings: {
-				text: 'Settings',
-			},
-			exitApp: {
-				text: 'Exit POC',
-			},
-		},
-		loadingScreen: {
-			almostDone: "Almost done...",
-			loading: "LOADING"
-		},
-		settings: {
-			languagePicker: {
-				headlineText: 'Languages:',
-			},
-		},
-		dialog: {
-			cancelButton: 'Cancel',
-			okButton: 'OK',
-			exitAppTitle: 'Exit App',
-			confirmExitAppMessage: `Are you sure you want to exit POC App?`,
-			exitAppButton: 'Exit',
-		},
-		promoButtonTexts: {
-			limitedTimeOffer:'Limited-Time Offers!',
-			learnMore: 'Learn more'
-		}
+	};
+
+	let es_ES = {
+		languages: languages,
+		appTitle: "Aplicación de Inicio Rotor",
+		helloWorld: '¡Hola Mundo!',
+	};
+
+	let fr_FR = {
+		languages: languages,
+		appTitle: "Application de Démarrage Rotor",
+		helloWorld: 'Bonjour le Monde!',
+	};
+
+	let hu_HU = {
+		languages: languages,
+		appTitle: "Rotor Kezdő Alkalmazás",
+		helloWorld: 'Helló Világ!',
+	};
+
+	let nl_NL = {
+		languages: languages,
+		appTitle: "Rotor Starter App",
+		helloWorld: 'Hallo Wereld!',
 	};
 
 	return {
-		// de_DE: de_DE,
 		en_US: en_US,
-		de_DE: en_US,
-		// 	es_ES: es_ES,
-		// 	fr_FR: fr_FR,
-		// 	hu_HU: hu_HU,
-		// 	it_IT: it_IT,
-		// 	nl_NL: nl_NL,
-		// 	pl_PL: pl_PL,
-		// 	pt_PT: pt_PT,
-		// 	sv_SE: sv_SE,
+		es_ES: es_ES,
+		fr_FR: fr_FR,
+		hu_HU: hu_HU,
+		nl_NL: nl_NL,
 	};
 };

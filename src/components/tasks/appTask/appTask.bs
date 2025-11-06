@@ -3,8 +3,8 @@ import "pkg:/source/roku_modules/rotorframework/RotorFrameworkTask.bs"
 
 ' Import common contants
 import "../common/constants.bs"
-import "pkg:/components/common/constants.bs"
-import "pkg:/components/common/intentTypes.bs"
+import "pkg:/components/common/Constants.bs"
+import "pkg:/components/common/IntentTypes.bs"
 
 ' Import Models and Reducers
 import "app/appStore.bs"

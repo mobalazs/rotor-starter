@@ -4,13 +4,11 @@
 	"description": "Rotor boilerplate project for Roku applications",
 	"scripts": {
 		"precompiler": "ts-node-cwd scripts/generateBsConstFromJs.ts",
-		"build-dev": "npm run precompiler && bsc  --project bsconfig-dev.json --createPackage=false",
-		"build-tests": "npm run precompiler && bsc --project bsconfig-tests.json --createPackage=false",
-		"build-prod": "npm run precompiler && bsc  --project bsconfig-prod.json --createPackage=false",
+		"build-dev": "npm run precompiler && bsc  --project bsconfig.json",
+		"build-tests": "npm run precompiler && bsc --project bsconfig-tests.json",
+		"build-prod": "npm run precompiler && bsc  --project bsconfig-prod.json",
 		"coverage": "npm run precompiler && node scripts/collect-coverage.js",
-		"lint": "npx bslint --project bsconfig.json  --lintConfig bslint.json",
-		"release": "npm run precompiler && bsc --createPackage=false",
-		"package": "npm run precompiler && bsc --create-package"
+		"lint": "npx bslint --project bsconfig.json  --lintConfig bslint.json"
 	},
 	"ropm": {
 		"rootDir": "src",
@@ -25,15 +23,13 @@
 	},
 	"keywords": [
 		"roku",
-		"template",
-		"starter",
-		"brightscript",
-		"brighterscript",
 		"rotor",
 		"framework",
+		"starter",
+		"template",
+		"brightscript",
+		"brighterscript",
 		"mvi",
-		"state-management",
-		"ui-framework",
 		"view-builder",
 		"ropm"
 	],
@@ -49,14 +45,14 @@
 		"@types/node": "^20.8.2",
 		"brighterscript": "1.0.0-alpha.48",
 		"obj-keypath": "^1.1.0",
-		"rooibos-roku": "^5.10.0",
+		"rooibos-roku": "file:./vendor/rooibos-roku-6.0.0-alpha.48-fixed354.tgz",
 		"ts-node": "^10.9.1",
 		"ts-node-cwd": "^10.9.2",
 		"typescript": "^5.2.2"
 	},
 	"dependencies": {
 		"roku-requests": "^1.2.0",
-		"rotor-framework": "^0.3.4"
+		"rotor-framework": "^0.3.6"
 	},
 	"main": "index.js"
 }

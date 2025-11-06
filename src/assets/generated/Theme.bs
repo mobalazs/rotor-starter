@@ -1,0 +1,104 @@
+namespace UI
+
+enum safeArea
+	x = 90
+	y = 60
+end enum
+enum designResolution
+	w = 1920
+	h = 1080
+end enum
+enum colors
+	primary = "0x4CAF50FF"
+	primaryHover = "0x66BB6AFF"
+	primaryPressed = "0x388E3CFF"
+	onPrimary = "0xFFFFFFFF"
+	secondary = "0x78a999FF"
+	secondaryHover = "0x8BB9A9FF"
+	secondaryPressed = "0x659488FF"
+	onSecondary = "0x000000FF"
+	background = "0x283E30FF"
+	onBackground = "0xFFFFFFFF"
+	surface = "0x0F1A17FF"
+	surfaceHover = "0x1A2621FF"
+	onSurface = "0xFFFFFFFF"
+	error = "0xB00020FF"
+	errorHover = "0xCF002FFF"
+	errorPressed = "0x8B0019FF"
+	onError = "0xFFFFFFFF"
+end enum
+namespace typography
+	namespace displayLarge
+		const uri = "pkg:/assets/fonts/Roboto-Light.ttf"
+		const size = 70
+	end namespace
+	namespace displayMedium
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 56
+	end namespace
+	namespace displaySmall
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 44
+	end namespace
+	namespace headlineLarge
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 40
+	end namespace
+	namespace headlineMedium
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 32
+	end namespace
+	namespace headlineSmall
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 28
+	end namespace
+	namespace titleLarge
+		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
+		const size = 24
+	end namespace
+	namespace titleMedium
+		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
+		const size = 20
+	end namespace
+	namespace titleSmall
+		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
+		const size = 18
+	end namespace
+	namespace bodyLarge
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 22
+	end namespace
+	namespace bodyMedium
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 20
+	end namespace
+	namespace bodySmall
+		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
+		const size = 18
+	end namespace
+	namespace labelLarge
+		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
+		const size = 20
+	end namespace
+	namespace labelMedium
+		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
+		const size = 18
+	end namespace
+	namespace labelSmall
+		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
+		const size = 16
+	end namespace
+end namespace
+namespace motion
+	const durationFast = 0.2
+	const durationMedium = 0.3
+	const durationSlow = 0.4
+	const easingStandard = "inOutCubic"
+	const easingDecelerate = "outCubic"
+	const easingAccelerate = "inCubic"
+	const easingEmphasized = "inOutQuintic"
+	const easingSubtle = "inOutQuad"
+	const easingSharp = "outQuartic"
+end namespace
+end namespace
+

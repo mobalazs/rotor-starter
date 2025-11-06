@@ -1,0 +1,537 @@
+crpt.load.mkup] Loading markup dev 'Rotor Framework POC'
+11-06 22:51:27.271 [scrpt.unload.mkup] Unloading markup dev 'Rotor Framework POC'
+11-06 22:51:27.275 [scrpt.parse.mkup.time] Parsed markup dev 'Rotor Framework POC' in 7 milliseconds
+
+------ Compiling dev 'Rotor Framework POC' ------
+BRIGHTSCRIPT: WARNING: unused variable 'e' in anonymous function in pkg:/source/roku_modules/rooibos_promises/promises.brs(673)
+BRIGHTSCRIPT: WARNING: unused variable 'intent' in anonymous function in pkg:/source/roku_modules/rotorframework/base/BaseReducer.brs(40)
+BRIGHTSCRIPT: WARNING: unused variable 'msg' in anonymous function in pkg:/source/roku_modules/rotorframework/base/BaseReducer.brs(95)
+BRIGHTSCRIPT: WARNING: unused variable 'template' in anonymous function in pkg:/source/roku_modules/rotorframework/base/BaseViewModel.brs(52)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/source/roku_modules/rotorframework/engine/animator/Animator.brs(47)
+BRIGHTSCRIPT: WARNING: unused variable 'ishandledrootchild' in anonymous function in pkg:/source/roku_modules/rotorframework/engine/builder/PostProcessor.brs(92)
+BRIGHTSCRIPT: WARNING: unused variable 'params' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FieldsPlugin.brs(15)
+BRIGHTSCRIPT: WARNING: unused variable 'oldvalue' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FieldsPlugin.brs(51)
+BRIGHTSCRIPT: WARNING: unused variable 'oldvalue' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(37)
+BRIGHTSCRIPT: WARNING: unused variable 'hid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(240)
+BRIGHTSCRIPT: WARNING: unused variable 'hid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(447)
+BRIGHTSCRIPT: WARNING: unused variable 'rotor' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(1187)
+BRIGHTSCRIPT: WARNING: unused variable 'rotor' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(1315)
+BRIGHTSCRIPT: WARNING: unused variable 'rotor' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(1333)
+BRIGHTSCRIPT: WARNING: unused variable 'oldvalue' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FontStylePlugin.brs(51)
+BRIGHTSCRIPT: WARNING: unused variable 'helperinterfaceid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/ObserverPlugin.brs(137)
+BRIGHTSCRIPT: WARNING: unused variable 'pluginkey' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/ObserverPlugin.brs(193)
+BRIGHTSCRIPT: WARNING: unused variable 'fieldid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/ObserverPlugin.brs(505)
+BRIGHTSCRIPT: WARNING: unused variable 'lcase' in anonymous function in pkg:/source/roku_modules/rotorframework/utils/ArrayUtils.brs(312)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(13)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(17)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(20)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(23)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(26)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(29)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(32)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(35)
+BRIGHTSCRIPT: WARNING: unused variable 'invocation' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(1801)
+BRIGHTSCRIPT: WARNING: unused variable 'returnvalue' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(1801)
+BRIGHTSCRIPT: WARNING: unused variable 'invocation' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(1847)
+BRIGHTSCRIPT: WARNING: unused variable 'linenumber' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(2263)
+BRIGHTSCRIPT: WARNING: unused variable 'casesensitive' in function 'rooibos_common_findelementindexinarray' in pkg:/source/rooibos/CommonUtils.brs(435)
+BRIGHTSCRIPT: WARNING: unused variable 'value' in function 'rooibos_common_logwarning' in pkg:/source/rooibos/CommonUtils.brs(771)
+BRIGHTSCRIPT: WARNING: unused variable 'value' in function 'rooibos_common_logdebug' in pkg:/source/rooibos/CommonUtils.brs(785)
+BRIGHTSCRIPT: WARNING: unused variable 'value' in function 'rooibos_common_logtrace' in pkg:/source/rooibos/CommonUtils.brs(791)
+BRIGHTSCRIPT: WARNING: unused variable 'depth' in anonymous function in pkg:/source/rooibos/ConsoleTestReporter.brs(204)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/JUnitTestReporter.brs(8)
+BRIGHTSCRIPT: WARNING: unused variable 'callback' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(298)
+BRIGHTSCRIPT: WARNING: unused variable 'startingdiagonalpath' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(604)
+BRIGHTSCRIPT: WARNING: unused variable 'options' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(723)
+BRIGHTSCRIPT: WARNING: unused variable 'options' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(729)
+BRIGHTSCRIPT: WARNING: unused variable 'retlines' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(786)
+BRIGHTSCRIPT: WARNING: unused variable 'name' in anonymous function in pkg:/source/rooibos/Utils.brs(17)
+BRIGHTSCRIPT: WARNING: unused variable 'field' in anonymous function in pkg:/source/rooibos/Utils.brs(48)
+BRIGHTSCRIPT: WARNING: unused variable 'callback' in anonymous function in pkg:/source/rooibos/Utils.brs(48)
+BRIGHTSCRIPT: WARNING: unused variable 'offset' in anonymous function in pkg:/source/rooibos/Utils.brs(50)
+BRIGHTSCRIPT: WARNING: unused variable 'count' in anonymous function in pkg:/source/rooibos/Utils.brs(50)
+BRIGHTSCRIPT: WARNING: unused variable 'children' in anonymous function in pkg:/source/rooibos/Utils.brs(53)
+BRIGHTSCRIPT: WARNING: unused variable 'field' in anonymous function in pkg:/source/rooibos/Utils.brs(55)
+BRIGHTSCRIPT: WARNING: unused variable 'callback' in anonymous function in pkg:/source/rooibos/Utils.brs(55)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/preloader/preloaderReducer.brs(25)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/preloader/preloaderReducer.brs(29)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/preloader/preloaderReducer.brs(87)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/fetchPool/fetchPoolReducer.brs(91)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/fetchPool/fetchPoolReducer.brs(95)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/app/appStoreReducer.brs(22)
+BRIGHTSCRIPT: WARNING: unused variable 'request' in anonymous function in pkg:/components/tasks/common/requestRouter.brs(5)
+Displayed 57 of 57 warnings
+11-06 22:51:27.500 [scrpt.ctx.cmpl.time] Compiled 'Rotor Framework POC', id 'dev' in 225 milliseconds (BCVer:0)
+11-06 22:51:27.502 [scrpt.proc.mkup.time] Processed markup dev 'Rotor Framework POC' in 0 milliseconds
+11-06 22:51:27.509 [beacon.signal] |AppCompileComplete --------> Duration(324 ms)
+11-06 22:51:27.513 [beacon.signal] |AppLaunchInitiate ---------> TimeBase(0 ms)
+11-06 22:51:27.517 [beacon.signal] |AppSplashInitiate ---------> TimeBase(4 ms)
+11-06 22:51:28.175 [beacon.signal] |AppSplashComplete ---------> Duration(658 ms)
+11-06 22:51:28.279 [beacon.signal] |AppLaunchInitiate ---------> TimeBase(0 ms)
+
+------ Compiling sdklauncher 'Roku SDK Launcher' ------
+11-06 22:51:28.274 [scrpt.ctx.cmpl.time] Compiled 'Roku SDK Launcher', id 'sdklauncher' in 0 milliseconds (BCVer:0)
+11-06 22:51:28.299 [scrpt.cmpl] Compiling 'Rotor Framework POC', id 'dev'
+11-06 22:51:28.346 [scrpt.load.mkup] Loading markup dev 'Rotor Framework POC'
+11-06 22:51:28.352 [scrpt.unload.mkup] Unloading markup dev 'Rotor Framework POC'
+11-06 22:51:28.357 [scrpt.parse.mkup.time] Parsed markup dev 'Rotor Framework POC' in 11 milliseconds
+
+------ Compiling dev 'Rotor Framework POC' ------
+BRIGHTSCRIPT: WARNING: unused variable 'e' in anonymous function in pkg:/source/roku_modules/rooibos_promises/promises.brs(673)
+BRIGHTSCRIPT: WARNING: unused variable 'intent' in anonymous function in pkg:/source/roku_modules/rotorframework/base/BaseReducer.brs(40)
+BRIGHTSCRIPT: WARNING: unused variable 'msg' in anonymous function in pkg:/source/roku_modules/rotorframework/base/BaseReducer.brs(95)
+BRIGHTSCRIPT: WARNING: unused variable 'template' in anonymous function in pkg:/source/roku_modules/rotorframework/base/BaseViewModel.brs(52)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/source/roku_modules/rotorframework/engine/animator/Animator.brs(47)
+BRIGHTSCRIPT: WARNING: unused variable 'ishandledrootchild' in anonymous function in pkg:/source/roku_modules/rotorframework/engine/builder/PostProcessor.brs(92)
+BRIGHTSCRIPT: WARNING: unused variable 'params' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FieldsPlugin.brs(15)
+BRIGHTSCRIPT: WARNING: unused variable 'oldvalue' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FieldsPlugin.brs(51)
+BRIGHTSCRIPT: WARNING: unused variable 'oldvalue' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(37)
+BRIGHTSCRIPT: WARNING: unused variable 'hid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(240)
+BRIGHTSCRIPT: WARNING: unused variable 'hid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(447)
+BRIGHTSCRIPT: WARNING: unused variable 'rotor' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(1187)
+BRIGHTSCRIPT: WARNING: unused variable 'rotor' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(1315)
+BRIGHTSCRIPT: WARNING: unused variable 'rotor' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FocusPlugin.brs(1333)
+BRIGHTSCRIPT: WARNING: unused variable 'oldvalue' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/FontStylePlugin.brs(51)
+BRIGHTSCRIPT: WARNING: unused variable 'helperinterfaceid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/ObserverPlugin.brs(137)
+BRIGHTSCRIPT: WARNING: unused variable 'pluginkey' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/ObserverPlugin.brs(193)
+BRIGHTSCRIPT: WARNING: unused variable 'fieldid' in anonymous function in pkg:/source/roku_modules/rotorframework/plugins/ObserverPlugin.brs(505)
+BRIGHTSCRIPT: WARNING: unused variable 'lcase' in anonymous function in pkg:/source/roku_modules/rotorframework/utils/ArrayUtils.brs(312)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(13)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(17)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(20)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(23)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(26)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(29)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(32)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/BaseTestReporter.brs(35)
+BRIGHTSCRIPT: WARNING: unused variable 'invocation' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(1801)
+BRIGHTSCRIPT: WARNING: unused variable 'returnvalue' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(1801)
+BRIGHTSCRIPT: WARNING: unused variable 'invocation' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(1847)
+BRIGHTSCRIPT: WARNING: unused variable 'linenumber' in anonymous function in pkg:/source/rooibos/BaseTestSuite.brs(2263)
+BRIGHTSCRIPT: WARNING: unused variable 'casesensitive' in function 'rooibos_common_findelementindexinarray' in pkg:/source/rooibos/CommonUtils.brs(435)
+BRIGHTSCRIPT: WARNING: unused variable 'value' in function 'rooibos_common_logwarning' in pkg:/source/rooibos/CommonUtils.brs(771)
+BRIGHTSCRIPT: WARNING: unused variable 'value' in function 'rooibos_common_logdebug' in pkg:/source/rooibos/CommonUtils.brs(785)
+BRIGHTSCRIPT: WARNING: unused variable 'value' in function 'rooibos_common_logtrace' in pkg:/source/rooibos/CommonUtils.brs(791)
+BRIGHTSCRIPT: WARNING: unused variable 'depth' in anonymous function in pkg:/source/rooibos/ConsoleTestReporter.brs(204)
+BRIGHTSCRIPT: WARNING: unused variable 'event' in anonymous function in pkg:/source/rooibos/JUnitTestReporter.brs(8)
+BRIGHTSCRIPT: WARNING: unused variable 'callback' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(298)
+BRIGHTSCRIPT: WARNING: unused variable 'startingdiagonalpath' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(604)
+BRIGHTSCRIPT: WARNING: unused variable 'options' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(723)
+BRIGHTSCRIPT: WARNING: unused variable 'options' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(729)
+BRIGHTSCRIPT: WARNING: unused variable 'retlines' in anonymous function in pkg:/source/rooibos/MochaTestReporter.brs(786)
+BRIGHTSCRIPT: WARNING: unused variable 'name' in anonymous function in pkg:/source/rooibos/Utils.brs(17)
+BRIGHTSCRIPT: WARNING: unused variable 'field' in anonymous function in pkg:/source/rooibos/Utils.brs(48)
+BRIGHTSCRIPT: WARNING: unused variable 'callback' in anonymous function in pkg:/source/rooibos/Utils.brs(48)
+BRIGHTSCRIPT: WARNING: unused variable 'offset' in anonymous function in pkg:/source/rooibos/Utils.brs(50)
+BRIGHTSCRIPT: WARNING: unused variable 'count' in anonymous function in pkg:/source/rooibos/Utils.brs(50)
+BRIGHTSCRIPT: WARNING: unused variable 'children' in anonymous function in pkg:/source/rooibos/Utils.brs(53)
+BRIGHTSCRIPT: WARNING: unused variable 'field' in anonymous function in pkg:/source/rooibos/Utils.brs(55)
+BRIGHTSCRIPT: WARNING: unused variable 'callback' in anonymous function in pkg:/source/rooibos/Utils.brs(55)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/preloader/preloaderReducer.brs(25)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/preloader/preloaderReducer.brs(29)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/preloader/preloaderReducer.brs(87)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/fetchPool/fetchPoolReducer.brs(91)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/fetchPool/fetchPoolReducer.brs(95)
+BRIGHTSCRIPT: WARNING: unused variable 'state' in anonymous function in pkg:/components/tasks/appTask/app/appStoreReducer.brs(22)
+BRIGHTSCRIPT: WARNING: unused variable 'request' in anonymous function in pkg:/components/tasks/common/requestRouter.brs(5)
+Displayed 57 of 57 warnings
+11-06 22:51:28.627 [scrpt.ctx.cmpl.time] Compiled 'Rotor Framework POC', id 'dev' in 269 milliseconds (BCVer:0)
+11-06 22:51:28.628 [scrpt.proc.mkup.time] Processed markup dev 'Rotor Framework POC' in 0 milliseconds
+11-06 22:51:28.629 [beacon.signal] |AppCompileComplete --------> Duration(342 ms)
+
+------ Running dev 'Rotor Framework POC' main ------
+11-06 22:51:28.653 [scrpt.ctx.run.enter] UI: Entering 'Rotor Framework POC', id 'dev'
+[Rooibos Info]: Starting test using test scene with name RooibosScene RooibosScene
+[Rooibos Info]: scene is ready; running tests now
+
+
+> SUITE: ExampleTestSuite>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+>>>> Describe: Example tests>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  Location: file:///Users/bmolnar/Developer/workspace/rotor-starter/src/source/tests/Example.spec.bs:7
+
+
+>>>>>> It: should pass a simple test>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  Location: file:///Users/bmolnar/Developer/workspace/rotor-starter/src/source/tests/Example.spec.bs:11
+
+<<<< END It: should pass a simple test (PASS) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>> It: should pass string comparison>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  Location: file:///Users/bmolnar/Developer/workspace/rotor-starter/src/source/tests/Example.spec.bs:16
+
+<<<< END It: should pass string comparison (PASS) <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ 
+ [START TEST REPORT]
+ 
+  ExampleTestSuite file:///Users/bmolnar/Developer/workspace/rotor-starter/src/source/tests/Example.spec.bs:4
+  |-Example tests
+  | |--should pass a simple test : ....................................PASS (0ms)
+  |   |--Test : file:///Users/bmolnar/Developer/workspace/rotor-starter/src/source/tests/Example.spec.bs:11
+  | |--should pass string comparison : ................................PASS (0ms)
+  |   |--Test : file:///Users/bmolnar/Developer/workspace/rotor-starter/src/source/tests/Example.spec.bs:16
+  |
+ 
+ Total: 2
+   Passed: 2
+   Crashed: 0
+   Failed: 0
+   Ignored: 0
+   Time: 2ms
+ 
+ 
+ RESULT: Success
+ 
+ [END TEST REPORT]
+ 
+
+...Generating code coverage report
+
+saving data
+
+
++++++++++++++++++++++++++++++++++++++++++++
+Code Coverage Report
++++++++++++++++++++++++++++++++++++++++++++
+
+Total Coverage: 0% (0/212)
+Files:  0/ 18
+
+HIT FILES
+---------
+
+MISSED FILES
+------------
+components/tasks/appTask/appTask.brs: MISS!
+source/Main.brs: MISS!
+components/common/Constants.brs: MISS!
+assets/generated/Theme.brs: MISS!
+source/utils/Utils.brs: MISS!
+components/tasks/common/requestRouter.brs: MISS!
+components/tasks/common/fetchWorkerTask.brs: MISS!
+components/tasks/appTask/preloader/preloaderModel.brs: MISS!
+components/tasks/appTask/preloader/preloaderReducer.brs: MISS!
+components/tasks/common/constants.brs: MISS!
+components/tasks/appTask/app/appStoreReducer.brs: MISS!
+components/common/IntentTypes.brs: MISS!
+components/tasks/appTask/fetchPool/fetchPoolReducer.brs: MISS!
+components/tasks/common/MockupRequestFactory.brs: MISS!
+components/tasks/common/parserFactory.brs: MISS!
+components/tasks/appTask/fetchPool/fetchPoolModel.brs: MISS!
+components/scene/MainScene.brs: MISS!
+components/tasks/appTask/app/appStore.brs: MISS!
+
++++++++++++++++++++++++++++++++++++++++++++
+Code Coverage Report Complete 2ms
++++++++++++++++++++++++++++++++++++++++++++
+
++++++++++++++++++++++++++++++++++++++++++++
+LCOV.INFO FILE
++++++++++++++++++++++++++++++++++++++++++++
+
++-=-coverage:start
+Generating lcov.info file...
+TN:
+SF:assets/generated/Theme.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/preloader/preloaderModel.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/preloader/preloaderReducer.brs
+DA:103,0
+DA:45,0
+DA:111,0
+DA:129,0
+DA:58,0
+DA:62,0
+DA:116,0
+DA:15,0
+DA:70,0
+DA:11,0
+DA:54,0
+DA:92,0
+DA:80,0
+DA:49,0
+DA:115,0
+DA:112,0
+DA:52,0
+DA:48,0
+DA:53,0
+DA:46,0
+DA:77,0
+DA:44,0
+DA:55,0
+LF:23
+LH:0
+end_of_record
+TN:
+SF:components/tasks/common/MockupRequestFactory.brs
+DA:81,0
+DA:19,0
+DA:145,0
+DA:45,0
+DA:83,0
+DA:148,0
+DA:15,0
+DA:146,0
+DA:50,0
+DA:152,0
+DA:153,0
+DA:156,0
+DA:54,0
+DA:168,0
+DA:144,0
+DA:80,0
+DA:49,0
+DA:155,0
+DA:14,0
+DA:160,0
+DA:7,0
+DA:51,0
+DA:161,0
+DA:147,0
+DA:10,0
+DA:154,0
+DA:13,0
+DA:48,0
+DA:82,0
+DA:165,0
+DA:16,0
+LF:31
+LH:0
+end_of_record
+TN:
+SF:components/tasks/common/constants.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/tasks/common/fetchWorkerTask.brs
+DA:7,0
+DA:12,0
+DA:22,0
+DA:18,0
+DA:16,0
+DA:20,0
+DA:14,0
+DA:6,0
+LF:8
+LH:0
+end_of_record
+TN:
+SF:components/tasks/common/parserFactory.brs
+DA:34,0
+DA:64,0
+DA:72,0
+DA:33,0
+DA:73,0
+DA:45,0
+DA:75,0
+DA:11,0
+DA:32,0
+DA:12,0
+DA:92,0
+DA:88,0
+DA:78,0
+DA:30,0
+DA:65,0
+DA:42,0
+DA:82,0
+DA:74,0
+DA:87,0
+DA:77,0
+DA:46,0
+DA:55,0
+DA:68,0
+DA:69,0
+DA:89,0
+DA:76,0
+DA:15,0
+DA:70,0
+DA:60,0
+DA:43,0
+DA:47,0
+DA:95,0
+DA:39,0
+DA:38,0
+DA:44,0
+LF:35
+LH:0
+end_of_record
+TN:
+SF:components/tasks/common/requestRouter.brs
+DA:22,0
+DA:23,0
+DA:24,0
+DA:14,0
+DA:10,0
+DA:13,0
+DA:21,0
+DA:16,0
+DA:15,0
+DA:11,0
+LF:10
+LH:0
+end_of_record
+TN:
+SF:source/Main.brs
+DA:33,0
+DA:22,0
+DA:18,0
+DA:3,0
+DA:31,0
+DA:28,0
+DA:29,0
+DA:41,0
+DA:21,0
+DA:25,0
+DA:11,0
+DA:32,0
+DA:36,0
+DA:12,0
+DA:43,0
+DA:1,0
+DA:14,0
+DA:30,0
+DA:37,0
+DA:10,0
+DA:13,0
+DA:48,0
+DA:5,0
+DA:35,0
+DA:38,0
+DA:44,0
+DA:6,0
+LF:27
+LH:0
+end_of_record
+TN:
+SF:source/utils/Utils.brs
+DA:34,0
+DA:27,0
+DA:19,0
+DA:31,0
+DA:17,0
+DA:28,0
+DA:26,0
+DA:29,0
+DA:41,0
+DA:15,0
+DA:25,0
+DA:32,0
+DA:30,0
+DA:4,0
+DA:42,0
+DA:16,0
+DA:5,0
+DA:44,0
+DA:6,0
+LF:19
+LH:0
+end_of_record
+TN:
+SF:components/common/Constants.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/common/IntentTypes.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/scene/MainScene.brs
+DA:12,0
+DA:27,0
+DA:43,0
+DA:19,0
+DA:28,0
+DA:40,0
+DA:41,0
+DA:37,0
+DA:42,0
+DA:13,0
+DA:21,0
+DA:46,0
+DA:20,0
+LF:13
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/app/appStore.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/app/appStoreReducer.brs
+DA:26,0
+DA:7,0
+DA:22,0
+DA:23,0
+DA:11,0
+LF:5
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/appTask.brs
+DA:36,0
+DA:33,0
+DA:43,0
+DA:31,0
+DA:45,0
+DA:41,0
+DA:37,0
+DA:42,0
+DA:21,0
+DA:38,0
+DA:20,0
+DA:32,0
+LF:12
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/fetchPool/fetchPoolModel.brs
+LF:0
+LH:0
+end_of_record
+TN:
+SF:components/tasks/appTask/fetchPool/fetchPoolReducer.brs
+DA:55,0
+DA:33,0
+DA:64,0
+DA:69,0
+DA:18,0
+DA:100,0
+DA:73,0
+DA:45,0
+DA:56,0
+DA:28,0
+DA:29,0
+DA:58,0
+DA:21,0
+DA:104,0
+DA:11,0
+DA:36,0
+DA:23,0
+DA:107,0
+DA:14,0
+DA:30,0
+DA:51,0
+DA:98,0
+DA:13,0
+DA:99,0
+DA:57,0
+DA:102,0
+DA:46,0
+DA:44,0
+DA:63,0
+LF:29
+LH:0
+end_of_record
++-=-coverage:end
+[Rooibos Result]: PASS
+[Rooibos Shutdown]

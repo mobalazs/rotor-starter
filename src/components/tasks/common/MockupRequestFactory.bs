@@ -10,7 +10,7 @@ class MockupRequestFactory
         fileContent = ReadAsciifile(uri)
 
         ' Check if file exists and is valid
-        if fileContent = invalid or fileContent = "" then
+        if fileContent = invalid or fileContent = ""
             print "[MOCKUP] Warning: Mockup file not found: " + uri
             print "[MOCKUP] Requested URL: " + url
             print "[MOCKUP] Returning 404 error response"
@@ -45,7 +45,7 @@ class MockupRequestFactory
         json = ParseJson(fileContent)
 
         ' Check if JSON parsing was successful
-        if json = invalid then
+        if json = invalid
             print "[MOCKUP] Error: Invalid JSON in mockup file: " + uri
             print "[MOCKUP] Requested URL: " + url
             print "[MOCKUP] Returning 500 error response"
@@ -142,22 +142,22 @@ class MockupRequestFactory
     private function urlToMockPath(url as string) as string
         ' Remove protocol (https:// or http://)
         path = url
-        if path.InStr("https://") = 0 then
+        if path.InStr("https://") = 0
             path = path.Mid(8)
-        else if path.InStr("http://") = 0 then
+        else if path.InStr("http://") = 0
             path = path.Mid(7)
         end if
 
         ' Remove domain and get path only
         slashPos = path.InStr("/")
-        if slashPos > -1 then
+        if slashPos > -1
             path = path.Mid(slashPos + 1)
         else
             path = "index"
         end if
 
         ' Remove .json extension if present
-        if path.InStr(".json") > -1 then
+        if path.InStr(".json") > -1
             path = path.Left(path.Len() - 5)
         end if
 

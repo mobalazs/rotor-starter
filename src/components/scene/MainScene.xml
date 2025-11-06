@@ -4,13 +4,12 @@
     <interface>
         <!-- Exits channel if set to true -->
         <field id="exitChannel" type="bool" alwaysNotify="true" />
-        <!-- Deep linking launch arguments will be passed via this field to Show() function -->
-        <field id="launch_args" type="assocarray" onChange="LaunchArgumentsReceived" />
-        <!-- roInput deep linking arguments will be passed via this field to Input() function -->
-        <field id="input_args" type="assocarray" onChange="InputArgumentsReceived" />
 
+        <!-- Launch params -->
+        <field id="launchParams" type="assocarray" />
 
-        <field id="appRoot" type="node" />
+        <!-- Input params -->
+        <field id="inputParams" type="assocarray" />
 
     </interface>
 
