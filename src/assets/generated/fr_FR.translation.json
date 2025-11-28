@@ -7,5 +7,25 @@
     "nl_NL": "Nederlands"
   },
   "appTitle": "Application de Démarrage Rotor",
-  "helloWorld": "Bonjour le Monde!"
+  "helloWorld": "Bonjour le Monde!",
+  "menu": {
+    "home": "Accueil",
+    "movies": "Films",
+    "settings": "Paramètres",
+    "exit": "Quitter"
+  },
+  "pages": {
+    "home": {
+      "title": "Page d'Accueil",
+      "content": "Bienvenue sur la page d'accueil!"
+    },
+    "movies": {
+      "title": "Page des Films",
+      "content": "Parcourez vos films préférés ici."
+    },
+    "settings": {
+      "title": "Page des Paramètres",
+      "content": "Ajustez les paramètres de votre application."
+    }
+  }
 }

@@ -7,5 +7,25 @@
     "nl_NL": "Nederlands"
   },
   "appTitle": "Rotor Kezdő Alkalmazás",
-  "helloWorld": "Helló Világ!"
+  "helloWorld": "Helló Világ!",
+  "menu": {
+    "home": "Kezdőlap",
+    "movies": "Filmek",
+    "settings": "Beállítások",
+    "exit": "Kilépés"
+  },
+  "pages": {
+    "home": {
+      "title": "Kezdőlap",
+      "content": "Üdvözöljük a kezdőlapon!"
+    },
+    "movies": {
+      "title": "Filmek Oldal",
+      "content": "Böngésszen kedvenc filmjei között itt."
+    },
+    "settings": {
+      "title": "Beállítások Oldal",
+      "content": "Állítsa be az alkalmazás beállításait."
+    }
+  }
 }

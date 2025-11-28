@@ -1,0 +1,43 @@
+namespace ViewModels
+    class SettingsPage extends Rotor.ViewModel
+        override function template() as object
+            return {
+                nodeType: "Group",
+                id: "settingsPage",
+                fields: {
+                    translation: [0, 0]
+                },
+                children: [
+                    {
+                        id: "pageTitle",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.settings.title",
+                            translation: [UI.safeArea.x, UI.safeArea.y],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.displaySmall_aa
+                    },
+                    {
+                        id: "pageContent",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.settings.content",
+                            translation: [UI.safeArea.x, UI.safeArea.y + 80],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.bodyLarge_aa
+                    }
+                ]
+            }
+        end function
+
+        override sub onCreateView()
+            Utils.BasicLogger("[SettingsPage] Created")
+        end sub
+
+        override sub onDestroyView()
+            Utils.BasicLogger("[SettingsPage] Destroyed")
+        end sub
+    end class
+end namespace

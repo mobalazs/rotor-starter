@@ -10,11 +10,11 @@ src/source/roku_modules
 src/components/roku_modules
 
 # IDE specific
-
 .vscode/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/sample.settings.json
+.claude/*
 
 # OS specific paths
 __MACOSX

@@ -4,8 +4,25 @@ import "pkg:/source/roku_modules/rotorframework/RotorFramework.bs"
 ' Assets
 import "pkg:/assets/generated/Theme.bs"
 
+' Constants and Intent Types
+import "pkg:/components/common/Constants.bs"
+import "pkg:/components/common/IntentTypes.bs"
+
 ' App specific utils
 import "pkg:/source/utils/Utils.bs"
+
+' Navigation System (dispatcher created in render thread)
+import "pkg:/components/viewModels/navigation/NavigationModel.bs"
+import "pkg:/components/viewModels/navigation/NavigationReducer.bs"
+import "pkg:/components/viewModels/navigation/MenuViewModel.bs"
+
+' Page ViewModels
+import "pkg:/components/viewModels/pages/HomePage.bs"
+import "pkg:/components/viewModels/pages/MoviesPage.bs"
+import "pkg:/components/viewModels/pages/SettingsPage.bs"
+
+' UI ViewModels
+import "pkg:/components/viewModels/LayoutViewModel.bs"
 
 sub init()
     ' Setup observers for launch and input events
@@ -42,19 +59,27 @@ sub InitApplication()
     m.fw.i18nService.setL10n(translationData)
     m.fw.i18nService.setLocale("en_US")
 
-    ' Render Hello World
+    ' Render Application with Layout Controller
     m.fw.render([
         {
-            id: "helloWorldLabel",
-            nodeType: "Label",
-            fields: {
-                text: "@l10n.helloWorld",
-                color: UI.colors.primary,
-                translation: [UI.safeArea.x, UI.safeArea.y]
-            },
-            onMountWidget: sub() typecast m as Rotor.Widget
-            end sub
+            id: "appContainer",
+            viewModel: ViewModels.LayoutViewModel
         }
     ])
 
+
 end sub
+
+function onKeyEvent(key as string, press as boolean) as boolean
+    result = m.fw.plugins.focus.onKeyEventHandler(key, press)
+
+    if press = true
+        if result.handled = true
+            return result.handled
+        else
+            return true
+        end if
+
+    end if
+    return false
+end function

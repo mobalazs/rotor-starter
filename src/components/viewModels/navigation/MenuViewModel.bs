@@ -1,0 +1,57 @@
+import "pkg:/components/viewModels/navigation/MenuItemViewModel.bs"
+
+namespace ViewModels
+    class MenuViewModel extends Rotor.ViewModel
+        viewModelState = {
+            pages: {
+                home: { iconUri: UI.components.menuBar.menuItem.iconUri.home },
+                movies: { iconUri: UI.components.menuBar.menuItem.iconUri.movies },
+                settings: { iconUri: UI.components.menuBar.menuItem.iconUri.settings },
+                exit: { iconUri: UI.components.menuBar.menuItem.iconUri.exit }
+            }
+        }
+
+        override sub onCreateView()
+            Utils.BasicLogger("[MenuViewModel] Creating menu")
+        end sub
+
+        override sub onMountView()
+            Utils.BasicLogger("[MenuViewModel] Creating menu")
+            m.plugins.focus.setFocus()
+        end sub
+
+        override function template() as object
+            ' Build menu items dynamically
+            menuChildren = []
+            for each pageId in m.viewModelState.pages.Keys()
+
+                iconUri = m.viewModelState.pages[pageId].iconUri
+
+                menuChildren.push({
+                    id: `navItem_${pageId}`,
+                    viewModel: ViewModels.MenuItemViewModel,
+                    props: {
+                        pageId: pageId,
+                        iconUri: iconUri
+                    }
+                })
+            end for
+
+            return {
+                id: "navigationBar",
+                nodeType: "LayoutGroup",
+                fields: {
+                    translation: [UI.safeArea.x, UI.designResolution.h / 2 - 200],
+                    layoutDirection: "vert",
+                    itemSpacings: [20]
+                },
+                focus: {
+                    group: {
+                        defaultFocusId: "navItem_home"
+                    }
+                },
+                children: menuChildren
+            }
+        end function
+    end class
+end namespace

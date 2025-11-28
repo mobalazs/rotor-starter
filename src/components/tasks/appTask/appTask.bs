@@ -13,24 +13,14 @@ import "app/appStoreReducer.bs"
 import "preloader/preloaderModel.bs"
 import "preloader/preloaderReducer.bs"
 
-import "fetchPool/fetchPoolModel.bs"
-import "fetchPool/fetchPoolReducer.bs"
-
 sub init()
     m.top.functionName = "task"
-    m.appFw = new Rotor.FrameworkTask({
-        tasks: ["SleepTask"] ' optional
-    })
+    m.appFw = new Rotor.FrameworkTask({})
 end sub
 
 sub task()
 
     ' * CREATE DISPATCHERS (Owned by this Task)
-
-    ' Fetch pool
-    fetchPoolModel = new Models.FetchPoolModel()
-    fetchPoolReducer = new Reducers.FetchPoolReducer()
-    Rotor.createDispatcher("fetchPool", fetchPoolModel, fetchPoolReducer)
 
     ' App logic
     appStore = new Models.AppStore()

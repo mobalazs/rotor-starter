@@ -19,9 +19,6 @@ namespace Reducers
 
         override function reducer(state, intent)
 
-            if intent.type = IntentTypes.AppStore.SET_ACTIVE_PAGE_KEY
-                state.activePageKey = intent.payload.activePageKey
-            end if
 
             return state
         end function

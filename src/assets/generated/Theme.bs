@@ -28,66 +28,70 @@ enum colors
 	onError = "0xFFFFFFFF"
 end enum
 namespace typography
-	namespace displayLarge
-		const uri = "pkg:/assets/fonts/Roboto-Light.ttf"
-		const size = 70
-	end namespace
-	namespace displayMedium
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 56
-	end namespace
-	namespace displaySmall
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 44
-	end namespace
-	namespace headlineLarge
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 40
-	end namespace
-	namespace headlineMedium
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 32
-	end namespace
-	namespace headlineSmall
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 28
-	end namespace
-	namespace titleLarge
-		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
-		const size = 24
-	end namespace
-	namespace titleMedium
-		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
-		const size = 20
-	end namespace
-	namespace titleSmall
-		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
-		const size = 18
-	end namespace
-	namespace bodyLarge
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 22
-	end namespace
-	namespace bodyMedium
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 20
-	end namespace
-	namespace bodySmall
-		const uri = "pkg:/assets/fonts/Roboto-Regular.ttf"
-		const size = 18
-	end namespace
-	namespace labelLarge
-		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
-		const size = 20
-	end namespace
-	namespace labelMedium
-		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
-		const size = 18
-	end namespace
-	namespace labelSmall
-		const uri = "pkg:/assets/fonts/Roboto-Medium.ttf"
-		const size = 16
-	end namespace
+	const displayLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Light.ttf"
+		size: 70
+	}
+	const displayMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 56
+	}
+	const displaySmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 44
+	}
+	const headlineLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 40
+	}
+	const headlineMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 32
+	}
+	const headlineSmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 28
+	}
+	const headlineSmall_bold_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Bold.ttf"
+		size: 28
+	}
+	const titleLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 24
+	}
+	const titleMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 20
+	}
+	const titleSmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 18
+	}
+	const bodyLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 22
+	}
+	const bodyMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 20
+	}
+	const bodySmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 18
+	}
+	const labelLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 20
+	}
+	const labelMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 18
+	}
+	const labelSmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 16
+	}
 end namespace
 namespace motion
 	const durationFast = 0.2
@@ -99,6 +103,19 @@ namespace motion
 	const easingEmphasized = "inOutQuintic"
 	const easingSubtle = "inOutQuad"
 	const easingSharp = "outQuartic"
+end namespace
+namespace components
+	namespace menuBar
+		namespace menuItem
+			enum iconUri
+				home = "pkg:/assets/images/menuIcons/home_32dp_FFFFFF.png"
+				movies = "pkg:/assets/images/menuIcons/movie_32dp_FFFFFF.png"
+				settings = "pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png"
+				exit = "pkg:/assets/images/menuIcons/exit_to_app_32dp_FFFFFF.png"
+			end enum
+			const iconSize = 32
+		end namespace
+	end namespace
 end namespace
 end namespace
 

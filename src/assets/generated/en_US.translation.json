@@ -7,5 +7,25 @@
     "nl_NL": "Nederlands"
   },
   "appTitle": "Rotor Starter App",
-  "helloWorld": "Hello World!"
+  "helloWorld": "Hello World!",
+  "menu": {
+    "home": "Home",
+    "movies": "Movies",
+    "settings": "Settings",
+    "exit": "Exit"
+  },
+  "pages": {
+    "home": {
+      "title": "Home Page",
+      "content": "Welcome to the Home page!"
+    },
+    "movies": {
+      "title": "Movies Page",
+      "content": "Browse your favorite movies here."
+    },
+    "settings": {
+      "title": "Settings Page",
+      "content": "Adjust your application settings."
+    }
+  }
 }

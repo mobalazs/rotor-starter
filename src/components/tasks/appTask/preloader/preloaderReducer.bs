@@ -97,43 +97,15 @@ namespace Reducers
 
 
 
-        sub fetchResources() ' simulation
-
-            ' (1) Dispatch add item
+        sub fetchResources()
+            ' For now, mark as immediately completed
+            ' TODO: Implement actual resource loading logic here
             m.preloaderDispatcher.dispatch({
-                type: IntentTypes.Preloader.ADD_ITEM,
+                type: IntentTypes.Preloader.COMPLETED_ITEM,
                 payload: {
-                    preloadId: "loadingScreenMinTime"
+                    preloadId: "fetchResources"
                 }
             })
-
-            ' (2) Get minimum loading duration
-            appStoreState = m.appStoreDispatcher.getState()
-            loadingScreenMinTime = appStoreState.loadingScreenMinTime
-
-            ' (3) dispatch completed item, if done
-            sleepDispatcher = m.getDispatcher("sleep")
-            sleepDispatcher.addListener({
-                callback: sub()
-                    m.dispatch({
-                        type: IntentTypes.Preloader.COMPLETED_ITEM,
-                        payload: {
-                            preloadId: "loadingScreenMinTime"
-                        }
-                    })
-                end sub,
-                once: true
-            })
-
-            ' (4) Start async process
-            sleepDispatcher.dispatch({
-                type: IntentTypes.Sleep.START,
-                payload: {
-                    duration: loadingScreenMinTime
-                }
-            })
-
-
         end sub
 
     end class

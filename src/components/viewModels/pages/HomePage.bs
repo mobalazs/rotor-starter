@@ -1,0 +1,43 @@
+namespace ViewModels
+    class HomePage extends Rotor.ViewModel
+        override function template() as object
+            return {
+                nodeType: "Group",
+                id: "homePage",
+                fields: {
+                    translation: [0, 0]
+                },
+                children: [
+                    {
+                        id: "pageTitle",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.home.title",
+                            translation: [UI.safeArea.x, UI.safeArea.y],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.displaySmall_aa
+                    },
+                    {
+                        id: "pageContent",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.home.content",
+                            translation: [UI.safeArea.x, UI.safeArea.y + 80],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.bodyLarge_aa
+                    }
+                ]
+            }
+        end function
+
+        override sub onCreateView()
+            Utils.BasicLogger("[HomePage] Created")
+        end sub
+
+        override sub onDestroyView()
+            Utils.BasicLogger("[HomePage] Destroyed")
+        end sub
+    end class
+end namespace

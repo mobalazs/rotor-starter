@@ -1,0 +1,23 @@
+import "pkg:/components/common/IntentTypes.bs"
+
+namespace Reducers
+    class NavigationReducer extends Rotor.Reducer
+        override function reducer(state, intent) as object
+
+            if intent.type = IntentTypes.Navigation.GOTO_PAGE
+                return {
+                    activePageId: intent.payload.pageId,
+                    transitionState: "transitioning"
+                }
+
+            else if intent.type = IntentTypes.Navigation.TRANSITION_COMPLETE
+                return {
+                    activePageId: state.activePageId,
+                    transitionState: "idle"
+                }
+            end if
+
+            return state
+        end function
+    end class
+end namespace

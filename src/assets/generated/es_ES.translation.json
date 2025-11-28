@@ -7,5 +7,25 @@
     "nl_NL": "Nederlands"
   },
   "appTitle": "Aplicación de Inicio Rotor",
-  "helloWorld": "¡Hola Mundo!"
+  "helloWorld": "¡Hola Mundo!",
+  "menu": {
+    "home": "Inicio",
+    "movies": "Películas",
+    "settings": "Configuración",
+    "exit": "Salir"
+  },
+  "pages": {
+    "home": {
+      "title": "Página de Inicio",
+      "content": "¡Bienvenido a la página de inicio!"
+    },
+    "movies": {
+      "title": "Página de Películas",
+      "content": "Explora tus películas favoritas aquí."
+    },
+    "settings": {
+      "title": "Página de Configuración",
+      "content": "Ajusta la configuración de tu aplicación."
+    }
+  }
 }

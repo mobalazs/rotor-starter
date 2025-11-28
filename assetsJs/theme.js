@@ -58,71 +58,75 @@ module.exports = function () {
 	// Typography - Material Design Type Scale
 	let typography = {
 		// Display styles
-		displayLarge: {
+		displayLarge_aa: {
 			uri: fonts.light,
 			size: 70,
 		},
-		displayMedium: {
+		displayMedium_aa: {
 			uri: fonts.regular,
 			size: 56,
 		},
-		displaySmall: {
+		displaySmall_aa: {
 			uri: fonts.regular,
 			size: 44,
 		},
 
 		// Headline styles
-		headlineLarge: {
+		headlineLarge_aa: {
 			uri: fonts.regular,
 			size: 40,
 		},
-		headlineMedium: {
+		headlineMedium_aa: {
 			uri: fonts.regular,
 			size: 32,
 		},
-		headlineSmall: {
+		headlineSmall_aa: {
 			uri: fonts.regular,
+			size: 28,
+		},
+		headlineSmall_bold_aa: {
+			uri: fonts.bold,
 			size: 28,
 		},
 
 		// Title styles
-		titleLarge: {
+		titleLarge_aa: {
 			uri: fonts.medium,
 			size: 24,
 		},
-		titleMedium: {
+		titleMedium_aa: {
 			uri: fonts.medium,
 			size: 20,
 		},
-		titleSmall: {
+		titleSmall_aa: {
 			uri: fonts.medium,
 			size: 18,
 		},
 
 		// Body styles
-		bodyLarge: {
+		bodyLarge_aa: {
 			uri: fonts.regular,
 			size: 22,
 		},
-		bodyMedium: {
+		bodyMedium_aa: {
 			uri: fonts.regular,
 			size: 20,
 		},
-		bodySmall: {
+		bodySmall_aa: {
 			uri: fonts.regular,
 			size: 18,
 		},
 
 		// Label styles
-		labelLarge: {
+		labelLarge_aa: {
 			uri: fonts.medium,
 			size: 20,
 		},
-		labelMedium: {
+		labelMedium_aa: {
 			uri: fonts.medium,
 			size: 18,
 		},
-		labelSmall: {
+		labelSmall_aa: {
 			uri: fonts.medium,
 			size: 16,
 		},
@@ -155,11 +159,28 @@ module.exports = function () {
 		easingSharp: 'outQuartic',
 	};
 
+	// Images - Application image assets
+	let menuBar = {
+		// Menu icons
+		menuItem: {
+			iconUri: {
+				home: 'pkg:/assets/images/menuIcons/home_32dp_FFFFFF.png',
+				movies: 'pkg:/assets/images/menuIcons/movie_32dp_FFFFFF.png',
+				settings: 'pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png',
+				exit: 'pkg:/assets/images/menuIcons/exit_to_app_32dp_FFFFFF.png',
+			},
+			iconSize: 32
+		}
+	};
+
 	return {
 		safeArea: safeArea,
 		designResolution: designResolution,
 		colors: colors,
 		typography: typography,
 		motion: motion,
+		components: {
+			menuBar: menuBar
+		}
 	};
 };
