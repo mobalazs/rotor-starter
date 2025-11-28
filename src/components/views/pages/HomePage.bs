@@ -1,12 +1,11 @@
+import "BasePage.bs"
+
 namespace ViewModels
-    class HomePage extends Rotor.ViewModel
+    class HomePage extends ViewModels.BasePage
+
         override function template() as object
             return {
                 nodeType: "Group",
-                id: "homePage",
-                fields: {
-                    translation: [0, 0]
-                },
                 children: [
                     {
                         id: "pageTitle",
@@ -34,6 +33,18 @@ namespace ViewModels
 
         override sub onCreateView()
             Utils.BasicLogger("[HomePage] Created")
+        end sub
+
+        override sub onMountView()
+            super.onMountView()
+            Utils.BasicLogger("[HomePage] Mounted")
+            ' Additional logic for HomePage can be added here
+        end sub
+
+        override sub onUpdateView()
+            super.onUpdateView()
+            Utils.BasicLogger("[HomePage] Updated")
+            ' Additional logic for HomePage can be added here
         end sub
 
         override sub onDestroyView()

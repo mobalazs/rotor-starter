@@ -1,0 +1,30 @@
+namespace ViewModels
+    class BasePage extends Rotor.ViewModel
+
+        props = {
+            isActive: false
+        }
+
+        override sub onUpdateView()
+            Utils.BasicLogger(`[PAGE] Page "${m.id}" is now ${m.props.isActive ? "active" : "inactive"}`)
+
+            m.animateIsActiveState()
+        end sub
+
+        override sub onMountView()
+            m.node.opacity = 0
+            m.animateIsActiveState()
+        end sub
+
+        sub animateIsActiveState()
+            m.animator("pageVisibility").create({
+                target: m,
+                opacity: m.props.isActive ? 1 : 0,
+                duration: UI.motion.durationFast,
+                easeFunction: UI.motion.easingEmphasized,
+                delay: m.props.isActive ? UI.motion.durationFast : 0
+            }).play()
+        end sub
+
+    end class
+end namespace

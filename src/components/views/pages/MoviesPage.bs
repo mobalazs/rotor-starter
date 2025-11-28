@@ -1,12 +1,11 @@
+import "BasePage.bs"
+
 namespace ViewModels
-    class MoviesPage extends Rotor.ViewModel
+    class MoviesPage extends ViewModels.BasePage
+
         override function template() as object
             return {
                 nodeType: "Group",
-                id: "moviesPage",
-                fields: {
-                    translation: [0, 0]
-                },
                 children: [
                     {
                         id: "pageTitle",

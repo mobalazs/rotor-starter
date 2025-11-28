@@ -1,12 +1,11 @@
+import "BasePage.bs"
+
 namespace ViewModels
-    class SettingsPage extends Rotor.ViewModel
+    class SettingsPage extends ViewModels.BasePage
+
         override function template() as object
             return {
                 nodeType: "Group",
-                id: "settingsPage",
-                fields: {
-                    translation: [0, 0]
-                },
                 children: [
                     {
                         id: "pageTitle",

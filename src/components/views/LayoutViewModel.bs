@@ -1,11 +1,22 @@
 
 namespace ViewModels
+
     class LayoutViewModel extends Rotor.ViewModel
+
         viewModelState = {
-            currentPageId: "home",
-            pages: {},
-            navDispatcher: invalid
+            currentPageId: "",
+            pages: {
+                "home": ViewModels.HomePage,
+                "movies": ViewModels.MoviesPage,
+                "settings": ViewModels.SettingsPage
+            }
         }
+
+        props = {
+            activePageId: "home" ' Initial page
+        }
+
+        navDispatcher as Rotor.Dispatcher
 
         override sub onCreateView()
             Utils.BasicLogger("[LayoutViewModel] Creating layout controller")
@@ -16,33 +27,20 @@ namespace ViewModels
             Rotor.createDispatcher("navigation", navModel, navReducer)
 
             ' Get reference to dispatcher
-            m.viewModelState.navDispatcher = m.getDispatcher("navigation")
-
-            ' Initialize pages map
-            m.viewModelState.pages = {
-                "home": ViewModels.HomePage,
-                "movies": ViewModels.MoviesPage,
-                "settings": ViewModels.SettingsPage
-            }
+            m.navDispatcher = m.getDispatcher("navigation")
 
             ' Listen for navigation state changes
-            m.viewModelState.navDispatcher.addListener({
+            m.navDispatcher.addListener({
                 mapStateToProps: sub(props, state)
                     props.activePageId = state.activePageId
-                    props.transitionState = state.transitionState
                 end sub,
                 callback: m.onNavigationChanged
             })
-
-            ' Render initial page
-            m.renderPage("home")
         end sub
 
-        override sub onDestroyView()
-            Utils.BasicLogger("[LayoutViewModel] Destroying layout controller")
-
-            ' CRITICAL: Destroy dispatcher to prevent memory leaks
-            m.viewModelState.navDispatcher.destroy()
+        override sub onMountView()
+            ' Render initial page
+            m.onNavigationChanged()
         end sub
 
         override function template() as object
@@ -63,11 +61,6 @@ namespace ViewModels
                             color: UI.colors.background
                         }
                     },
-                    ' Navigation bar - left side vertical menu
-                    {
-                        id: "menu",
-                        viewModel: ViewModels.MenuViewModel
-                    },
                     ' Page container
                     {
                         id: "pageContainer",
@@ -75,45 +68,62 @@ namespace ViewModels
                         fields: {
                             translation: [0, 100]
                         }
+                    },
+                    ' Navigation bar - left side vertical menu
+                    {
+                        id: "menu",
+                        viewModel: ViewModels.MenuViewModel
                     }
                 ]
             }
         end function
+
+        ' ==========================================
+        ' Custom method to handle navigation changes
+        ' ==========================================
 
         sub onNavigationChanged()
             Utils.BasicLogger(`[LayoutViewModel] Navigation changed: ${m.props.activePageId}`)
 
             ' Handle page change
             if m.viewModelState.currentPageId <> m.props.activePageId
-                m.renderPage(m.props.activePageId)
+                m.proceedPageTransition()
                 m.viewModelState.currentPageId = m.props.activePageId
             end if
+        end sub
 
-            ' Mark transition as complete
-            m.viewModelState.navDispatcher.dispatch({
-                type: IntentTypes.Navigation.TRANSITION_COMPLETE
+        sub proceedPageTransition()
+            pageContainer = m.getWidget("pageContainer")
+            pagesToRender = []
+
+            ' Render new active page
+            pagesToRender.push({
+                id: m.props.activePageId,
+                viewModel: m.viewModelState.pages[m.props.activePageId],
+                props: {
+                    isActive: true
+                }
+            })
+            ' Hide current page if exists
+            if pageContainer.children[m.viewModelState.currentPageId] <> invalid
+                pagesToRender.push({
+                    id: m.viewModelState.currentPageId,
+                    props: {
+                        isActive: false
+                    }
+                })
+            end if
+
+            ' Render transition
+            pageContainer.render({
+                children: pagesToRender
             })
         end sub
 
-        sub renderPage(pageId as string)
-            Utils.BasicLogger(`[LayoutViewModel] Rendering page: ${pageId}`)
-
-            pageClass = m.viewModelState.pages[pageId]
-
-            m.render({
-                id: "pageContainer",
-                children: [{
-                    viewModel: pageClass
-                }]
-            })
+        override sub onDestroyView()
+            Utils.BasicLogger("[LayoutViewModel] Destroying layout controller")
+            m.navDispatcher.destroy()
         end sub
 
-        ' Public method to navigate to page
-        sub goToPage(pageId as string)
-            m.viewModelState.navDispatcher.dispatch({
-                type: IntentTypes.Navigation.GOTO_PAGE,
-                payload: { pageId: pageId }
-            })
-        end sub
     end class
 end namespace

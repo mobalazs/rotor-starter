@@ -3,11 +3,24 @@ import "pkg:/components/views/navigation/MenuItemViewModel.bs"
 namespace ViewModels
     class MenuViewModel extends Rotor.ViewModel
         viewModelState = {
-            pages: {
-                home: { iconUri: UI.components.menuBar.menuItem.iconUri.home },
-                movies: { iconUri: UI.components.menuBar.menuItem.iconUri.movies },
-                settings: { iconUri: UI.components.menuBar.menuItem.iconUri.settings },
-                exit: { iconUri: UI.components.menuBar.menuItem.iconUri.exit }
+            pageIds: ["home", "movies", "settings", "exit"],
+            pageSettings: {
+                home: {
+                    class: ViewModels.HomePage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.home
+                },
+                movies: {
+                    class: ViewModels.MoviesPage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.movies
+                },
+                settings: {
+                    class: ViewModels.SettingsPage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.settings
+                },
+                exit: {
+
+                    iconUri: UI.components.menuBar.menuItem.iconUri.exit
+                }
             }
         }
 
@@ -23,9 +36,9 @@ namespace ViewModels
         override function template() as object
             ' Build menu items dynamically
             menuChildren = []
-            for each pageId in m.viewModelState.pages.Keys()
+            for each pageId in m.viewModelState.pageIds
 
-                iconUri = m.viewModelState.pages[pageId].iconUri
+                iconUri = m.viewModelState.pageSettings[pageId].iconUri
 
                 menuChildren.push({
                     id: `navItem_${pageId}`,
