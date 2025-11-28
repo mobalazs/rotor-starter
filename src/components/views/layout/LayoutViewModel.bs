@@ -18,7 +18,6 @@ namespace ViewModels
         ' ========== ViewModel Variables ==========
 
         private navDispatcher as Rotor.Dispatcher
-        private navState as object
 
 
         ' ===========================
@@ -38,13 +37,11 @@ namespace ViewModels
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
-                mapStateToProps: sub(props, state)
+                mapStateToProps: sub(props, state as Models.NavState)
                     props.activePageId = state.activePageId
                 end sub,
                 callback: m.onNavigationChanged
             })
-
-            m.navState = m.navDispatcher.getState()
 
         end sub
 
@@ -85,8 +82,7 @@ namespace ViewModels
                         id: "menu",
                         viewModel: ViewModels.MenuViewModel,
                         props: {
-                            pageIds: m.navState.pageIds,
-                            pageSettings: m.navState.pageSettings
+                            navDispatcherId: "navigation"
                         }
                     }
                 ]
@@ -115,11 +111,12 @@ namespace ViewModels
         private sub proceedPageTransition()
             pageContainer = m.getWidget("pageContainer")
             pagesToRender = []
+            navState = m.navDispatcher.getState() as Models.NavState
 
             ' Render new active page
             pagesToRender.push({
                 id: m.props.activePageId,
-                viewModel: m.navState.pageSettings[m.props.activePageId].class,
+                viewModel: navState.pageSettings[m.props.activePageId].class,
                 props: {
                     isActive: true
                 }
@@ -133,9 +130,11 @@ namespace ViewModels
                     }
                 })
             end if
+            ' Update Menu
 
             ' Render transition
-            pageContainer.render({
+            m.render({
+                id: "pageContainer",
                 children: pagesToRender
             })
         end sub

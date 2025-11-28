@@ -1,4 +1,16 @@
 namespace Models
+
+    interface pageSettings
+        class as function ' Rotor.ViewModel
+        iconUri as string[] ' array of icon uris
+        intentType as object ' intent type for dispatching
+    end interface
+    interface NavState
+        activePageId as string ' current active page ID
+        pageIds as string[] ' array of page IDs strings
+        pageSettings as pageSettings[] ' associative array of page settings
+    end interface
+
     class NavigationModel extends Rotor.Model
         state = {
             activePageId: "home",
@@ -6,20 +18,24 @@ namespace Models
             pageSettings: {
                 home: {
                     class: ViewModels.HomePage,
-                    iconUri: UI.components.menuBar.menuItem.iconUri.home
+                    iconUri: UI.components.menuBar.menuItem.iconUri.home,
+                    intentType: IntentTypes.Navigation.GOTO_PAGE
                 },
                 movies: {
                     class: ViewModels.MoviesPage,
-                    iconUri: UI.components.menuBar.menuItem.iconUri.movies
+                    iconUri: UI.components.menuBar.menuItem.iconUri.movies,
+                    intentType: IntentTypes.Navigation.GOTO_PAGE
                 },
                 settings: {
                     class: ViewModels.SettingsPage,
-                    iconUri: UI.components.menuBar.menuItem.iconUri.settings
+                    iconUri: UI.components.menuBar.menuItem.iconUri.settings,
+                    intentType: IntentTypes.Navigation.GOTO_PAGE
                 },
                 exit: {
-                    iconUri: UI.components.menuBar.menuItem.iconUri.exit
+                    iconUri: UI.components.menuBar.menuItem.iconUri.exit,
+                    intentType: IntentTypes.Navigation.EXIT_APP
                 }
             }
-        }
+        } as NavState
     end class
 end namespace

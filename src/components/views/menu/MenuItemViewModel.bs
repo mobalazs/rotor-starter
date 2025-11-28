@@ -2,15 +2,18 @@ namespace ViewModels
     class MenuItemViewModel extends Rotor.ViewModel
 
         props = {
-            pageId: "home",
-            iconUri: ""
+            pageId: "home", ' Page ID for this menu item
+            iconUri: "", ' Icon URI for menu item
+            intentType: "", ' Define intent type for CTA
+            dispatcherId: "", ' Dispatcher ID for navigation
+            isSelected: false
         }
 
         viewModelState = {
             isFocused: false
         }
 
-        sub onFocused(isFocused as boolean)
+        override sub onUpdateView()
             ' Update focus state and trigger re-render
             m.children.menuIcon.refresh("fields.blendColor")
             m.children.menuLabel.refresh(["fontStyle", "fields.color"])
@@ -18,8 +21,8 @@ namespace ViewModels
 
         sub onSelected()
             ' Navigate to page
-            m.getDispatcher("navigation").dispatch({
-                type: IntentTypes.Navigation.GOTO_PAGE,
+            m.getDispatcher(m.props.dispatcherId).dispatch({
+                type: m.props.intentType,
                 payload: { pageId: m.props.pageId }
             })
         end sub
@@ -35,7 +38,7 @@ namespace ViewModels
                 dispatcher: "navigation",
                 focus: {
                     onFocusChanged: sub(isFocused as boolean): typecast m as ViewModels.MenuItemViewModel
-                        m.onFocused(isFocused)
+                        m.onUpdateView()
                     end sub,
 
                     onSelected: sub() typecast m as ViewModels.MenuItemViewModel
@@ -54,7 +57,12 @@ namespace ViewModels
                             loadHeight: iconSize,
                             translation: [0, 0],
                             blendColor: function() as string
-                                return m.viewModelState.isFocused ? UI.colors.primaryHover : UI.colors.onSurface
+                                if m.viewModelState.isFocused
+                                    return UI.colors.primaryHover
+                                else if m.props.isSelected
+                                    return UI.colors.primary
+                                end if
+                                return UI.colors.onSurface
                             end function
                         }
                     },
@@ -69,7 +77,12 @@ namespace ViewModels
                             height: menuPadding + iconSize,
                             translation: [labelOffsetX, 0],
                             color: function() as string typecast m as Rotor.Widget
-                                return m.viewModelState.isFocused ? UI.colors.primaryHover : UI.colors.onSurface
+                                if m.viewModelState.isFocused
+                                    return UI.colors.primaryHover
+                                else if m.props.isSelected
+                                    return UI.colors.primary
+                                end if
+                                return UI.colors.onSurface
                             end function
                         }
                     }

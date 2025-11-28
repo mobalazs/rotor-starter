@@ -6,7 +6,8 @@ namespace IntentTypes
     end enum
 
     enum Navigation
-        GOTO_PAGE = "GOTO_PAGE"
+        GOTO_PAGE = "goto_page"
+        EXIT_APP = "exit_app"
     end enum
 
     enum Preloader
