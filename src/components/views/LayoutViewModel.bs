@@ -3,6 +3,8 @@ namespace ViewModels
 
     class LayoutViewModel extends Rotor.ViewModel
 
+        ' ========== Shared state and props of viewModel ==========
+
         viewModelState = {
             currentPageId: "",
             pages: {
@@ -16,7 +18,14 @@ namespace ViewModels
             activePageId: "home" ' Initial page
         }
 
-        navDispatcher as Rotor.Dispatcher
+        ' ========== ViewModel Variables ==========
+
+        private navDispatcher as Rotor.Dispatcher
+
+
+        ' ===========================
+        ' ViewModel lifecycle methods
+        ' ===========================
 
         override sub onCreateView()
             Utils.BasicLogger("[LayoutViewModel] Creating layout controller")
@@ -78,11 +87,16 @@ namespace ViewModels
             }
         end function
 
+        override sub onDestroyView()
+            Utils.BasicLogger("[LayoutViewModel] Destroying layout controller")
+            m.navDispatcher.destroy()
+        end sub
+
         ' ==========================================
         ' Custom method to handle navigation changes
         ' ==========================================
 
-        sub onNavigationChanged()
+        private sub onNavigationChanged()
             Utils.BasicLogger(`[LayoutViewModel] Navigation changed: ${m.props.activePageId}`)
 
             ' Handle page change
@@ -92,7 +106,7 @@ namespace ViewModels
             end if
         end sub
 
-        sub proceedPageTransition()
+        private sub proceedPageTransition()
             pageContainer = m.getWidget("pageContainer")
             pagesToRender = []
 
@@ -118,11 +132,6 @@ namespace ViewModels
             pageContainer.render({
                 children: pagesToRender
             })
-        end sub
-
-        override sub onDestroyView()
-            Utils.BasicLogger("[LayoutViewModel] Destroying layout controller")
-            m.navDispatcher.destroy()
         end sub
 
     end class
