@@ -10,11 +10,6 @@ namespace Reducers
                     transitionState: "transitioning"
                 }
 
-            else if intent.type = IntentTypes.Navigation.TRANSITION_COMPLETE
-                return {
-                    activePageId: state.activePageId,
-                    transitionState: "idle"
-                }
             end if
 
             return state

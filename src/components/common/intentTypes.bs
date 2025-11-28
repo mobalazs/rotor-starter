@@ -7,7 +7,6 @@ namespace IntentTypes
 
     enum Navigation
         GOTO_PAGE = "GOTO_PAGE"
-        TRANSITION_COMPLETE = "TRANSITION_COMPLETE"
     end enum
 
     enum Preloader
