@@ -12,17 +12,17 @@ import "pkg:/components/common/IntentTypes.bs"
 import "pkg:/source/utils/Utils.bs"
 
 ' Navigation System (dispatcher created in render thread)
-import "pkg:/components/viewModels/navigation/NavigationModel.bs"
-import "pkg:/components/viewModels/navigation/NavigationReducer.bs"
-import "pkg:/components/viewModels/navigation/MenuViewModel.bs"
+import "pkg:/components/views/navigation/NavigationModel.bs"
+import "pkg:/components/views/navigation/NavigationReducer.bs"
+import "pkg:/components/views/navigation/MenuViewModel.bs"
 
 ' Page ViewModels
-import "pkg:/components/viewModels/pages/HomePage.bs"
-import "pkg:/components/viewModels/pages/MoviesPage.bs"
-import "pkg:/components/viewModels/pages/SettingsPage.bs"
+import "pkg:/components/views/pages/HomePage.bs"
+import "pkg:/components/views/pages/MoviesPage.bs"
+import "pkg:/components/views/pages/SettingsPage.bs"
 
 ' UI ViewModels
-import "pkg:/components/viewModels/LayoutViewModel.bs"
+import "pkg:/components/views/LayoutViewModel.bs"
 
 sub init()
     ' Setup observers for launch and input events

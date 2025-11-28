@@ -1,4 +1,4 @@
-import "pkg:/components/viewModels/navigation/MenuItemViewModel.bs"
+import "pkg:/components/views/navigation/MenuItemViewModel.bs"
 
 namespace ViewModels
     class MenuViewModel extends Rotor.ViewModel
