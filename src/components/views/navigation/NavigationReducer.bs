@@ -1,5 +1,3 @@
-import "pkg:/components/common/IntentTypes.bs"
-
 namespace Reducers
     class NavigationReducer extends Rotor.Reducer
         override function reducer(state, intent) as object
