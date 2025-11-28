@@ -1,3 +1,5 @@
+import "NavigationModel.bs"
+import "NavigationReducer.bs"
 
 namespace ViewModels
 
@@ -6,12 +8,7 @@ namespace ViewModels
         ' ========== Shared state and props of viewModel ==========
 
         viewModelState = {
-            currentPageId: "",
-            pages: {
-                "home": ViewModels.HomePage,
-                "movies": ViewModels.MoviesPage,
-                "settings": ViewModels.SettingsPage
-            }
+            currentPageId: ""
         }
 
         props = {
@@ -21,6 +18,7 @@ namespace ViewModels
         ' ========== ViewModel Variables ==========
 
         private navDispatcher as Rotor.Dispatcher
+        private navState as object
 
 
         ' ===========================
@@ -45,6 +43,9 @@ namespace ViewModels
                 end sub,
                 callback: m.onNavigationChanged
             })
+
+            m.navState = m.navDispatcher.getState()
+
         end sub
 
         override sub onMountView()
@@ -53,6 +54,7 @@ namespace ViewModels
         end sub
 
         override function template() as object
+
             return {
                 nodeType: "Group",
                 id: "mainLayout",
@@ -81,7 +83,11 @@ namespace ViewModels
                     ' Navigation bar - left side vertical menu
                     {
                         id: "menu",
-                        viewModel: ViewModels.MenuViewModel
+                        viewModel: ViewModels.MenuViewModel,
+                        props: {
+                            pageIds: m.navState.pageIds,
+                            pageSettings: m.navState.pageSettings
+                        }
                     }
                 ]
             }
@@ -113,7 +119,7 @@ namespace ViewModels
             ' Render new active page
             pagesToRender.push({
                 id: m.props.activePageId,
-                viewModel: m.viewModelState.pages[m.props.activePageId],
+                viewModel: m.navState.pageSettings[m.props.activePageId].class,
                 props: {
                     isActive: true
                 }

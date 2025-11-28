@@ -1,5 +1,3 @@
-import "pkg:/components/common/IntentTypes.bs"
-
 namespace ViewModels
     class MenuItemViewModel extends Rotor.ViewModel
 

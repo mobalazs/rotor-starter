@@ -1,0 +1,25 @@
+namespace Models
+    class NavigationModel extends Rotor.Model
+        state = {
+            activePageId: "home",
+            pageIds: ["home", "movies", "settings", "exit"],
+            pageSettings: {
+                home: {
+                    class: ViewModels.HomePage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.home
+                },
+                movies: {
+                    class: ViewModels.MoviesPage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.movies
+                },
+                settings: {
+                    class: ViewModels.SettingsPage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.settings
+                },
+                exit: {
+                    iconUri: UI.components.menuBar.menuItem.iconUri.exit
+                }
+            }
+        }
+    end class
+end namespace

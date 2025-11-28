@@ -1,7 +1,0 @@
-namespace Models
-    class NavigationModel extends Rotor.Model
-        state = {
-            activePageId: "home"
-        }
-    end class
-end namespace
