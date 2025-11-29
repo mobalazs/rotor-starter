@@ -7,6 +7,7 @@ namespace Reducers
 
             else if intent.type = IntentTypes.Navigation.EXIT_APP
                 Utils.BasicLogger("[NavigationReducer] Exiting application as per user request")
+                state.shouldExitApp = true
 
             end if
 

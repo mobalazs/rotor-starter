@@ -10,12 +10,15 @@ namespace Models
         activePageId as string ' current active page ID
         pageIds as string[] ' array of page IDs strings
         pageSettings as pageSettings[] ' associative array of page settings
+        shouldExitApp as boolean ' flag to trigger app exit
     end interface
 
     class NavigationModel extends Rotor.Model
         state = {
 
             activePageId: "home",
+
+            shouldExitApp: false,
 
             pageIds: ["home", "movies", "settings", "exit"],
 

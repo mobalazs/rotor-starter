@@ -39,6 +39,14 @@ namespace ViewModels
                 callback: m.onNavigationChanged
             })
 
+            ' Listen for exit app flag
+            m.navDispatcher.addListener({
+                shouldUpdate: function(props, state as Models.NavState)
+                    return state.shouldExitApp = true
+                end function,
+                callback: m.onExitApp
+            })
+
         end sub
 
         override sub onMountView()
@@ -147,6 +155,26 @@ namespace ViewModels
                 id: "pageContainer",
                 children: pagesToRender
             })
+        end sub
+
+        '''''''''
+        ' onExitApp: Handles application exit request from navigation state
+        '''''''''
+        private sub onExitApp()
+            Utils.BasicLogger("[LayoutViewModel] Exit app requested - exiting application")
+
+            ' Optional: Show exit confirmation dialog here
+            ' Optional: Cleanup, save state, analytics, etc.
+
+            ' Exit the application
+            globalScope = GetGlobalAA()
+            ' Get framework instance created in MainScene
+            fw = globalScope.fw
+            ' Destroy framework (also destroys all dispatchers and view models)
+            fw.destroy()
+            ' Exit scene
+            globalScope.top.getScene().exitChannel = true
+
         end sub
 
     end class

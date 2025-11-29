@@ -29,5 +29,5 @@ supports_etc_seek=1
 supports_etc_next=1
 
 ### Supporting Instant Resume
-sdk_instant_resume=1
+sdk_instant_resume=0
 run_as_process=1
