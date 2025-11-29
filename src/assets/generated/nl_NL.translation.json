@@ -8,6 +8,9 @@
   },
   "appTitle": "Rotor Starter App",
   "helloWorld": "Hallo Wereld!",
+  "buttons": {
+    "clickMe": "Klik Hier"
+  },
   "menu": {
     "home": "Home",
     "movies": "Films",

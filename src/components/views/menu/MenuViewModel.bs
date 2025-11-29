@@ -12,10 +12,13 @@ namespace ViewModels
         }
 
         viewModelState = {
-            currentPageId: "" ' Currently active page ID
+            currentPageId: "", ' Currently active page ID
+            isFocused: false ' Set by focus plugin via focus group is defined on top widget in template
         }
 
         navDispatcher as Rotor.Dispatcher
+        menuBackgroundWidget as object
+        menuLabels as object
 
         override sub onCreateView()
             Utils.BasicLogger("[MenuViewModel] Create menu")
@@ -23,6 +26,9 @@ namespace ViewModels
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
+                shouldUpdate: function(props, state as Models.NavState)
+                    return props.activePageId <> state.activePageId and state.activePageId <> ""
+                end function,
                 mapStateToProps: sub(props, state)
                     props.activePageId = state.activePageId
                 end sub,
@@ -36,10 +42,17 @@ namespace ViewModels
 
         override sub onMountView()
             Utils.BasicLogger("[MenuViewModel] Mount menu")
+
+            ' Get widget references
+            m.menuBackgroundWidget = m.getWidget("menuBackground")
+            m.menuLabels = m.findWidgets("menuItemsContainer/**/menuLabel")
+
+            ' Set initial closed state
+            m.animateMenuState(m.viewModelState.isFocused)
+
             ' Set initial UI according to state
             m.onCurrentPageIdChanged()
-            ' Set initial focus to first menu item
-            m.plugins.focus.setFocus()
+
         end sub
 
         override sub onDestroyView()
@@ -57,7 +70,7 @@ namespace ViewModels
                 pageSettings = navState.pageSettings[pageId]
 
                 menuItems.push({
-                    id: `navItem_${pageId}`,
+                    id: `menuItem_${pageId}`,
                     viewModel: ViewModels.MenuItemViewModel,
                     props: {
                         pageId: pageId,
@@ -72,9 +85,9 @@ namespace ViewModels
                 nodeType: "Group",
                 focus: {
                     group: {
-                        defaultFocusId: "navItem_home",
-                        onFocused: sub(isFocused as boolean)
-                            ' Handle focus change if needed
+                        defaultFocusId: "menuItem_home",
+                        onFocusChanged: sub(isFocused as boolean)
+                            m.animateMenuState(isFocused)
                         end sub
                     }
                 },
@@ -86,12 +99,12 @@ namespace ViewModels
                             width: 300,
                             height: UI.designResolution.h,
                             color: UI.colors.surface,
-                            opacity: 0.5,
+                            opacity: 0.9,
                             translation: [0, 0]
                         }
                     },
                     {
-                        id: "navigationBar",
+                        id: "menuItemsContainer",
                         nodeType: "LayoutGroup",
                         fields: {
                             enableRenderTracking: true,
@@ -100,18 +113,18 @@ namespace ViewModels
                             itemSpacings: [20]
                         },
 
-                        ' Set proper width for menu background based on navigation bar width (adapt to different text lengths)
+                        ' Set proper width for menu background based on menu items container width (adapt to different text lengths)
                         observer: {
                             fieldId: "renderTracking",
                             callback: sub(payload)
-                                navigationBarNode = m.node
+                                menuItemsContainerNode = m.node
                                 menuBackgroundNode = m.getSiblingWidget("menuBackground").node
 
-                                ' Get navigation bar width from bounding rect
-                                navBarWidth = navigationBarNode.localBoundingRect().width
+                                ' Get menu items container width from bounding rect
+                                menuWidth = menuItemsContainerNode.localBoundingRect().width
 
-                                ' Set menu background width to match navigation bar width
-                                menuBackgroundNode.width = navBarWidth + UI.safeArea.x * 2
+                                ' Set menu background width to match menu items container width
+                                menuBackgroundNode.width = menuWidth + UI.safeArea.x * 2
                             end sub
                         },
 
@@ -128,16 +141,37 @@ namespace ViewModels
             if m.viewModelState.currentPageId <> m.props.activePageId
                 m.render([
                     {
-                        id: "navigationBar/navItem_" + m.viewModelState.currentPageId,
+                        id: "menuItemsContainer/menuItem_" + m.viewModelState.currentPageId,
                         props: { isSelected: false }
                     },
                     {
-                        id: "navigationBar/navItem_" + m.props.activePageId,
+                        id: "menuItemsContainer/menuItem_" + m.props.activePageId,
                         props: { isSelected: true }
                     }
                 ])
                 m.viewModelState.currentPageId = m.props.activePageId
             end if
+        end sub
+
+        '''''''''
+        ' animateMenuState: Animates menu between open and closed states
+        ' @param {boolean} isFocused - True for open (focused), false for closed (unfocused)
+        '''''''''
+        sub animateMenuState(isFocused as boolean)
+
+            bgWidth = (isFocused ? m.node.localBoundingRect().width : UI.components.menuBar.menuItem.iconSize + UI.components.menuBar.rightPadding) + UI.safeArea.x
+            labelOpacity = isFocused ? 1 : 0
+
+            m.animator("menuStateAnimation").timeline({
+                duration: UI.motion.durationFast,
+                easeFunction: UI.motion.easingEmphasized
+            }).add({
+                target: m.menuBackgroundWidget,
+                width: bgWidth
+            }).add({
+                targets: m.menuLabels,
+                opacity: labelOpacity
+            }).play()
         end sub
 
     end class

@@ -2,7 +2,7 @@ namespace ViewModels
     class MenuItemViewModel extends Rotor.ViewModel
 
         props = {
-            pageId: "home", ' Page ID for this menu item
+            pageId: "", ' Page ID for this menu item
             iconUri: "", ' Icon URI for menu item
             intentType: "", ' Define intent type for CTA
             dispatcherId: "", ' Dispatcher ID for navigation

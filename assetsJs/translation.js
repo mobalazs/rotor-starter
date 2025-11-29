@@ -13,6 +13,9 @@ module.exports = function () {
 		languages: languages,
 		appTitle: "Rotor Starter App",
 		helloWorld: 'Hello World!',
+		buttons: {
+			clickMe: 'Click Me'
+		},
 		menu: {
 			home: 'Home',
 			movies: 'Movies',
@@ -39,6 +42,9 @@ module.exports = function () {
 		languages: languages,
 		appTitle: "Aplicación de Inicio Rotor",
 		helloWorld: '¡Hola Mundo!',
+		buttons: {
+			clickMe: 'Haz Clic'
+		},
 		menu: {
 			home: 'Inicio',
 			movies: 'Películas',
@@ -65,6 +71,9 @@ module.exports = function () {
 		languages: languages,
 		appTitle: "Application de Démarrage Rotor",
 		helloWorld: 'Bonjour le Monde!',
+		buttons: {
+			clickMe: 'Cliquez Ici'
+		},
 		menu: {
 			home: 'Accueil',
 			movies: 'Films',
@@ -91,6 +100,9 @@ module.exports = function () {
 		languages: languages,
 		appTitle: "Rotor Kezdő Alkalmazás",
 		helloWorld: 'Helló Világ!',
+		buttons: {
+			clickMe: 'Kattints Ide'
+		},
 		menu: {
 			home: 'Kezdőlap',
 			movies: 'Filmek',
@@ -117,6 +129,9 @@ module.exports = function () {
 		languages: languages,
 		appTitle: "Rotor Starter App",
 		helloWorld: 'Hallo Wereld!',
+		buttons: {
+			clickMe: 'Klik Hier'
+		},
 		menu: {
 			home: 'Home',
 			movies: 'Films',

@@ -106,14 +106,16 @@ namespace motion
 end namespace
 namespace components
 	namespace menuBar
+		const rightPadding = 18
+		const pageOffset = 176
 		namespace menuItem
+			const iconSize = 32
 			enum iconUri
 				home = "pkg:/assets/images/menuIcons/home_32dp_FFFFFF.png"
 				movies = "pkg:/assets/images/menuIcons/movie_32dp_FFFFFF.png"
 				settings = "pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png"
 				exit = "pkg:/assets/images/menuIcons/exit_to_app_32dp_FFFFFF.png"
 			end enum
-			const iconSize = 32
 		end namespace
 	end namespace
 end namespace

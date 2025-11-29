@@ -3,10 +3,10 @@ namespace Reducers
         override function reducer(state, intent) as object
 
             if intent.type = IntentTypes.Navigation.GOTO_PAGE
-                return {
-                    activePageId: intent.payload.pageId,
-                    transitionState: "transitioning"
-                }
+                state.activePageId = intent.payload.pageId
+
+            else if intent.type = IntentTypes.Navigation.EXIT_APP
+                Utils.BasicLogger("[NavigationReducer] Exiting application as per user request")
 
             end if
 

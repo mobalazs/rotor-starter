@@ -1,4 +1,5 @@
 import "BasePage.bs"
+import "../buttons/BaseButton.bs"
 
 namespace ViewModels
     class SettingsPage extends ViewModels.BasePage
@@ -6,13 +7,21 @@ namespace ViewModels
         override function template() as object
             return {
                 nodeType: "Group",
+                fields: {
+                    translation: m.props.pageTranslation
+                },
+                focus: {
+                    group: {
+                        defaultFocusId: "exampleButton"
+                    }
+                },
                 children: [
                     {
                         id: "pageTitle",
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.title",
-                            translation: [UI.safeArea.x, UI.safeArea.y],
+                            translation: [0, 0],
                             color: UI.colors.onBackground
                         },
                         fontStyle: UI.typography.displaySmall_aa
@@ -22,10 +31,20 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.content",
-                            translation: [UI.safeArea.x, UI.safeArea.y + 80],
+                            translation: [0, 80],
                             color: UI.colors.onBackground
                         },
                         fontStyle: UI.typography.bodyLarge_aa
+                    },
+                    {
+                        id: "exampleButton",
+                        viewModel: ViewModels.BaseButton,
+                        props: {
+                            text: "@l10n.buttons.clickMe"
+                        },
+                        fields: {
+                            translation: [0, 150]
+                        }
                     }
                 ]
             }

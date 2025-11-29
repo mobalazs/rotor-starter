@@ -8,6 +8,9 @@
   },
   "appTitle": "Rotor Kezdő Alkalmazás",
   "helloWorld": "Helló Világ!",
+  "buttons": {
+    "clickMe": "Kattints Ide"
+  },
   "menu": {
     "home": "Kezdőlap",
     "movies": "Filmek",

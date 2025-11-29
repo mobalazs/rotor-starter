@@ -1,0 +1,105 @@
+namespace ViewModels
+
+    '''''''''
+    ' BaseButton
+    '
+    ' props:
+    '   @text {string} Button text
+    '   @paddings {array} [top/bottom, left/right] like CSS paddings
+    '''''''''
+    class BaseButton extends Rotor.ViewModel
+
+        props = {
+            text: "",
+            paddings: [10, 24]
+        }
+
+        viewModelState = {
+            isFocused: false
+        }
+
+        override function template() as object
+
+            fontStyle = UI.typography.labelLarge_aa
+
+            height = fontStyle.size + 2 * m.props.paddings[0]
+
+            '''''''''
+            ' autoSizeObserverCallback: Observer callback for auto-sizing button width based on text content.
+            ' Triggered when renderTracking or text field changes.
+            ' Updates both button background and label width to match text width plus horizontal padding.
+            '''''''''
+            autoSizeObserverCallback = sub(payload) typecast m as Rotor.Widget ' buttonLabel
+                buttonBgNode = m.getSiblingWidget("buttonBg").node
+                labelNode = m.node
+
+                ' Auto width based on text
+                textWidth = labelNode.localBoundingRect().width
+
+                ' Update widths
+                buttonBgNode.width = textWidth + 2 * m.props.paddings[1]
+                ' Ensure proper horizontal padding from left (update safe solution)
+                labelNode.translation = [m.props.paddings[1], 0]
+            end sub
+
+            '''''''''
+            ' onFocusChanged: Focus state change handler.
+            ' Updates button background and label colors based on focus state using Material Design colors.
+            ' Normal (unfocused): surface background with onSurface text
+            ' Focused: primary background with onPrimary text
+            ' @param {boolean} isFocused - True when button gains focus, false when loses focus
+            '''''''''
+            onFocusChanged = sub(isFocused as boolean) typecast m as ViewModels.BaseButton
+                ' Using Rotor render cycle to update colors via function expression in fields
+                m.children.buttonBg.refresh("fields.color")
+
+                ' Alternative approach - direct node manipulation:
+                ' m.children.buttonBg.node.color = isFocused ? UI.colors.primary : UI.colors.surface
+            end sub
+
+            return {
+                nodeType: "Group",
+                focus: {
+                    isEnabled: true,
+                    onFocusChanged: onFocusChanged
+                },
+                children: [
+                    {
+                        id: "buttonBg",
+                        nodeType: "Rectangle",
+                        fields: {
+                            color: function() as string
+                                return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surface
+                            end function,
+                            width: 0,
+                            height: height
+                        }
+                    },
+                    {
+                        id: "buttonLabel",
+                        nodeType: "Label",
+                        fontStyle: fontStyle,
+                        fields: {
+                            enableRenderTracking: true,
+                            text: m.props.text,
+                            color: UI.colors.onPrimary,
+                            horizAlign: "center",
+                            vertAlign: "center",
+                            height: height,
+                            translation: [0, 0]
+                        },
+                        observer: [{
+                            fieldId: "renderTracking",
+                            callback: autoSizeObserverCallback
+                        }, {
+                            fieldId: "text",
+                            callback: autoSizeObserverCallback
+                        }]
+                    }
+                ]
+            }
+        end function
+
+    end class
+
+end namespace

@@ -8,6 +8,9 @@
   },
   "appTitle": "Application de Démarrage Rotor",
   "helloWorld": "Bonjour le Monde!",
+  "buttons": {
+    "clickMe": "Cliquez Ici"
+  },
   "menu": {
     "home": "Accueil",
     "movies": "Films",

@@ -135,9 +135,9 @@ module.exports = function () {
 	// Motion - Material Design Motion System
 	let motion = {
 		// Duration (in seconds) - Material Design standards
-		durationFast: 0.2,      // Small elements, icons (100-200ms)
-		durationMedium: 0.3,    // Most UI elements (200-300ms)
-		durationSlow: 0.4,      // Large elements, complex animations (300-500ms)
+		durationFast: 0.2, // Small elements, icons (100-200ms)
+		durationMedium: 0.3, // Most UI elements (200-300ms)
+		durationSlow: 0.4, // Large elements, complex animations (300-500ms)
 
 		// Easing functions - Native Roku SceneGraph Animation easing
 		// Standard - Most common, balanced ease-in and ease-out
@@ -158,19 +158,20 @@ module.exports = function () {
 		// Sharp - Quick, responsive animations
 		easingSharp: 'outQuartic',
 	};
-
 	// Images - Application image assets
 	let menuBar = {
+		rightPadding: 18,
+		pageOffset: safeArea.x + 32 + 18 + 2 * 18, // safeArea.x + iconSize + rightPadding + rightMargin
 		// Menu icons
 		menuItem: {
+			iconSize: 32,
 			iconUri: {
 				home: 'pkg:/assets/images/menuIcons/home_32dp_FFFFFF.png',
 				movies: 'pkg:/assets/images/menuIcons/movie_32dp_FFFFFF.png',
 				settings: 'pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png',
 				exit: 'pkg:/assets/images/menuIcons/exit_to_app_32dp_FFFFFF.png',
-			},
-			iconSize: 32
-		}
+			}
+		},
 	};
 
 	return {
@@ -180,7 +181,7 @@ module.exports = function () {
 		typography: typography,
 		motion: motion,
 		components: {
-			menuBar: menuBar
-		}
+			menuBar: menuBar,
+		},
 	};
 };

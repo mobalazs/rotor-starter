@@ -1,5 +1,3 @@
-import "NavigationModel.bs"
-import "NavigationReducer.bs"
 
 namespace ViewModels
 
@@ -27,16 +25,14 @@ namespace ViewModels
         override sub onCreateView()
             Utils.BasicLogger("[LayoutViewModel] Creating layout controller")
 
-            ' Create Navigation dispatcher in render thread (UI-specific state)
-            navModel = new Models.NavigationModel()
-            navReducer = new Reducers.NavigationReducer()
-            Rotor.createDispatcher("navigation", navModel, navReducer)
-
             ' Get reference to dispatcher
             m.navDispatcher = m.getDispatcher("navigation")
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
+                shouldUpdate: function(props, state as Models.NavState)
+                    return props.activePageId <> state.activePageId and state.activePageId <> ""
+                end function,
                 mapStateToProps: sub(props, state as Models.NavState)
                     props.activePageId = state.activePageId
                 end sub,
@@ -73,14 +69,28 @@ namespace ViewModels
                     {
                         id: "pageContainer",
                         nodeType: "Group",
-                        fields: {
-                            translation: [0, 100]
+                        focus: {
+                            group: {
+                                defaultFocusId: function() as string
+                                    return `${m.props.activePageId}`
+                                end function,
+                                ' Focus target to menu if user click "left" on RC
+                                left: `menu`
+                            }
                         }
                     },
                     ' Navigation bar - left side vertical menu
                     {
                         id: "menu",
                         viewModel: ViewModels.MenuViewModel,
+                        focus: {
+                            group: {
+                                ' Focus target to pageContainer if user click "right" on RC
+                                right: function() as string
+                                    return `pageContainer`
+                                end function
+                            }
+                        },
                         props: {
                             navDispatcherId: "navigation"
                         }
@@ -116,7 +126,7 @@ namespace ViewModels
             ' Render new active page
             pagesToRender.push({
                 id: m.props.activePageId,
-                viewModel: navState.pageSettings[m.props.activePageId].class,
+                viewModel: navState.pageSettings[m.props.activePageId].viewModel,
                 props: {
                     isActive: true
                 }
