@@ -20,7 +20,7 @@
   "pages": {
     "home": {
       "title": "Home Page",
-      "content": "Welcome to the Home page!"
+      "content": "Welcome to the homepage! `This RowList` is shown here as a demonstration to illustrate that the framework can operate in a hybrid mode. Creating a fully custom `carousel` ViewModel driven by the Rotor Framework is also feasible and recommended. For more information, contact the author."
     },
     "movies": {
       "title": "Movies Page",

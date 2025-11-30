@@ -11,6 +11,11 @@ namespace Reducers
 
         requestTask = CreateObject("roSGNode", "RequestTask")
 
+
+        ' ======================
+        ' Dispatcher Middlewares
+        ' ======================
+
         override function applyMiddlewares()
             return [
                 ' Logger middleware
@@ -50,6 +55,10 @@ namespace Reducers
 
             ]
         end function
+
+        ' ==================
+        ' Dispatcher Reducer
+        ' ==================
 
         override function reducer(state, intent)
 

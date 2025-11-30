@@ -15,13 +15,14 @@ namespace ViewModels
 
         override function template() as object
             return {
-                nodeType: "Group",
+                nodeType: "LayoutGroup",
                 fields: {
+                    itemSpacings: [30],
                     translation: m.props.pageTranslation
                 },
                 focus: {
                     group: {
-                        defaultFocusId: "exampleButton"
+                        defaultFocusId: "contentList"
                     }
                 },
                 children: [
@@ -39,20 +40,25 @@ namespace ViewModels
                         id: "pageContent",
                         nodeType: "Label",
                         fields: {
+                            width: 800,
+                            wrap: true,
                             text: "@l10n.pages.home.content",
-                            translation: [0, 80],
                             color: UI.colors.onBackground
                         },
-                        fontStyle: UI.typography.bodyLarge_aa
+                        fontStyle: UI.typography.bodySmall_aa
                     },
                     {
-                        id: "exampleButton",
-                        viewModel: ViewModels.BaseButton,
-                        props: {
-                            text: "@l10n.buttons.clickMe"
-                        },
+                        id: "contentList",
+                        nodeType: "RowList",
                         fields: {
-                            translation: [0, 150]
+                            itemComponentName: "SimpleRowListItem",
+                            content: m.props.listContentNode,
+                            itemSize: [200, 308],
+                            itemSpacing: [20, 20],
+                            numRows: 2
+                        },
+                        focus: {
+                            enableNativeFocus: true
                         }
                     }
                 ]
@@ -70,8 +76,8 @@ namespace ViewModels
 
         override sub onMountView()
             super.onMountView()
-            ' Set initial focus to first menu item
-            m.getWidget("exampleButton").plugins.focus.setFocus()
+            ' Set initial focus to content list
+            m.getWidget("contentList").plugins.focus.setFocus()
         end sub
 
         override sub onUpdateView()
@@ -95,7 +101,8 @@ namespace ViewModels
                 ' If state has already been isReady then immediately perform the transition VIA super method
                 crState = m.crDispatcher.getState()
                 if crState.ok = true and m.props.listContentNode <> invalid
-                    ' m.viewModelState.isReady = true
+
+                    m.setContent()
                     super.performPageTransition()
 
                 else
@@ -125,6 +132,11 @@ namespace ViewModels
             end if
 
         end sub
+
+        sub setContent()
+            m.children.contentList.node.content = m.props.listContentNode
+        end sub
+
 
     end class
 end namespace

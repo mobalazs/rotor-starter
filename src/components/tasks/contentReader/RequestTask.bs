@@ -57,7 +57,8 @@ function parse(response) as Object
             title: item.title,
             shortDescription: item.shortDescription,
             PosterUrl: item.posterUrl,
-            FHDPosterUrl: item.posterUrl
+            FHDPosterUrl: item.posterUrl,
+            HDPosterUrl: item.posterUrl
         }
 
         contentNode = Rotor.Utils.createContentNode(cardData)

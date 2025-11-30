@@ -6,152 +6,172 @@ module.exports = function () {
 		es_ES: 'Español',
 		fr_FR: 'Français',
 		hu_HU: 'Magyar',
-		nl_NL: 'Nederlands'
+		nl_NL: 'Nederlands',
 	};
 
 	let en_US = {
 		languages: languages,
-		appTitle: "Rotor Starter App",
+		appTitle: 'Rotor Starter App',
 		helloWorld: 'Hello World!',
 		buttons: {
-			clickMe: 'Click Me'
+			clickMe: 'Click Me',
 		},
 		menu: {
 			home: 'Home',
 			movies: 'Movies',
 			settings: 'Settings',
-			exit: 'Exit'
+			exit: 'Exit',
 		},
 		pages: {
 			home: {
 				title: 'Home Page',
-				content: 'Welcome to the Home page!'
+				content:
+					'Welcome to the homepage! `This RowList` is shown here as a demonstration \
+to illustrate that the framework can operate in a hybrid mode. Creating a fully custom \
+`carousel` ViewModel driven by the Rotor Framework is also feasible and recommended. \
+For more information, contact the author.',
 			},
 			movies: {
 				title: 'Movies Page',
-				content: 'Browse your favorite movies here.'
+				content: 'Browse your favorite movies here.',
 			},
 			settings: {
 				title: 'Settings Page',
-				content: 'Adjust your application settings.'
-			}
-		}
+				content: 'Adjust your application settings.',
+			},
+		},
 	};
 
 	let es_ES = {
 		languages: languages,
-		appTitle: "Aplicación de Inicio Rotor",
+		appTitle: 'Aplicación de Inicio Rotor',
 		helloWorld: '¡Hola Mundo!',
 		buttons: {
-			clickMe: 'Haz Clic'
+			clickMe: 'Haz Clic',
 		},
 		menu: {
 			home: 'Inicio',
 			movies: 'Películas',
 			settings: 'Configuración',
-			exit: 'Salir'
+			exit: 'Salir',
 		},
 		pages: {
 			home: {
 				title: 'Página de Inicio',
-				content: '¡Bienvenido a la página de inicio!'
+				content:
+					'¡Bienvenido a la página de inicio! `Esta RowList` se muestra aquí como demostración \
+para ilustrar que el framework puede operar en modo híbrido. Crear un `carousel` ViewModel \
+completamente personalizado impulsado por Rotor Framework también es factible y recomendado. \
+Para más información, contacte al autor.',
 			},
 			movies: {
 				title: 'Página de Películas',
-				content: 'Explora tus películas favoritas aquí.'
+				content: 'Explora tus películas favoritas aquí.',
 			},
 			settings: {
 				title: 'Página de Configuración',
-				content: 'Ajusta la configuración de tu aplicación.'
-			}
-		}
+				content: 'Ajusta la configuración de tu aplicación.',
+			},
+		},
 	};
 
 	let fr_FR = {
 		languages: languages,
-		appTitle: "Application de Démarrage Rotor",
+		appTitle: 'Application de Démarrage Rotor',
 		helloWorld: 'Bonjour le Monde!',
 		buttons: {
-			clickMe: 'Cliquez Ici'
+			clickMe: 'Cliquez Ici',
 		},
 		menu: {
 			home: 'Accueil',
 			movies: 'Films',
 			settings: 'Paramètres',
-			exit: 'Quitter'
+			exit: 'Quitter',
 		},
 		pages: {
 			home: {
-				title: 'Page d\'Accueil',
-				content: 'Bienvenue sur la page d\'accueil!'
+				title: "Page d'Accueil",
+				content:
+					"Bienvenue sur la page d'accueil ! `Cette RowList` est affichée ici comme démonstration \
+pour illustrer que le framework peut fonctionner en mode hybride. Créer un `carousel` ViewModel \
+entièrement personnalisé piloté par Rotor Framework est également possible et recommandé. \
+Pour plus d'informations, contactez l'auteur.",
 			},
 			movies: {
 				title: 'Page des Films',
-				content: 'Parcourez vos films préférés ici.'
+				content: 'Parcourez vos films préférés ici.',
 			},
 			settings: {
 				title: 'Page des Paramètres',
-				content: 'Ajustez les paramètres de votre application.'
-			}
-		}
+				content: 'Ajustez les paramètres de votre application.',
+			},
+		},
 	};
 
 	let hu_HU = {
 		languages: languages,
-		appTitle: "Rotor Kezdő Alkalmazás",
+		appTitle: 'Rotor Kezdő Alkalmazás',
 		helloWorld: 'Helló Világ!',
 		buttons: {
-			clickMe: 'Kattints Ide'
+			clickMe: 'Kattints Ide',
 		},
 		menu: {
 			home: 'Kezdőlap',
 			movies: 'Filmek',
 			settings: 'Beállítások',
-			exit: 'Kilépés'
+			exit: 'Kilépés',
 		},
 		pages: {
 			home: {
 				title: 'Kezdőlap',
-				content: 'Üdvözöljük a kezdőlapon!'
+				content:
+					'Üdvözöljük a kezdőlapon! Ez a `RowList` bemutatóként jelenik meg itt, hogy \
+szemléltesse, hogy a keretrendszer hibrid módban is képes működni. Egy teljesen egyedi, \
+Rotor Framework által vezérelt `carousel` ViewModel létrehozása szintén megvalósítható és ajánlott. \
+További információért vegye fel a kapcsolatot a szerzővel.',
 			},
 			movies: {
 				title: 'Filmek Oldal',
-				content: 'Böngésszen kedvenc filmjei között itt.'
+				content: 'Böngésszen kedvenc filmjei között itt.',
 			},
 			settings: {
 				title: 'Beállítások Oldal',
-				content: 'Állítsa be az alkalmazás beállításait.'
-			}
-		}
+				content: 'Állítsa be az alkalmazás beállításait.',
+			},
+		},
 	};
 
 	let nl_NL = {
 		languages: languages,
-		appTitle: "Rotor Starter App",
+		appTitle: 'Rotor Starter App',
 		helloWorld: 'Hallo Wereld!',
 		buttons: {
-			clickMe: 'Klik Hier'
+			clickMe: 'Klik Hier',
 		},
 		menu: {
 			home: 'Home',
 			movies: 'Films',
 			settings: 'Instellingen',
-			exit: 'Afsluiten'
+			exit: 'Afsluiten',
 		},
 		pages: {
 			home: {
 				title: 'Startpagina',
-				content: 'Welkom op de startpagina!'
+				content:
+					'Welkom op de startpagina! Deze `RowList` wordt hier als demonstratie getoond om te \
+illustreren dat het framework in hybride modus kan werken. Het maken van een volledig aangepast \
+`carousel` ViewModel aangedreven door Rotor Framework is ook haalbaar en aanbevolen. \
+Voor meer informatie, neem contact op met de auteur.',
 			},
 			movies: {
 				title: 'Filmenpagina',
-				content: 'Blader hier door uw favoriete films.'
+				content: 'Blader hier door uw favoriete films.',
 			},
 			settings: {
 				title: 'Instellingenpagina',
-				content: 'Pas uw applicatie-instellingen aan.'
-			}
-		}
+				content: 'Pas uw applicatie-instellingen aan.',
+			},
+		},
 	};
 
 	return {
