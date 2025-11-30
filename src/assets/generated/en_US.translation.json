@@ -1,0 +1,34 @@
+{
+  "languages": {
+    "en_US": "English",
+    "es_ES": "Español",
+    "fr_FR": "Français",
+    "hu_HU": "Magyar",
+    "nl_NL": "Nederlands"
+  },
+  "appTitle": "Rotor Starter App",
+  "helloWorld": "Hello World!",
+  "buttons": {
+    "clickMe": "Click Me"
+  },
+  "menu": {
+    "home": "Home",
+    "movies": "Movies",
+    "settings": "Settings",
+    "exit": "Exit"
+  },
+  "pages": {
+    "home": {
+      "title": "Home Page",
+      "content": "Welcome to the homepage! This `RowList` is shown here as a demonstration to illustrate that the framework can operate in a hybrid mode. Creating a fully custom `carousel` ViewModel driven by the Rotor Framework is also feasible and recommended. For more information, contact the author."
+    },
+    "movies": {
+      "title": "Movies Page",
+      "content": "Browse your favorite movies here."
+    },
+    "settings": {
+      "title": "Settings Page",
+      "content": "Adjust your application settings."
+    }
+  }
+}

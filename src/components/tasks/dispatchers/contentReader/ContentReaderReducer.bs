@@ -1,0 +1,124 @@
+' App specific utils
+import "pkg:/source/utils/Utils.bs"
+
+namespace Reducers
+
+    class ContentReaderReducer extends Rotor.Reducer
+
+        sub logIntent(intent)
+            Utils.BasicLogger(`[CONTENT_READER] dispatcherId: ${m.ownerDispatcherId}, type: ${intent.type}`)
+        end sub
+
+        requestTask = CreateObject("roSGNode", "RequestTask")
+
+
+        ' ======================
+        ' Dispatcher Middlewares
+        ' ======================
+
+        override function applyMiddlewares()
+            return [
+                ' Logger middleware
+                function(intent, state) as Intent
+                    m.logIntent(intent)
+
+                    return intent ' NEXT
+                end function,
+
+                ' Async content reader middleware
+                function(intent, state) as Intent
+
+                    if intent.type = IntentTypes.ContentReader.LOAD_CONTENT
+
+                        m.startAsyncTask()
+
+                        ' Prevent intent propagation
+                        return invalid
+
+                    end if
+
+                    return intent ' NEXT
+                end function,
+
+                ' Catch response error middleware
+                function(intent, state) as Intent
+                    if intent.type = IntentTypes.ContentReader.CONTENT_LOADED
+                        if intent.payload.response.statusCode <> 200
+                            Utils.BasicLogger(`[CONTENT_READER] Error loading content: statusCode=${intent.payload.response.statusCode}`)
+                            ' Modify intent to indicate error
+                            intent.type = IntentTypes.ContentReader.CONTENT_LOAD_ERROR
+                        end if
+                    end if
+
+                    return intent ' NEXT
+                end function,
+
+            ]
+        end function
+
+        ' ==================
+        ' Dispatcher Reducer
+        ' ==================
+
+        override function reducer(state, intent)
+
+            if intent.type = IntentTypes.ContentReader.CONTENT_LOADED
+                state.listContentNode = intent.payload.response.listContentNode
+                state.gridContentNode = intent.payload.response.gridContentNode
+                state.statusCode = intent.payload.response.statusCode
+                state.ok = intent.payload.response.ok
+
+            else if intent.type = IntentTypes.ContentReader.CONTENT_LOAD_ERROR
+                ' Handle error state if needed
+                state.statusCode = intent.payload.response.statusCode
+                state.ok = intent.payload.response.ok
+            end if
+
+
+            return state
+        end function
+
+
+        ' ====================
+        ' Async helper methods
+        ' ====================
+
+        sub startAsyncTask()
+            ' In your project, you can implement your own fetch pool.
+            ' This is a simple example showing how to use a single-request task:
+            ' The "dispatcherId" extra field is required so the response can be routed back
+            ' to the correct dispatcher.
+            ' The task observes the "response" field using the framework’s shared port,
+            ' which triggers the dispatcher's asyncReducerCallback with the incoming message.
+
+            if m.requestTask.state = "run" then m.requestTask.control = "stop"
+            #if debug
+                url = "pkg:/assets/mockups/test-feed.json"
+            #else
+                url = "https://example.com/api/content"
+            #end if
+            m.requestTask.request = {
+                url: url
+            }
+            m.requestTask.dispatcherId = "contentReaderDispatcher" ' Identifies the dispatcher that should receive this response
+            m.requestTask.observeFieldScoped("response", m.port, ["dispatcherId"])
+            m.requestTask.control = "run"
+
+        end sub
+
+        override sub asyncReducerCallback(msg)
+            response = msg.getData()
+
+            ' Dispatch CONTENT_LOADED intent with parsed data
+            m.dispatch({
+                type: IntentTypes.ContentReader.CONTENT_LOADED,
+                payload: {
+                    response: response
+                }
+            })
+        end sub
+
+
+    end class
+
+end namespace

@@ -1,0 +1,30 @@
+' Rotor Framework Task
+import "pkg:/source/roku_modules/rotorframework/RotorFrameworkTask.bs"
+
+' Constants and Intent Types
+import "pkg:/components/common/Constants.bs"
+import "pkg:/components/common/IntentTypes.bs"
+
+' Import Models and Reducers
+import "pkg:/components/tasks/dispatchers/contentReader/ContentReaderModel.bs"
+import "pkg:/components/tasks/dispatchers/contentReader/ContentReaderReducer.bs"
+
+
+sub init()
+    m.top.functionName = "task"
+    m.fw = new Rotor.FrameworkTask({
+        ' tasks: ["SleepTask"] ' optional
+    })
+end sub
+
+sub task()
+
+    ' * CREATE DISPATCHERS (Owned by this Task)
+
+    ' Content Reader Dispatcher
+    ContentReaderModel = new Models.ContentReaderModel()
+    ContentReaderReducer = new Reducers.ContentReaderReducer()
+    Rotor.createDispatcher("contentReaderDispatcher", ContentReaderModel, ContentReaderReducer)
+
+    m.fw.sync() ' main loop of cross-thread MVI
+end sub

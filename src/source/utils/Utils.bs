@@ -1,0 +1,48 @@
+namespace Utils
+
+    sub BasicLogger(message as string)
+        #if debug
+            dt = createObject("roDateTime")
+            print `${RALE_Logger__GetDate(dt)} ${RALE_Logger__GetTime(dt)} ${message}`
+        #end if
+    end sub
+
+    ' RALE_Logger__getZeroNumber - Convert number to format "0[number]" if it has less then 2 digits
+    ' @param {integer} n - number for converting
+    ' @param {integer} to_length -  the necessary count of digits
+    ' @return {string} - converted number format as
+    function RALE_Logger__getZeroNumber(n, to_length = 2)
+        n = str(n).trim()
+        if len(n) < to_length
+            n = String(to_length - 1, "0") + n
+        end if
+        return n as string
+    end function
+
+    ' modified RALE_Logger__GetTime - Returns current time
+    ' @return {string} - current time in format: "[hours]:[minutes]:[seconds].[milliseconds]"
+    function RALE_Logger__GetTime(dt)
+        h = RALE_Logger__getZeroNumber(dt.getHours())
+        n = RALE_Logger__getZeroNumber(dt.getMinutes())
+        s = RALE_Logger__getZeroNumber(dt.getSeconds())
+        ms = str(dt.getMilliseconds()).trim()
+        if len(ms) = 1
+            ms = ms + "0"
+        else
+            ms = left(ms, 3)
+        end if
+        return h + ":" + n + ":" + s + "." + ms
+    end function
+
+    ' modified RALE_Logger__GetDate - Returns current date
+    ' @return {string} - current date in format: "[year]-[month]-[day]"
+    function RALE_Logger__GetDate(dt)
+        ' y = str(dt.getYear()).trim()
+        mm = RALE_Logger__getZeroNumber(dt.getMonth())
+        d = RALE_Logger__getZeroNumber(dt.getDayOfMonth())
+        ' return y + "-" + mm + "-" + d
+        return mm + "-" + d
+    end function
+
+
+end namespace

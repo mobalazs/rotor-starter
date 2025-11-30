@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="SimpleRowListItem" extends="Group">
+
+    <interface>
+        <field id="itemContent" type="node" onChange="showcontent"/>
+        <field id="focusPercent" type="float" onChange="showfocus"/>
+        <field id="rowFocusPercent" type="float" onChange="showrowfocus"/>
+    </interface>
+
+    <script type="text/brightscript" uri="SimpleRowListItem.bs" />
+
+    <children>
+
+        <Poster
+            id="itemPoster"
+            translation="[0, 0]"
+            width="200"
+            height="300"
+            scaleRotateCenter="[100.0, 150.0]">
+
+            <Rectangle
+                id="itemMask"
+                color="0x000000FF"
+                opacity="0.75"
+                width="200"
+                height="300"
+                scaleRotateCenter="[100.0, 150.0]"/>
+
+        </Poster>
+
+        <Label
+            id="itemLabel"
+            translation="[20, 250]"
+            horizAlign="left"
+            font = "font:SmallestSystemFont"
+            width="160"
+            opacity="0.0"/>
+
+    </children>
+
+</component>

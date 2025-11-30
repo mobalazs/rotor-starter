@@ -1,0 +1,62 @@
+namespace ViewModels
+    class BasePage extends Rotor.ViewModel
+
+        props = {
+            isActive: false,
+            shouldDiscardInactivePage: false,
+            pageTranslation: [UI.components.menuBar.pageOffset, UI.safeArea.y + UI.components.menuBar.rightPadding]
+        }
+
+        ' =================
+        ' Lifecycle methods
+        ' =================
+
+        override sub onUpdateView()
+            Utils.BasicLogger(`[PAGE] Page "${m.id}" is now ${m.props.isActive ? "active" : "inactive"}`)
+            m.performPageTransition()
+        end sub
+
+        override sub onMountView()
+            ' Ensure initial opacity state
+            m.node.opacity = 0
+            m.performPageTransition()
+        end sub
+
+        ' ==============
+        ' Custom methods
+        ' ==============
+
+        sub performPageTransition()
+            ' Animate page visibility
+            m.animateIsActiveState()
+            ' Delegate focus to page if active
+            m.delegateFocusToPage()
+            ' Notify ready beacon (ONCE)
+            m.fireAppLaunchCompleted()
+        end sub
+
+        sub delegateFocusToPage()
+            ' Set focus to defaultFocusId defined by top widget
+            if m.props.isActive then m.plugins.focus.setFocus()
+        end sub
+
+        sub animateIsActiveState()
+            m.animator("pageVisibility").create({
+                target: m,
+                opacity: m.props.isActive ? 1 : 0,
+                duration: UI.motion.durationSlow,
+                easeFunction: UI.motion.easingEmphasized,
+                delay: m.props.isActive and m.props.shouldDiscardInactivePage ? UI.motion.durationSlow : 0
+            }).play()
+        end sub
+
+        sub fireAppLaunchCompleted()
+            ' Notify ready beacon (ONCE)
+            parentViewModel = m.getParentViewModel()
+            if parentViewModel.viewModelState.isAppLaunchCompleteBeaconFired = false
+                parentViewModel.fireAppLaunchCompleteBeacon()
+            end if
+        end sub
+
+    end class
+end namespace

@@ -1,0 +1,33 @@
+title=Rotor Starter Template
+major_version=0
+minor_version=2
+build_version=3
+
+ui_resolutions=FHD
+supports_input_launch=1
+
+mm_icon_focus_hd=pkg:/assets/images/channelIcons/channel-icon_HD.png
+mm_icon_focus_sd=pkg:/assets/images/channelIcons/channel-icon_SD.png
+
+# splash_screen_fhd=pkg:/assets/images/splash.jpg
+# splash_screen_hd=pkg:/assets/images/splash.jpg
+# splash_screen_sd=pkg:/assets/images/splash.jpg
+
+# sg_component_libs_required=roku_analytics
+# bs_libs_required=roku_ads_lib ' RAF
+
+### constants
+bs_const=debug=true;unittest=false
+
+# splash_color=#0000DD
+splash_min_time=0
+config_version=v1
+
+### Supporting Voice Control
+supports_voice_roinput=1
+supports_etc_seek=1
+supports_etc_next=1
+
+### Supporting Instant Resume
+sdk_instant_resume=0
+run_as_process=1

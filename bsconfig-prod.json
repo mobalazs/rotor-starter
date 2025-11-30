@@ -1,0 +1,27 @@
+{
+    "extends": "bsconfig.json",
+    "description": "Production build configuration.",
+
+    "bs_const": {
+        "debug": false,
+        "unittest": false
+    },
+
+    "createPackage": true,
+    "emitDefinitions": false,
+    "sourceMap": false,
+
+    "files": [
+        "source/**/*",
+        "components/**/*",
+        "manifest",
+        "assets/**/*",
+        "!**/*.spec.bs"
+    ],
+
+
+    "plugins": [
+        "@rokucommunity/bslint"
+    ]
+
+}

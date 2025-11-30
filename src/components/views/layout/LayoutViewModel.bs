@@ -1,0 +1,214 @@
+
+namespace ViewModels
+
+    class LayoutViewModel extends Rotor.ViewModel
+
+        ' ========== Shared state and props of viewModel ==========
+
+        viewModelState = {
+            currentPageId: "",
+            isAppLaunchCompleteBeaconFired: false
+        }
+
+        props = {
+            deeplinkArgs: invalid,
+            activePageId: "" ' It will be set in onCreateView() based on Model.navState.
+        }
+
+        ' ========== ViewModel Variables ==========
+
+        private navDispatcher as Rotor.Dispatcher
+
+
+        ' ===========================
+        ' ViewModel lifecycle methods
+        ' ===========================
+
+        override sub onCreateView()
+            Utils.BasicLogger("[LayoutViewModel] Creating layout controller")
+
+            ' Get reference to dispatcher
+            m.navDispatcher = m.getDispatcher("navigation")
+
+            ' Listen for navigation state changes
+            m.navDispatcher.addListener({
+                shouldUpdate: function(props, state as Models.NavState)
+                    return props.activePageId <> state.activePageId and state.activePageId <> ""
+                end function,
+                mapStateToProps: sub(props, state as Models.NavState)
+                    props.activePageId = state.activePageId
+                end sub,
+                callback: m.onNavigationChanged
+            })
+
+            ' Listen for exit app flag
+            m.navDispatcher.addListener({
+                shouldUpdate: function(props, state as Models.NavState)
+                    return state.shouldExitApp = true
+                end function,
+                callback: m.onExitApp
+            })
+
+            ' Set initial value for activePageId from navigation Model.navState
+            m.props.activePageId = m.navDispatcher.getState().activePageId
+
+        end sub
+
+        override sub onMountView()
+            ' Render initial page
+            m.onNavigationChanged()
+            ' Handle deeplink
+            m.handleDeeplink()
+        end sub
+
+        override sub onUpdateView()
+            ' Handle deeplink
+            m.handleDeeplink()
+        end sub
+
+        override function template() as object
+
+            return {
+                nodeType: "Group",
+                id: "mainLayout",
+                fields: {
+                    translation: [0, 0]
+                },
+                children: [
+                    ' Background
+                    {
+                        id: "background",
+                        nodeType: "Rectangle",
+                        fields: {
+                            width: UI.designResolution.w,
+                            height: UI.designResolution.h,
+                            color: UI.colors.background
+                        }
+                    },
+                    ' Page container
+                    {
+                        id: "pageContainer",
+                        nodeType: "Group",
+                        focus: {
+                            group: {
+                                defaultFocusId: function() as string
+                                    return `${m.props.activePageId}`
+                                end function,
+                                ' Focus target to menu if user click "left" on RC
+                                left: `menu`
+                            }
+                        }
+                    },
+                    ' Navigation bar - left side vertical menu
+                    {
+                        id: "menu",
+                        viewModel: ViewModels.MenuViewModel,
+                        focus: {
+                            group: {
+                                ' Focus target to pageContainer if user click "right" on RC
+                                right: function() as string
+                                    return `pageContainer`
+                                end function
+                            }
+                        },
+                        props: {
+                            navDispatcherId: "navigation"
+                        }
+                    }
+                ]
+            }
+        end function
+
+        override sub onDestroyView()
+            Utils.BasicLogger("[LayoutViewModel] Destroying layout controller")
+            m.navDispatcher.destroy()
+        end sub
+
+        ' ==========================================
+        ' Custom method to handle navigation changes
+        ' ==========================================
+
+        private sub onNavigationChanged()
+            Utils.BasicLogger(`[LayoutViewModel] Navigation changed: ${m.props.activePageId}`)
+
+            ' Handle page change
+            if m.viewModelState.currentPageId <> m.props.activePageId
+                m.startPageTransition()
+                m.viewModelState.currentPageId = m.props.activePageId
+            end if
+        end sub
+
+        private sub startPageTransition()
+            pageContainer = m.getWidget("pageContainer")
+            pagesToRender = []
+            navState = m.navDispatcher.getState() as Models.NavState
+            shouldDiscardInactivePage = pageContainer.children[m.viewModelState.currentPageId] <> invalid
+
+            ' Render new active page
+            pagesToRender.push({
+                id: m.props.activePageId,
+                viewModel: navState.pageSettings[m.props.activePageId].viewModel,
+                props: {
+                    isActive: true,
+                    shouldDiscardInactivePage: shouldDiscardInactivePage
+                }
+            })
+            ' Hide current page if exists
+            if shouldDiscardInactivePage
+                pagesToRender.push({
+                    id: m.viewModelState.currentPageId,
+                    props: {
+                        isActive: false
+                    }
+                })
+            end if
+            ' Update Menu
+
+            ' Render transition
+            m.render({
+                id: "pageContainer",
+                children: pagesToRender
+            })
+        end sub
+
+        private sub fireAppLaunchCompleteBeacon()
+            ' Fire once
+            if m.viewModelState.isAppLaunchCompleteBeaconFired = false
+                Utils.BasicLogger("[LayoutViewModel] Fire `AppLaunchComplete` beacon.")
+                m.node.signalBeacon("AppLaunchComplete")
+                m.viewModelState.isAppLaunchCompleteBeaconFired = true
+            end if
+        end sub
+
+        '''''''''
+        ' onExitApp: Handles application exit request from navigation state
+        '''''''''
+        private sub onExitApp()
+            Utils.BasicLogger("[LayoutViewModel] Exit app requested - exiting application")
+
+            ' Optional: Show exit confirmation dialog here
+            ' Optional: Cleanup, save state, analytics, etc.
+
+            ' Exit the application
+            globalScope = GetGlobalAA()
+            ' Get framework instance created in MainScene
+            fw = globalScope.fw
+            ' Destroy framework (also destroys all dispatchers and view models)
+            fw.destroy()
+            ' Exit scene
+            globalScope.top.getScene().exitChannel = true
+
+        end sub
+
+        sub handleDeeplink()
+            if m.props.deeplinkArgs <> invalid
+                Utils.BasicLogger(`[LayoutViewModel] Deeplink detected with args: ${m.props.deeplinkArgs}`)
+                ' Invalidate current deeplinkArgs
+                m.props.deeplinkArgs = invalid
+
+                ' PERFORM DEEPLINK
+            end if
+        end sub
+
+    end class
+end namespace

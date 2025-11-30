@@ -1,0 +1,177 @@
+import "MenuItemViewModel.bs"
+
+namespace ViewModels
+
+
+    class MenuViewModel extends Rotor.ViewModel
+
+        props = {
+            ' Note: This menBar viewModel is compatible with dispatcher based on Models.NavState:
+            navDispatcherId: "", ' Dispatcher ID for navigation
+            activePageId: "" ' Currently active page ID
+        }
+
+        viewModelState = {
+            currentPageId: "", ' Currently active page ID
+            isFocused: false ' Set by focus plugin via focus group is defined on top widget in template
+        }
+
+        navDispatcher as Rotor.Dispatcher
+        menuBackgroundWidget as object
+        menuLabels as object
+
+        override sub onCreateView()
+            Utils.BasicLogger("[MenuViewModel] Create menu")
+            m.navDispatcher = m.getDispatcher(m.props.navDispatcherId)
+
+            ' Listen for navigation state changes
+            m.navDispatcher.addListener({
+                shouldUpdate: function(props, state as Models.NavState)
+                    return props.activePageId <> state.activePageId and state.activePageId <> ""
+                end function,
+                mapStateToProps: sub(props, state)
+                    props.activePageId = state.activePageId
+                end sub,
+                callback: m.onCurrentPageIdChanged
+            })
+
+            ' Get initial activePageId
+            navState = m.navDispatcher.getState() as Models.NavState
+            m.props.activePageId = navState.activePageId
+        end sub
+
+        override sub onMountView()
+            Utils.BasicLogger("[MenuViewModel] Mount menu")
+
+            ' Get widget references
+            m.menuBackgroundWidget = m.getWidget("menuBackground")
+            m.menuLabels = m.findWidgets("menuItemsContainer/**/menuLabel")
+
+            ' Set initial UI according to state
+            m.onCurrentPageIdChanged()
+
+        end sub
+
+        override sub onDestroyView()
+            Utils.BasicLogger("[MenuViewModel] Update menu")
+            m.navDispatcher.destroy()
+            m.menuBackgroundWidget = invalid
+            m.menuLabels = invalid
+        end sub
+
+        override function template() as object
+            navState = m.navDispatcher.getState() as Models.NavState
+
+            ' Build menu items dynamically
+            menuItems = []
+            for each pageId in navState.pageIds
+
+                pageSettings = navState.pageSettings[pageId]
+
+                menuItems.push({
+                    id: `menuItem_${pageId}`,
+                    viewModel: ViewModels.MenuItemViewModel,
+                    props: {
+                        pageId: pageId,
+                        iconUri: pageSettings.iconUri,
+                        intentType: pageSettings.intentType,
+                        dispatcherId: m.props.navDispatcherId
+                    }
+                })
+            end for
+
+            return {
+                nodeType: "Group",
+                focus: {
+                    group: {
+                        defaultFocusId: "menuItem_home",
+                        onFocusChanged: sub(isFocused as boolean)
+                            m.animateMenuState(isFocused)
+                        end sub
+                    }
+                },
+                children: [
+                    {
+                        id: "menuBackground",
+                        nodeType: "Rectangle",
+                        fields: {
+                            width: m.getBgWidth(m.viewModelState.isFocused),
+                            height: UI.designResolution.h,
+                            color: UI.colors.surface,
+                            opacity: 0.9,
+                            translation: [0, 0]
+                        }
+                    },
+                    {
+                        id: "menuItemsContainer",
+                        nodeType: "LayoutGroup",
+                        fields: {
+                            enableRenderTracking: true,
+                            translation: [UI.safeArea.x, UI.designResolution.h / 2 - 200],
+                            layoutDirection: "vert",
+                            itemSpacings: [20]
+                        },
+
+                        ' Set proper width for menu background based on menu items container width (adapt to different text lengths)
+                        observer: {
+                            fieldId: "renderTracking",
+                            callback: sub(payload)
+                                menuBackgroundNode = m.getSiblingWidget("menuBackground").node
+                                ' Set menu background width to match menu items container width
+                                menuBackgroundNode.width = m.getViewModel().getBgWidth(m.viewModelState.isFocused)
+                            end sub
+                        },
+
+                        ' Menu item view models as children
+                        children: menuItems
+                    }
+                ]
+            }
+        end function
+
+        sub onCurrentPageIdChanged()
+            ' Handle current page ID change if needed
+            Utils.BasicLogger(`[MenuViewModel] Current page ID changed`)
+            if m.viewModelState.currentPageId <> m.props.activePageId
+                m.render([
+                    {
+                        id: "menuItemsContainer/menuItem_" + m.viewModelState.currentPageId,
+                        props: { isSelected: false }
+                    },
+                    {
+                        id: "menuItemsContainer/menuItem_" + m.props.activePageId,
+                        props: { isSelected: true }
+                    }
+                ])
+                m.viewModelState.currentPageId = m.props.activePageId
+            end if
+        end sub
+
+        '''''''''
+        ' animateMenuState: Animates menu between open and closed states
+        ' @param {boolean} isFocused - True for open (focused), false for closed (unfocused)
+        '''''''''
+        sub animateMenuState(isFocused as boolean)
+
+            bgWidth = m.getBgWidth(isFocused)
+            labelOpacity = isFocused ? 1 : 0
+
+            m.animator("menuStateAnimation").timeline({
+                duration: UI.motion.durationFast,
+                easeFunction: UI.motion.easingEmphasized
+            }).add({
+                target: m.menuBackgroundWidget,
+                width: bgWidth
+            }).add({
+                targets: m.menuLabels,
+                opacity: labelOpacity
+            }).play()
+        end sub
+
+        function getBgWidth(isFocused as boolean) as integer
+            return UI.safeArea.x + (isFocused ? m.node.localBoundingRect().width : UI.components.menuBar.menuItem.iconSize + UI.components.menuBar.rightPadding)
+        end function
+
+    end class
+
+end namespace

@@ -1,0 +1,53 @@
+namespace Models
+
+    interface pageSettings
+        viewModel as function ' Rotor.ViewModel
+        iconUri as string[] ' array of icon uris
+        intentType as object ' intent type for dispatching
+    end interface
+
+    interface NavState
+        activePageId as string ' current active page ID
+        pageIds as string[] ' array of page IDs strings
+        pageSettings as pageSettings[] ' associative array of page settings
+        shouldExitApp as boolean ' flag to trigger app exit
+    end interface
+
+    class NavigationModel extends Rotor.Model
+        state = {
+
+            activePageId: "home",
+
+            shouldExitApp: false,
+
+            pageIds: ["home", "movies", "settings", "exit"],
+
+            pageSettings: {
+                home: {
+                    viewModel: ViewModels.HomePage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.home,
+                    intentType: IntentTypes.Navigation.GOTO_PAGE
+                },
+                movies: {
+                    viewModel: ViewModels.MoviesPage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.movies,
+                    intentType: IntentTypes.Navigation.GOTO_PAGE
+                },
+                settings: {
+                    viewModel: ViewModels.SettingsPage,
+                    iconUri: UI.components.menuBar.menuItem.iconUri.settings,
+                    intentType: IntentTypes.Navigation.GOTO_PAGE
+                },
+                exit: {
+                    iconUri: UI.components.menuBar.menuItem.iconUri.exit,
+                    intentType: IntentTypes.Navigation.EXIT_APP
+                }
+            },
+
+            dialogSettings: {
+                ' class: ViewModels.Dialog
+            }
+
+        } as NavState
+    end class
+end namespace

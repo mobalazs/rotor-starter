@@ -1,0 +1,94 @@
+namespace ViewModels
+    class MenuItemViewModel extends Rotor.ViewModel
+
+        props = {
+            pageId: "", ' Page ID for this menu item
+            iconUri: "", ' Icon URI for menu item
+            intentType: "", ' Define intent type for CTA
+            dispatcherId: "", ' Dispatcher ID for navigation
+            isSelected: false
+        }
+
+        viewModelState = {
+            isFocused: false
+        }
+
+        override sub onUpdateView()
+            ' Update focus state and trigger re-render
+            m.children.menuIcon.refresh("fields.blendColor")
+            m.children.menuLabel.refresh(["fontStyle", "fields.color"])
+        end sub
+
+        sub onSelected()
+            ' Navigate to page
+            m.getDispatcher(m.props.dispatcherId).dispatch({
+                type: m.props.intentType,
+                payload: { pageId: m.props.pageId }
+            })
+        end sub
+
+        override function template() as object
+
+            iconSize = UI.components.menuBar.menuItem.iconSize
+            labelOffsetX = iconSize + 10 ' icon width + spacing
+            menuPadding = 24
+
+            return {
+                nodeType: "Group",
+                dispatcher: "navigation",
+                focus: {
+                    onFocusChanged: sub(isFocused as boolean): typecast m as ViewModels.MenuItemViewModel
+                        m.onUpdateView()
+                    end sub,
+
+                    onSelected: sub() typecast m as ViewModels.MenuItemViewModel
+                        m.onSelected()
+                    end sub
+                },
+                children: [
+                    {
+                        id: "menuIcon",
+                        nodeType: "Poster",
+                        fields: {
+                            uri: m.props.iconUri,
+                            width: iconSize,
+                            height: iconSize,
+                            loadWidth: iconSize,
+                            loadHeight: iconSize,
+                            translation: [0, 0],
+                            blendColor: function() as string
+                                if m.viewModelState.isFocused
+                                    return UI.colors.primaryHover
+                                else if m.props.isSelected
+                                    return UI.colors.primary
+                                end if
+                                return UI.colors.onSurface
+                            end function
+                        }
+                    },
+                    {
+                        id: "menuLabel",
+                        nodeType: "Label",
+                        fontStyle: function() as object
+                            return m.viewModelState.isFocused ? UI.typography.headlineSmall_bold_aa : UI.typography.headlineSmall_aa
+                        end function,
+                        fields: {
+                            text: `@l10n.menu.${m.props.pageId}`,
+                            height: menuPadding + iconSize,
+                            translation: [labelOffsetX, 0],
+                            opacity: 0,
+                            color: function() as string typecast m as Rotor.Widget
+                                if m.viewModelState.isFocused
+                                    return UI.colors.primaryHover
+                                else if m.props.isSelected
+                                    return UI.colors.primary
+                                end if
+                                return UI.colors.onSurface
+                            end function
+                        }
+                    }
+                ]
+            }
+        end function
+    end class
+end namespace

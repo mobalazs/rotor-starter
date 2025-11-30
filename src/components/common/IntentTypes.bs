@@ -1,0 +1,14 @@
+namespace IntentTypes
+
+    enum Navigation
+        GOTO_PAGE = "goto_page"
+        EXIT_APP = "exit_app"
+    end enum
+
+    enum ContentReader
+        LOAD_CONTENT = "load_content"
+        CONTENT_LOADED = "content_loaded"
+        CONTENT_LOAD_ERROR = "content_load_error"
+    end enum
+
+end namespace

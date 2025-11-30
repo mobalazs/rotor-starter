@@ -1,0 +1,34 @@
+{
+  "languages": {
+    "en_US": "English",
+    "es_ES": "Español",
+    "fr_FR": "Français",
+    "hu_HU": "Magyar",
+    "nl_NL": "Nederlands"
+  },
+  "appTitle": "Aplicación de Inicio Rotor",
+  "helloWorld": "¡Hola Mundo!",
+  "buttons": {
+    "clickMe": "Haz Clic"
+  },
+  "menu": {
+    "home": "Inicio",
+    "movies": "Películas",
+    "settings": "Configuración",
+    "exit": "Salir"
+  },
+  "pages": {
+    "home": {
+      "title": "Página de Inicio",
+      "content": "¡Bienvenido a la página de inicio! Esta `RowList` se muestra aquí como demostración para ilustrar que el framework puede operar en modo híbrido. Crear un `carousel` ViewModel completamente personalizado impulsado por Rotor Framework también es factible y recomendado. Para más información, contacte al autor."
+    },
+    "movies": {
+      "title": "Página de Películas",
+      "content": "Explora tus películas favoritas aquí."
+    },
+    "settings": {
+      "title": "Página de Configuración",
+      "content": "Ajusta la configuración de tu aplicación."
+    }
+  }
+}

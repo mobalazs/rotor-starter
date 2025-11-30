@@ -1,0 +1,17 @@
+namespace Reducers
+    class NavigationReducer extends Rotor.Reducer
+        override function reducer(state, intent) as object
+
+            if intent.type = IntentTypes.Navigation.GOTO_PAGE
+                state.activePageId = intent.payload.pageId
+
+            else if intent.type = IntentTypes.Navigation.EXIT_APP
+                Utils.BasicLogger("[NavigationReducer] Exiting application as per user request")
+                state.shouldExitApp = true
+
+            end if
+
+            return state
+        end function
+    end class
+end namespace

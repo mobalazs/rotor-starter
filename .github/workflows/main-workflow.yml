@@ -1,0 +1,58 @@
+name: Build, Lint & SCA
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-lint-SCA:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Java for SCA tool
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      # 3. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 4. Install npm dependencies
+      - name: Install npm dependencies
+        run: npm ci
+
+      # 5. Install ropm globally
+      - name: Install ropm
+        run: npm install -g ropm
+
+      # 6. Install Roku dependencies
+      - name: Install Roku dependencies
+        run: ropm install
+
+      # 7. Lint code
+      - name: Lint code
+        run: npm run lint
+
+      # 8. Build project
+      - name: Build project
+        run: npm run build-dev
+
+      # 9. Run Roku Static Code Analysis
+      - name: Run SCA
+        run: npm run sca
+

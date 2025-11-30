@@ -1,0 +1,34 @@
+{
+  "languages": {
+    "en_US": "English",
+    "es_ES": "Español",
+    "fr_FR": "Français",
+    "hu_HU": "Magyar",
+    "nl_NL": "Nederlands"
+  },
+  "appTitle": "Rotor Kezdő Alkalmazás",
+  "helloWorld": "Helló Világ!",
+  "buttons": {
+    "clickMe": "Kattints Ide"
+  },
+  "menu": {
+    "home": "Kezdőlap",
+    "movies": "Filmek",
+    "settings": "Beállítások",
+    "exit": "Kilépés"
+  },
+  "pages": {
+    "home": {
+      "title": "Kezdőlap",
+      "content": "Üdvözöljük a kezdőlapon! Ez a `RowList` bemutatóként jelenik meg itt, hogy szemléltesse, hogy a keretrendszer hibrid módban is képes működni. Egy teljesen egyedi, Rotor Framework által vezérelt `carousel` ViewModel létrehozása szintén megvalósítható és ajánlott. További információért vegye fel a kapcsolatot a szerzővel."
+    },
+    "movies": {
+      "title": "Filmek Oldal",
+      "content": "Böngésszen kedvenc filmjei között itt."
+    },
+    "settings": {
+      "title": "Beállítások Oldal",
+      "content": "Állítsa be az alkalmazás beállításait."
+    }
+  }
+}

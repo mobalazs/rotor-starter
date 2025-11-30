@@ -1,0 +1,144 @@
+import "BasePage.bs"
+
+namespace ViewModels
+    class HomePage extends ViewModels.BasePage
+
+        props = {
+            isActive: false,
+            pageTranslation: [UI.components.menuBar.pageOffset, UI.safeArea.y + UI.components.menuBar.rightPadding],
+            listContentNode: invalid
+        }
+
+        ' Define Content Reader Dispatcher
+        crDispatcher as Rotor.Dispatcher
+
+        override function template() as object
+            return {
+                nodeType: "LayoutGroup",
+                fields: {
+                    itemSpacings: [15, 30],
+                    translation: m.props.pageTranslation
+                },
+                focus: {
+                    group: {
+                        defaultFocusId: "contentList"
+                    }
+                },
+                children: [
+                    {
+                        id: "pageTitle",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.home.title",
+                            translation: [0, 0],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.displaySmall_aa
+                    },
+                    {
+                        id: "pageContent",
+                        nodeType: "Label",
+                        fields: {
+                            width: 1000,
+                            wrap: true,
+                            text: "@l10n.pages.home.content",
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.bodySmall_aa
+                    },
+                    {
+                        id: "contentList",
+                        nodeType: "RowList",
+                        fields: {
+                            itemComponentName: "SimpleRowListItem",
+                            content: m.props.listContentNode,
+                            itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
+                            rowItemSize: [200, 300],
+                            rowItemSpacing: [5, 0],
+                            itemSpacing: [0, 0],
+                            rowLabelOffset: [0, 10],
+                            showRowLabel: [true],
+                            rowLabelFont: "font:SmallestBoldSystemFont",
+                            numRows: 3
+                        },
+                        focus: {
+                            enableNativeFocus: true
+                        }
+                    }
+                ]
+            }
+        end function
+
+        ' =================
+        ' Lifecycle methods
+        ' =================
+
+        override sub onCreateView()
+            ' Get Content Reader Dispatcher
+            m.crDispatcher = m.getDispatcher("contentReaderDispatcher")
+        end sub
+
+        override sub onMountView()
+            super.onMountView()
+            ' Additional logic for HomePage can be added here
+        end sub
+
+        override sub onUpdateView()
+            super.onUpdateView()
+            ' Additional logic for HomePage can be added here
+        end sub
+
+        override sub onDestroyView()
+            ' Destroy Content Reader Dispatcher
+            m.crDispatcher.destroy()
+        end sub
+
+        ' ==============
+        ' Custom methods
+        ' ==============
+
+        override sub performPageTransition()
+
+            if m.props.isActive
+
+                ' If state has already been isReady then immediately perform the transition VIA super method
+                crState = m.crDispatcher.getState()
+                if crState.ok = true and m.props.listContentNode <> invalid
+
+                    m.setContent()
+                    super.performPageTransition()
+
+                else
+                    ' If async operation needs then deffer page transition.
+                    ' Listen to Content Reader Dispatcher
+                    m.crDispatcher.addListener({
+                        shouldUpdate: function(props, state as Models.ContentReaderState)
+                            return state.ok and state.listContentNode <> invalid
+                        end function,
+                        mapStateToProps: sub(props, state as Models.ContentReaderState)
+                            props.listContentNode = state.listContentNode
+                        end sub,
+                        callback: m.onUpdateView,
+                        once: true
+                    })
+
+                    ' Initiate load content
+                    m.crDispatcher.dispatch({
+                        type: IntentTypes.ContentReader.LOAD_CONTENT
+                    })
+
+                end if
+            else
+
+                ' Fade out transition can be performed immediately
+                super.performPageTransition()
+            end if
+
+        end sub
+
+        sub setContent()
+            m.children.contentList.node.content = m.props.listContentNode
+        end sub
+
+    end class
+end namespace

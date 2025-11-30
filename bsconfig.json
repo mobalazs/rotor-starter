@@ -1,0 +1,39 @@
+{
+	"rootDir": "src",
+	"stagingDir": "dist",
+
+	"bs_const": {
+		"debug": true,
+		"unittest": false
+	},
+
+	"createPackage": false,
+	"emitDefinitions": true,
+	"sourceMap": true,
+	"autoImportComponentScript": true,
+
+	"plugins": [
+		"@rokucommunity/bslint"
+	],
+
+	"files": [
+		"source/**/*",
+		"components/**/*",
+		"manifest",
+		"assets/**/*",
+		{
+			"src": "../mockups/**/*",
+			"dest": "mockups/"
+		},
+		"!source/libs/**/*.spec.bs"
+	],
+
+	"diagnosticFilters": [
+		{
+			"src": "**/roku_modules/**/*.*"
+		},
+		{
+			"src": "**/*.spec.bs"
+		}
+	]
+}

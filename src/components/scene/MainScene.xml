@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="MainScene" extends="Scene">
+
+    <interface>
+        <!-- Exits channel if set to true -->
+        <field id="exitChannel" type="bool" alwaysNotify="true" />
+
+        <!-- Launch args -->
+        <field id="launchArgs" type="assocarray" />
+
+        <!-- Input args -->
+        <field id="inputArgs" type="assocarray" />
+
+    </interface>
+
+</component>

@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-dev",
+            "command": "npm run build-dev",
+            "type": "shell",
+            "presentation": {
+                "clear": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "dedicated",
+                "group": "terminal1",
+                "close": false
+            }
+        },
+        {
+            "label": "build-tests",
+            "command": "npm run build-tests",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "group": "terminal1",
+                "close": false
+            }
+        },
+        {
+            "label": "watch",
+            "command": "npm run watch",
+            "type": "shell",
+            "isBackground": true,
+            "problemMatcher": "$bsc-watch-silent",
+            "presentation": {
+                "clear": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "group": "terminal1",
+                "close": true
+            }
+        }
+    ]
+}

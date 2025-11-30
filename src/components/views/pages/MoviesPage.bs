@@ -1,0 +1,61 @@
+import "BasePage.bs"
+import "../buttons/BaseButton.bs"
+
+namespace ViewModels
+    class MoviesPage extends ViewModels.BasePage
+
+        override function template() as object
+            return {
+                nodeType: "Group",
+                fields: {
+                    translation: m.props.pageTranslation
+                },
+                focus: {
+                    group: {
+                        defaultFocusId: "exampleButton"
+                    }
+                },
+                children: [
+                    {
+                        id: "pageTitle",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.movies.title",
+                            translation: [0, 0],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.displaySmall_aa
+                    },
+                    {
+                        id: "pageContent",
+                        nodeType: "Label",
+                        fields: {
+                            text: "@l10n.pages.movies.content",
+                            translation: [0, 80],
+                            color: UI.colors.onBackground
+                        },
+                        fontStyle: UI.typography.bodyLarge_aa
+                    },
+                    {
+                        id: "exampleButton",
+                        viewModel: ViewModels.BaseButton,
+                        props: {
+                            text: "@l10n.buttons.clickMe"
+                        },
+                        fields: {
+                            translation: [0, 150]
+                        }
+                    }
+                ]
+            }
+        end function
+
+        override sub onCreateView()
+            Utils.BasicLogger("[MoviesPage] Created")
+        end sub
+
+        override sub onDestroyView()
+            Utils.BasicLogger("[MoviesPage] Destroyed")
+        end sub
+    end class
+end namespace

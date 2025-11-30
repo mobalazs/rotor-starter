@@ -1,0 +1,123 @@
+namespace UI
+
+enum safeArea
+	x = 90
+	y = 60
+end enum
+enum designResolution
+	w = 1920
+	h = 1080
+end enum
+enum colors
+	primary = "0x4CAF50FF"
+	primaryHover = "0x66BB6AFF"
+	primaryPressed = "0x388E3CFF"
+	onPrimary = "0xFFFFFFFF"
+	secondary = "0x78a999FF"
+	secondaryHover = "0x8BB9A9FF"
+	secondaryPressed = "0x659488FF"
+	onSecondary = "0x000000FF"
+	background = "0x283E30FF"
+	onBackground = "0xFFFFFFFF"
+	surface = "0x0F1A17FF"
+	surfaceHover = "0x1A2621FF"
+	onSurface = "0xFFFFFFFF"
+	error = "0xB00020FF"
+	errorHover = "0xCF002FFF"
+	errorPressed = "0x8B0019FF"
+	onError = "0xFFFFFFFF"
+end enum
+namespace typography
+	const displayLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Light.ttf"
+		size: 70
+	}
+	const displayMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 56
+	}
+	const displaySmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 44
+	}
+	const headlineLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 40
+	}
+	const headlineMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 32
+	}
+	const headlineSmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 28
+	}
+	const headlineSmall_bold_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Bold.ttf"
+		size: 28
+	}
+	const titleLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 24
+	}
+	const titleMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 20
+	}
+	const titleSmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 18
+	}
+	const bodyLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 22
+	}
+	const bodyMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 20
+	}
+	const bodySmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 18
+	}
+	const labelLarge_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 20
+	}
+	const labelMedium_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 18
+	}
+	const labelSmall_aa = {
+		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
+		size: 16
+	}
+end namespace
+namespace motion
+	const durationFast = 0.2
+	const durationMedium = 0.3
+	const durationSlow = 0.4
+	const easingStandard = "inOutCubic"
+	const easingDecelerate = "outCubic"
+	const easingAccelerate = "inCubic"
+	const easingEmphasized = "inOutQuintic"
+	const easingSubtle = "inOutQuad"
+	const easingSharp = "outQuartic"
+end namespace
+namespace components
+	namespace menuBar
+		const rightPadding = 18
+		const pageOffset = 176
+		namespace menuItem
+			const iconSize = 32
+			enum iconUri
+				home = "pkg:/assets/images/menuIcons/home_32dp_FFFFFF.png"
+				movies = "pkg:/assets/images/menuIcons/movie_32dp_FFFFFF.png"
+				settings = "pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png"
+				exit = "pkg:/assets/images/menuIcons/exit_to_app_32dp_FFFFFF.png"
+			end enum
+		end namespace
+	end namespace
+end namespace
+end namespace
+
