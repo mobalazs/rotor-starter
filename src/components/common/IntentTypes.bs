@@ -1,20 +1,8 @@
 namespace IntentTypes
 
-    enum AppStore
-        LOAD_REMOTE_APP_CONFIG = "app_load_remote_config"
-        SET_ACTIVE_PAGE_KEY = "app_set_new_page_key"
-    end enum
-
     enum Navigation
         GOTO_PAGE = "goto_page"
         EXIT_APP = "exit_app"
-    end enum
-
-    enum Preloader
-        START_PRELOAD_RESOURCES = "preloader_start_preload_resources"
-        ADD_ITEM = "preloader_add_item"
-        COMPLETED_ITEM = "preloader_completed_item"
-        READY = "preloader_ready"
     end enum
 
     enum ContentReader
