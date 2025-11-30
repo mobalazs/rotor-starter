@@ -3,6 +3,7 @@
 ![license](https://img.shields.io/github/license/mobalazs/rotor-starter)
 ![code style](https://img.shields.io/badge/lint-bslint-yellow)
 ![code size](https://img.shields.io/github/languages/code-size/mobalazs/rotor-starter)
+[![Slack](https://img.shields.io/badge/Slack-RokuDevelopers-4A154B?logo=slack)](https://rokudevelopers.slack.com)
 
 # 🚀 Rotor Starter
 
