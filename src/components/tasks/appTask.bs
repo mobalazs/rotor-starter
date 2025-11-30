@@ -12,7 +12,7 @@ import "pkg:/components/tasks/contentReader/ContentReaderReducer.bs"
 
 sub init()
     m.top.functionName = "task"
-    m.appFw = new Rotor.FrameworkTask({
+    m.fw = new Rotor.FrameworkTask({
         ' tasks: ["SleepTask"] ' optional
     })
 end sub
@@ -21,10 +21,10 @@ sub task()
 
     ' * CREATE DISPATCHERS (Owned by this Task)
 
-    ' Home content reader
+    ' Content Reader Dispatcher
     ContentReaderModel = new Models.ContentReaderModel()
     ContentReaderReducer = new Reducers.ContentReaderReducer()
     Rotor.createDispatcher("contentReaderDispatcher", ContentReaderModel, ContentReaderReducer)
 
-    m.appFw.sync() ' main loop of multi-thread MVI
+    m.fw.sync() ' main loop of cross-thread MVI
 end sub

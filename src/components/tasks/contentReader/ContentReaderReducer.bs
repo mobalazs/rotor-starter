@@ -91,6 +91,7 @@ namespace Reducers
             m.requestTask.request = {
                 url: url
             }
+            m.requestTask.dispatcherId = "contentReaderDispatcher" ' Identifies the dispatcher that should receive this response
             m.requestTask.observeFieldScoped("response", m.port, ["dispatcherId"])
             m.requestTask.control = "run"
 
