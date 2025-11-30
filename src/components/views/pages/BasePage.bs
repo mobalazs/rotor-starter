@@ -3,6 +3,7 @@ namespace ViewModels
 
         props = {
             isActive: false,
+            shouldDiscardInactivePage: false,
             pageTranslation: [UI.components.menuBar.pageOffset, UI.safeArea.y + UI.components.menuBar.rightPadding]
         }
 
@@ -45,7 +46,7 @@ namespace ViewModels
                 opacity: m.props.isActive ? 1 : 0,
                 duration: UI.motion.durationSlow,
                 easeFunction: UI.motion.easingEmphasized,
-                delay: m.props.isActive ? UI.motion.durationSlow : 0
+                delay: m.props.isActive and m.props.shouldDiscardInactivePage ? UI.motion.durationSlow : 0
             }).play()
         end sub
 

@@ -134,17 +134,19 @@ namespace ViewModels
             pageContainer = m.getWidget("pageContainer")
             pagesToRender = []
             navState = m.navDispatcher.getState() as Models.NavState
+            shouldDiscardInactivePage = pageContainer.children[m.viewModelState.currentPageId] <> invalid
 
             ' Render new active page
             pagesToRender.push({
                 id: m.props.activePageId,
                 viewModel: navState.pageSettings[m.props.activePageId].viewModel,
                 props: {
-                    isActive: true
+                    isActive: true,
+                    shouldDiscardInactivePage: shouldDiscardInactivePage
                 }
             })
             ' Hide current page if exists
-            if pageContainer.children[m.viewModelState.currentPageId] <> invalid
+            if shouldDiscardInactivePage
                 pagesToRender.push({
                     id: m.viewModelState.currentPageId,
                     props: {
