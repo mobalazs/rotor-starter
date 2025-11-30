@@ -81,8 +81,7 @@ namespace ViewModels
 
         override sub onMountView()
             super.onMountView()
-            ' Set initial focus to content list
-            m.getWidget("contentList").plugins.focus.setFocus()
+            ' Additional logic for HomePage can be added here
         end sub
 
         override sub onUpdateView()
@@ -141,7 +140,6 @@ namespace ViewModels
         sub setContent()
             m.children.contentList.node.content = m.props.listContentNode
         end sub
-
 
     end class
 end namespace

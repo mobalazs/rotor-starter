@@ -30,6 +30,8 @@ namespace ViewModels
             m.animateIsActiveState()
             ' Delegate focus to page if active
             m.delegateFocusToPage()
+            ' Notify ready beacon (ONCE)
+            m.fireAppLaunchCompleted()
         end sub
 
         sub delegateFocusToPage()
@@ -45,6 +47,14 @@ namespace ViewModels
                 easeFunction: UI.motion.easingEmphasized,
                 delay: m.props.isActive ? UI.motion.durationSlow : 0
             }).play()
+        end sub
+
+        sub fireAppLaunchCompleted()
+            ' Notify ready beacon (ONCE)
+            parentViewModel = m.getParentViewModel()
+            if parentViewModel.viewModelState.isAppLaunchCompleteBeaconFired = false
+                parentViewModel.fireAppLaunchCompleteBeacon()
+            end if
         end sub
 
     end class

@@ -6,11 +6,12 @@ namespace ViewModels
         ' ========== Shared state and props of viewModel ==========
 
         viewModelState = {
-            currentPageId: ""
+            currentPageId: "",
+            isAppLaunchCompleteBeaconFired: false
         }
 
         props = {
-            activePageId: "home" ' Initial page
+            activePageId: "" ' It will be set in onCreateView() based on Model.navState.
         }
 
         ' ========== ViewModel Variables ==========
@@ -46,6 +47,9 @@ namespace ViewModels
                 end function,
                 callback: m.onExitApp
             })
+
+            ' Set initial value for activePageId from navigation Model.navState
+            m.props.activePageId = m.navDispatcher.getState().activePageId
 
         end sub
 
@@ -155,6 +159,15 @@ namespace ViewModels
                 id: "pageContainer",
                 children: pagesToRender
             })
+        end sub
+
+        private sub fireAppLaunchCompleteBeacon()
+            ' Fire once
+            if m.viewModelState.isAppLaunchCompleteBeaconFired = false
+                Utils.BasicLogger("[LayoutViewModel] Fire `AppLaunchComplete` beacon.")
+                m.node.signalBeacon("AppLaunchComplete")
+                m.viewModelState.isAppLaunchCompleteBeaconFired = true
+            end if
         end sub
 
         '''''''''
