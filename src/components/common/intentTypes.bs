@@ -19,8 +19,8 @@ namespace IntentTypes
 
     enum ContentReader
         LOAD_CONTENT = "load_content"
-        PARSE_CONTENT = "parse_content"
         CONTENT_LOADED = "content_loaded"
+        CONTENT_LOAD_ERROR = "content_load_error"
     end enum
 
 end namespace

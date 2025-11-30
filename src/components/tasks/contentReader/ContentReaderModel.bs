@@ -1,0 +1,14 @@
+namespace Models
+
+    class ContentReaderModel extends Rotor.Model
+
+        state = {
+            listContentNode: [],
+            gridContentNode: [],
+            statusCode: 0,
+            ok: false
+        }
+
+    end class
+
+end namespace

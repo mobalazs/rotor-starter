@@ -96,7 +96,7 @@ namespace ViewModels
                         id: "menuBackground",
                         nodeType: "Rectangle",
                         fields: {
-                            width: 300,
+                            width: m.getBgWidth(m.viewModelState.isFocused),
                             height: UI.designResolution.h,
                             color: UI.colors.surface,
                             opacity: 0.9,
@@ -159,7 +159,7 @@ namespace ViewModels
         '''''''''
         sub animateMenuState(isFocused as boolean)
 
-            bgWidth = (isFocused ? m.node.localBoundingRect().width : UI.components.menuBar.menuItem.iconSize + UI.components.menuBar.rightPadding) + UI.safeArea.x
+            bgWidth = m.getBgWidth(isFocused)
             labelOpacity = isFocused ? 1 : 0
 
             m.animator("menuStateAnimation").timeline({
@@ -173,6 +173,10 @@ namespace ViewModels
                 opacity: labelOpacity
             }).play()
         end sub
+
+        function getBgWidth(isFocused as boolean) as integer
+            return UI.safeArea.x + (isFocused ? m.node.localBoundingRect().width : UI.components.menuBar.menuItem.iconSize + UI.components.menuBar.rightPadding)
+        end function
 
     end class
 

@@ -76,6 +76,7 @@ namespace ViewModels
                             text: `@l10n.menu.${m.props.pageId}`,
                             height: menuPadding + iconSize,
                             translation: [labelOffsetX, 0],
+                            opacity: 0,
                             color: function() as string typecast m as Rotor.Widget
                                 if m.viewModelState.isFocused
                                     return UI.colors.primaryHover
