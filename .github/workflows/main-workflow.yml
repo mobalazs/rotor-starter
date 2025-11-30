@@ -25,19 +25,27 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      # 3. Install dependencies
-      - name: Install dependencies
+      # 3. Install npm dependencies
+      - name: Install npm dependencies
         run: npm ci
 
-      # 4. Lint code
+      # 4. Install ropm globally
+      - name: Install ropm
+        run: npm install -g ropm
+
+      # 5. Install Roku dependencies
+      - name: Install Roku dependencies
+        run: ropm install
+
+      # 6. Lint code
       - name: Lint code
         run: npm run lint
 
-      # 5. Build project
+      # 7. Build project
       - name: Build project
         run: npm run build-dev
 
-      # 6. Run Roku Static Code Analysis
+      # 8. Run Roku Static Code Analysis
       - name: Run SCA
         run: npm run sca
 
