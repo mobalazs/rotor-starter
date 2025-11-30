@@ -93,7 +93,7 @@ namespace Reducers
 
             if m.requestTask.state = "run" then m.requestTask.control = "stop"
             #if debug
-                url = "pkg:/assets/mockups/testFeed.json"
+                url = "pkg:/assets/mockups/test-feed.json"
             #else
                 url = "https://example.com/api/content"
             #end if

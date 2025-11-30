@@ -22,8 +22,10 @@ sub fetch()
             ok: true,
             statusCode: 200
         }
+        json = ParseJson(response.json)
     #else
         response = Requests().get(url)
+        json = response.json
     #end if
 
 
@@ -35,17 +37,19 @@ sub fetch()
     ' to convert responses into ContentNode structures as early as possible, since
     ' they transfer more efficiently between threads and avoid unnecessary
     ' rendezvous overhead.
-    parsedResponse = parse(response)
+    parsedResponse = parse(json)
+
+    ' Add request state
+    parsedResponse.append({
+        ok: response.ok,
+        statusCode: response.statusCode
+    })
 
     m.top.response = parsedResponse
 
 end sub
 
-function parse(response) as Object
-    ' Get json string from response
-    jsonString = response.json
-
-    json = ParseJson(jsonString)
+function parse(json) as Object
 
     ' Convert to desired node structure
     ' Build a lookup of content nodes by contentId
@@ -90,8 +94,6 @@ function parse(response) as Object
     end if
 
     return {
-        listContentNode: listContentNode,
-        ok: response.ok,
-        statusCode: response.statusCode
+        listContentNode: listContentNode
     }
 end function
