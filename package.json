@@ -50,7 +50,7 @@
 	},
 	"dependencies": {
 		"roku-requests": "^1.2.0",
-		"rotor-framework": "^0.3.7"
+		"rotor-framework": "^0.4.0"
 	},
 	"main": "index.js"
 }
