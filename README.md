@@ -1,3 +1,5 @@
+[![build status](https://img.shields.io/github/actions/workflow/status/mobalazs/rotor-starter/main-workflow.yml?branch=main&logo=github&label=build)](https://github.com/mobalazs/rotor-starter/actions/workflows/main-workflow.yml)
+![template](https://img.shields.io/badge/repository-template-blue?style=flat)
 # 🚀 Rotor Starter
 
 **A professional starter template for building Roku applications with the [Rotor Framework](https://github.com/mobalazs/rotor-framework).**
