@@ -52,6 +52,10 @@ This starter template includes everything you need to build professional Roku ap
 - ✅ **Multi-language Support** - i18n ready with 5 languages (EN, ES, FR, HU, NL)
 - ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
 - ✅ **Hybrid Architecture Demo** - Shows native RowList integration with Rotor ViewModels
+- ✅ **Deeplink Flow** - Prepared deeplink handling for launch and input events
+- ✅ **App Launch Beacon** - Implemented AppLaunchComplete beacon on show content
+- ✅ **Page Transitions** - Smooth page transitions with fade animations
+- ✅ **Content Loader** - Example async content loading pattern
 - ✅ **Build System** - Automated theme and translation generation
 - ✅ **Development Tools** - Linting and Static Channel Analysis runner
 
