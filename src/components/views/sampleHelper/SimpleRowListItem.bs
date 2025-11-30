@@ -2,6 +2,11 @@ sub init()
     m.itemposter = m.top.findNode("itemPoster")
     m.itemmask = m.top.findNode("itemMask")
     m.itemlabel = m.top.findNode("itemLabel")
+
+    ' Set initial unfocused scale on the whole Group
+    m.top.scale = [0.95, 0.95]
+    ' Set scale center to middle of the item
+    m.top.scaleRotateCenter = [100.0, 150.0]
 end sub
 
 sub showcontent()
@@ -11,8 +16,11 @@ sub showcontent()
 end sub
 
 sub showfocus()
-    scale = 1 + (m.top.focusPercent * 0.08)
-    m.itemposter.scale = [scale, scale]
+    ' Inverted scaling: focused = 1.0, unfocused = 0.95
+    ' focusPercent: 0 (unfocused) -> 1 (focused)
+    scale = 0.95 + (m.top.focusPercent * 0.05)
+    ' Scale the whole Group so focus border scales too
+    m.top.scale = [scale, scale]
 end sub
 
 sub showrowfocus()

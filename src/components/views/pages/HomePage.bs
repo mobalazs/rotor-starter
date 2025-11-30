@@ -17,7 +17,7 @@ namespace ViewModels
             return {
                 nodeType: "LayoutGroup",
                 fields: {
-                    itemSpacings: [30],
+                    itemSpacings: [15, 30],
                     translation: m.props.pageTranslation
                 },
                 focus: {
@@ -40,7 +40,7 @@ namespace ViewModels
                         id: "pageContent",
                         nodeType: "Label",
                         fields: {
-                            width: 800,
+                            width: 1000,
                             wrap: true,
                             text: "@l10n.pages.home.content",
                             color: UI.colors.onBackground
@@ -53,9 +53,14 @@ namespace ViewModels
                         fields: {
                             itemComponentName: "SimpleRowListItem",
                             content: m.props.listContentNode,
-                            itemSize: [200, 308],
-                            itemSpacing: [20, 20],
-                            numRows: 2
+                            itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
+                            rowItemSize: [200, 300],
+                            rowItemSpacing: [5, 0],
+                            itemSpacing: [0, 0],
+                            rowLabelOffset: [0, 10],
+                            showRowLabel: [true],
+                            rowLabelFont: "font:SmallestBoldSystemFont",
+                            numRows: 3
                         },
                         focus: {
                             enableNativeFocus: true

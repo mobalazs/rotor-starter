@@ -20,7 +20,7 @@
   "pages": {
     "home": {
       "title": "Kezdőlap",
-      "content": "Üdvözöljük a kezdőlapon!"
+      "content": "Üdvözöljük a kezdőlapon! Ez a `RowList` bemutatóként jelenik meg itt, hogy szemléltesse, hogy a keretrendszer hibrid módban is képes működni. Egy teljesen egyedi, Rotor Framework által vezérelt `carousel` ViewModel létrehozása szintén megvalósítható és ajánlott. További információért vegye fel a kapcsolatot a szerzővel."
     },
     "movies": {
       "title": "Filmek Oldal",

@@ -20,7 +20,7 @@
   "pages": {
     "home": {
       "title": "Page d'Accueil",
-      "content": "Bienvenue sur la page d'accueil!"
+      "content": "Bienvenue sur la page d'accueil ! Cette `RowList` est affichée ici comme démonstration pour illustrer que le framework peut fonctionner en mode hybride. Créer un `carousel` ViewModel entièrement personnalisé piloté par Rotor Framework est également possible et recommandé. Pour plus d'informations, contactez l'auteur."
     },
     "movies": {
       "title": "Page des Films",

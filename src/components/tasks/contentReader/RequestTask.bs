@@ -61,13 +61,14 @@ function parse(response) as Object
             HDPosterUrl: item.posterUrl
         }
 
-        contentNode = Rotor.Utils.createContentNode(cardData)
+        contentNode = CreateObject("roSGNode", "ContentNode")
+        contentNode.setFields(cardData)
         itemsById[item.contentId] = contentNode
     end for
 
     ' Build listContent suitable for RowList with proper hierarchy:
     ' Root ContentNode containing Row ContentNodes, each Row containing Item ContentNodes
-    listContentNode = Rotor.Utils.createContentNode()
+    listContentNode = CreateObject("roSGNode", "ContentNode")
     if type(json.rows) <> "invalid"
         rowIndex = 0
         for each row in json.rows
@@ -80,11 +81,10 @@ function parse(response) as Object
             end for
 
             ' Create row node with items as children
-            rowData = {
-                title: "Row " + rowIndex.toStr()
-            }
-            rowNode = Rotor.Utils.createContentNode(rowData)
+            rowNode = CreateObject("roSGNode", "ContentNode")
+            rowNode.title = "Row " + rowIndex.toStr()
             rowNode.appendChildren(itemNodes)
+
             listContentNode.appendChild(rowNode)
         end for
     end if

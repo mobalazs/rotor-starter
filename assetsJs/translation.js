@@ -26,7 +26,7 @@ module.exports = function () {
 			home: {
 				title: 'Home Page',
 				content:
-					'Welcome to the homepage! `This RowList` is shown here as a demonstration \
+					'Welcome to the homepage! This `RowList` is shown here as a demonstration \
 to illustrate that the framework can operate in a hybrid mode. Creating a fully custom \
 `carousel` ViewModel driven by the Rotor Framework is also feasible and recommended. \
 For more information, contact the author.',
@@ -59,7 +59,7 @@ For more information, contact the author.',
 			home: {
 				title: 'Página de Inicio',
 				content:
-					'¡Bienvenido a la página de inicio! `Esta RowList` se muestra aquí como demostración \
+					'¡Bienvenido a la página de inicio! Esta `RowList` se muestra aquí como demostración \
 para ilustrar que el framework puede operar en modo híbrido. Crear un `carousel` ViewModel \
 completamente personalizado impulsado por Rotor Framework también es factible y recomendado. \
 Para más información, contacte al autor.',
@@ -92,7 +92,7 @@ Para más información, contacte al autor.',
 			home: {
 				title: "Page d'Accueil",
 				content:
-					"Bienvenue sur la page d'accueil ! `Cette RowList` est affichée ici comme démonstration \
+					"Bienvenue sur la page d'accueil ! Cette `RowList` est affichée ici comme démonstration \
 pour illustrer que le framework peut fonctionner en mode hybride. Créer un `carousel` ViewModel \
 entièrement personnalisé piloté par Rotor Framework est également possible et recommandé. \
 Pour plus d'informations, contactez l'auteur.",

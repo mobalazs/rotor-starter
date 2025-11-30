@@ -20,7 +20,7 @@
   "pages": {
     "home": {
       "title": "Startpagina",
-      "content": "Welkom op de startpagina!"
+      "content": "Welkom op de startpagina! Deze `RowList` wordt hier als demonstratie getoond om te illustreren dat het framework in hybride modus kan werken. Het maken van een volledig aangepast `carousel` ViewModel aangedreven door Rotor Framework is ook haalbaar en aanbevolen. Voor meer informatie, neem contact op met de auteur."
     },
     "movies": {
       "title": "Filmenpagina",
