@@ -13,8 +13,7 @@
 	"autoImportComponentScript": true,
 
 	"plugins": [
-		"@rokucommunity/bslint",
-		"rooibos-roku"
+		"@rokucommunity/bslint"
 	],
 
 	"files": [

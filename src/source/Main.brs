@@ -1,11 +1,5 @@
 sub main(launchParams)
 
-    #if unittest
-        'bs:disable-next-line
-        Rooibos_init("RooibosScene")
-        return
-    #end if
-
     ' Create MainScene
     screen = CreateObject("roSGScreen")
     m.port = CreateObject("roMessagePort")

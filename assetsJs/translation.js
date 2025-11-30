@@ -1,5 +1,5 @@
 module.exports = function () {
-	let appTitle = 'Rotor Framework POC';
+	let appTitle = 'Rotor Starter Template';
 
 	let languages = {
 		en_US: 'English',

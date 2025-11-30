@@ -259,6 +259,8 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 | `npm run build-prod` | Production build (optimized) |
 | `npm run build-tests` | Build with tests |
 | `npm run lint` | Lint BrighterScript code |
+| `npm run analyze` | Run Roku Static Analysis Tool |
+| `npm run build-analyze` | Build and analyze in one command |
 | `npm run coverage` | Generate coverage report |
 
 ---
