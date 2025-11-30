@@ -1,4 +1,4 @@
-name: Build, Lint & Coverage
+name: Build, Lint & SCA
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-lint-coverage:
+  build-lint-SCA:
     runs-on: ubuntu-latest
     permissions:
       contents: read
