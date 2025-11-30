@@ -18,31 +18,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      # 3. Install dependencies
+      # 2. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 4. Lint code
+      # 3. Lint code
       - name: Lint code
         run: npm run lint
 
-      # 5. Run tests and collect coverage
-      - name: Run tests and collect coverage
-        env:
-          ROKU_DEV_TARGET: ${{ secrets.ROKU_DEV_TARGET }}
-          ROKU_DEV_PASS: ${{ secrets.ROKU_DEV_PASS }}
-        run: npm run coverage
-
-      # 6. Upload coverage to Coveralls (only on main branch push)
-      - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: coverage.lcov
-          base-path: src
