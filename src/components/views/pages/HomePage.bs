@@ -4,6 +4,15 @@ import "../buttons/BaseButton.bs"
 namespace ViewModels
     class HomePage extends ViewModels.BasePage
 
+        props = {
+            isActive: false,
+            pageTranslation: [UI.components.menuBar.pageOffset, UI.safeArea.y + UI.components.menuBar.rightPadding],
+            listContentNode: invalid
+        }
+
+        ' Define Content Reader Dispatcher
+        crDispatcher as Rotor.Dispatcher
+
         override function template() as object
             return {
                 nodeType: "Group",
@@ -50,27 +59,72 @@ namespace ViewModels
             }
         end function
 
+        ' =================
+        ' Lifecycle methods
+        ' =================
+
         override sub onCreateView()
-            Utils.BasicLogger("[HomePage] Created")
+            ' Get Content Reader Dispatcher
+            m.crDispatcher = m.getDispatcher("contentReaderDispatcher")
         end sub
 
         override sub onMountView()
             super.onMountView()
-            Utils.BasicLogger("[HomePage] Mounted")
-            ' Additional logic for HomePage can be added here
-
             ' Set initial focus to first menu item
             m.getWidget("exampleButton").plugins.focus.setFocus()
         end sub
 
         override sub onUpdateView()
             super.onUpdateView()
-            Utils.BasicLogger("[HomePage] Updated")
             ' Additional logic for HomePage can be added here
         end sub
 
         override sub onDestroyView()
-            Utils.BasicLogger("[HomePage] Destroyed")
+            ' Destroy Content Reader Dispatcher
+            m.crDispatcher.destroy()
         end sub
+
+        ' ==============
+        ' Custom methods
+        ' ==============
+
+        override sub performPageTransition()
+
+            if m.props.isActive
+
+                ' If state has already been isReady then immediately perform the transition VIA super method
+                crState = m.crDispatcher.getState()
+                if crState.ok = true and m.props.listContentNode <> invalid
+                    ' m.viewModelState.isReady = true
+                    super.performPageTransition()
+
+                else
+                    ' If async operation needs then deffer page transition.
+                    ' Listen to Content Reader Dispatcher
+                    m.crDispatcher.addListener({
+                        shouldUpdate: function(props, state as Models.ContentReaderState)
+                            return state.ok and state.listContentNode <> invalid
+                        end function,
+                        mapStateToProps: sub(props, state as Models.ContentReaderState)
+                            props.listContentNode = state.listContentNode
+                        end sub,
+                        callback: m.onUpdateView,
+                        once: true
+                    })
+
+                    ' Initiate load content
+                    m.crDispatcher.dispatch({
+                        type: IntentTypes.ContentReader.LOAD_CONTENT
+                    })
+
+                end if
+            else
+
+                ' Fade out transition can be performed immediately
+                super.performPageTransition()
+            end if
+
+        end sub
+
     end class
 end namespace

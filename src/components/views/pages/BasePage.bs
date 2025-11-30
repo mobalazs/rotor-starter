@@ -6,6 +6,10 @@ namespace ViewModels
             pageTranslation: [UI.components.menuBar.pageOffset, UI.safeArea.y + UI.components.menuBar.rightPadding]
         }
 
+        ' =================
+        ' Lifecycle methods
+        ' =================
+
         override sub onUpdateView()
             Utils.BasicLogger(`[PAGE] Page "${m.id}" is now ${m.props.isActive ? "active" : "inactive"}`)
             m.performPageTransition()
@@ -16,6 +20,10 @@ namespace ViewModels
             m.node.opacity = 0
             m.performPageTransition()
         end sub
+
+        ' ==============
+        ' Custom methods
+        ' ==============
 
         sub performPageTransition()
             ' Animate page visibility

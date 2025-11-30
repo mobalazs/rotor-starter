@@ -2,7 +2,7 @@
 <component name="RequestTask" extends="Task">
     <interface>
         <field id="request" type="assocarray" />
-        <field id="response" type="node" />
+        <field id="response" type="assocarray" />
         <field id="dispatcherId" type="string" />
     </interface>
 </component>

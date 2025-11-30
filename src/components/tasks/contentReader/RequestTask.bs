@@ -88,24 +88,8 @@ function parse(response) as Object
         end for
     end if
 
-    ' Build gridContent: flat array of card content nodes
-    gridContent = []
-    if type(json.grid) <> "invalid"
-        for each cid in json.grid
-            if itemsById.Lookup(cid) <> invalid
-                gridContent.push(itemsById[cid])
-            end if
-        end for
-    end if
-    sectionData = {
-        title: "Grid"
-    }
-    gridContentNode = Rotor.Utils.createContentNode(sectionData)
-    gridContentNode.appendChildren(gridContent)
-
     return {
         listContentNode: listContentNode,
-        gridContentNode: gridContentNode,
         ok: response.ok,
         statusCode: response.statusCode
     }

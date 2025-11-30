@@ -11,9 +11,13 @@ import "pkg:/components/common/IntentTypes.bs"
 ' App specific utils
 import "pkg:/source/utils/Utils.bs"
 
-' Dispatchers (render thread)
-import "pkg:/components/dispatchers/navDispatcher/NavigationModel.bs"
+' Reducers
 import "pkg:/components/dispatchers/navDispatcher/NavigationReducer.bs"
+
+' Dispatcher Models
+import "pkg:/components/dispatchers/navDispatcher/NavigationModel.bs"
+import "pkg:/components/dispatchers/navDispatcher/NavigationModel.bs"
+import "pkg:/components/tasks/contentReader/ContentReaderModel.bs"
 
 ' Layout
 import "pkg:/components/views/layout/LayoutViewModel.bs"
@@ -55,7 +59,9 @@ end sub
 
 sub InitApplication()
 
-    m.fw = new Rotor.Framework()
+    m.fw = new Rotor.Framework({
+        tasks: ["AppTask"]
+    })
 
     ' Load English translations synchronously from JSON file
     translationJson = ReadAsciiFile("pkg:/assets/generated/en_US.translation.json")
@@ -75,8 +81,6 @@ sub InitApplication()
             viewModel: ViewModels.LayoutViewModel
         }
     ])
-
-
 end sub
 
 function onKeyEvent(key as string, press as boolean) as boolean
