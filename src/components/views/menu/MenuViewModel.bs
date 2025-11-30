@@ -47,9 +47,6 @@ namespace ViewModels
             m.menuBackgroundWidget = m.getWidget("menuBackground")
             m.menuLabels = m.findWidgets("menuItemsContainer/**/menuLabel")
 
-            ' Set initial closed state
-            m.animateMenuState(m.viewModelState.isFocused)
-
             ' Set initial UI according to state
             m.onCurrentPageIdChanged()
 
@@ -58,6 +55,8 @@ namespace ViewModels
         override sub onDestroyView()
             Utils.BasicLogger("[MenuViewModel] Update menu")
             m.navDispatcher.destroy()
+            m.menuBackgroundWidget = invalid
+            m.menuLabels = invalid
         end sub
 
         override function template() as object
@@ -117,14 +116,9 @@ namespace ViewModels
                         observer: {
                             fieldId: "renderTracking",
                             callback: sub(payload)
-                                menuItemsContainerNode = m.node
                                 menuBackgroundNode = m.getSiblingWidget("menuBackground").node
-
-                                ' Get menu items container width from bounding rect
-                                menuWidth = menuItemsContainerNode.localBoundingRect().width
-
                                 ' Set menu background width to match menu items container width
-                                menuBackgroundNode.width = menuWidth + UI.safeArea.x * 2
+                                menuBackgroundNode.width = m.getViewModel().getBgWidth(m.viewModelState.isFocused)
                             end sub
                         },
 
