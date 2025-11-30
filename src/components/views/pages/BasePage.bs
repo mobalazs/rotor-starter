@@ -8,15 +8,16 @@ namespace ViewModels
 
         override sub onUpdateView()
             Utils.BasicLogger(`[PAGE] Page "${m.id}" is now ${m.props.isActive ? "active" : "inactive"}`)
-            ' Animate page visibility
-            m.animateIsActiveState()
-            ' Delegate focus to page if active
-            m.delegateFocusToPage()
+            m.performPageTransition()
         end sub
 
         override sub onMountView()
             ' Ensure initial opacity state
             m.node.opacity = 0
+            m.performPageTransition()
+        end sub
+
+        sub performPageTransition()
             ' Animate page visibility
             m.animateIsActiveState()
             ' Delegate focus to page if active

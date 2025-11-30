@@ -121,12 +121,12 @@ namespace ViewModels
 
             ' Handle page change
             if m.viewModelState.currentPageId <> m.props.activePageId
-                m.proceedPageTransition()
+                m.startPageTransition()
                 m.viewModelState.currentPageId = m.props.activePageId
             end if
         end sub
 
-        private sub proceedPageTransition()
+        private sub startPageTransition()
             pageContainer = m.getWidget("pageContainer")
             pagesToRender = []
             navState = m.navDispatcher.getState() as Models.NavState
