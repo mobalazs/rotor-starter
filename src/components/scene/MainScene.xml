@@ -5,11 +5,11 @@
         <!-- Exits channel if set to true -->
         <field id="exitChannel" type="bool" alwaysNotify="true" />
 
-        <!-- Launch params -->
-        <field id="launchParams" type="assocarray" />
+        <!-- Launch args -->
+        <field id="launchArgs" type="assocarray" />
 
-        <!-- Input params -->
-        <field id="inputParams" type="assocarray" />
+        <!-- Input args -->
+        <field id="inputArgs" type="assocarray" />
 
     </interface>
 

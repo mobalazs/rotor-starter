@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-lint-coverage:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: read
@@ -18,11 +18,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Install dependencies
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm ci
 
-      # 3. Lint code
+      # 4. Lint code
       - name: Lint code
         run: npm run lint
+
+      # 5. Build project
+      - name: Build project
+        run: npm run build-dev
+
+      # 6. Run Roku Static Code Analysis
+      - name: Run SCA
+        run: npm run sca
 

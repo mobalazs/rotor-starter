@@ -1,4 +1,4 @@
-sub main(launchParams)
+sub main(launchArgs)
 
     ' Create MainScene
     screen = CreateObject("roSGScreen")
@@ -11,12 +11,12 @@ sub main(launchParams)
     ' Add and Observe exitChannel field
     scene.ObserveField("exitChannel", m.port)
 
-    ' Create roInput
+    ' Start app with launch parameters
+    scene.setField("launchArgs", launchArgs)
+
+    ' create roInput context for handling roInputEvent messages
     input = CreateObject("roInput")
     input.setMessagePort(m.port)
-
-    ' Start app with launch parameters
-    scene.setField("launchParams", launchParams)
 
     ' Main Loop
     while true
@@ -26,16 +26,18 @@ sub main(launchParams)
             if msg.IsScreenClosed()
                 return
             end if
+
         else if msgType = "roSGNodeEvent"
             field = msg.getField()
             data = msg.getData()
             if field = "exitChannel" and data = true
                 exit while
             end if
+
         else if msgType = "roInputEvent"
-            ' roInputEvent deep linking, pass arguments to the scene
-            launchParams = msg.getInfo()
-            scene.setField("launchParams", launchParams)
+            ' Handle deep linking roInputEvent
+            inputArgs = msg.getInfo()
+            scene.setField("inputArgs", inputArgs)
         end if
     end while
 

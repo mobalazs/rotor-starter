@@ -13,8 +13,8 @@ mm_icon_focus_sd=pkg:/assets/images/channelIcons/channel-icon_SD.png
 # splash_screen_hd=pkg:/assets/images/splash.jpg
 # splash_screen_sd=pkg:/assets/images/splash.jpg
 
-sg_component_libs_required=roku_analytics
-bs_libs_required=roku_ads_lib
+# sg_component_libs_required=roku_analytics
+# bs_libs_required=roku_ads_lib ' RAF
 
 ### constants
 bs_const=debug=true;unittest=false

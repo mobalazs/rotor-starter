@@ -6,7 +6,6 @@
 		"precompiler": "ts-node-cwd scripts/generateBsConstFromJs.ts",
 		"build-dev": "npm run precompiler && bsc  --project bsconfig.json",
 		"build-prod": "npm run precompiler && bsc  --project bsconfig-prod.json",
-		"coverage": "npm run precompiler && node scripts/collect-coverage.js",
 		"lint": "npx bslint --project bsconfig.json  --lintConfig bslint.json",
 		"sca": "npm run build-dev && node scripts/roku-static-analysis.js"
 	},

@@ -11,6 +11,7 @@ namespace ViewModels
         }
 
         props = {
+            deeplinkArgs: invalid,
             activePageId: "" ' It will be set in onCreateView() based on Model.navState.
         }
 
@@ -56,6 +57,13 @@ namespace ViewModels
         override sub onMountView()
             ' Render initial page
             m.onNavigationChanged()
+            ' Handle deeplink
+            m.handleDeeplink()
+        end sub
+
+        override sub onUpdateView()
+            ' Handle deeplink
+            m.handleDeeplink()
         end sub
 
         override function template() as object
@@ -190,6 +198,16 @@ namespace ViewModels
             ' Exit scene
             globalScope.top.getScene().exitChannel = true
 
+        end sub
+
+        sub handleDeeplink()
+            if m.props.deeplinkArgs <> invalid
+                Utils.BasicLogger(`[LayoutViewModel] Deeplink detected with args: ${m.props.deeplinkArgs}`)
+                ' Invalidate current deeplinkArgs
+                m.props.deeplinkArgs = invalid
+
+                ' PERFORM DEEPLINK
+            end if
         end sub
 
     end class

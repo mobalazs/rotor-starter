@@ -23,7 +23,7 @@ if (!fs.existsSync(STAGING_DIR)) {
 try {
     console.log('🔍 Running Roku Static Code Analysis...');
     console.log(`   Analyzing: ${STAGING_DIR}\n`);
-    execSync(`"${SCA_CMD}" "${STAGING_DIR}"`, { stdio: 'inherit' });
+    execSync(`"${SCA_CMD}" "${STAGING_DIR}" --severity error`, { stdio: 'inherit' });
     console.log('\n✅ Static analysis complete!');
 } catch (error) {
     console.error('\n❌ Static analysis found issues or failed');

@@ -17,7 +17,7 @@ import "pkg:/components/dispatchers/navDispatcher/NavigationReducer.bs"
 ' Dispatcher Models
 import "pkg:/components/dispatchers/navDispatcher/NavigationModel.bs"
 import "pkg:/components/dispatchers/navDispatcher/NavigationModel.bs"
-import "pkg:/components/tasks/contentReader/ContentReaderModel.bs"
+import "pkg:/components/tasks/dispatchers/contentReader/ContentReaderModel.bs"
 
 ' Layout
 import "pkg:/components/views/layout/LayoutViewModel.bs"
@@ -31,33 +31,46 @@ import "pkg:/components/views/pages/SettingsPage.bs"
 import "pkg:/components/views/menu/MenuViewModel.bs"
 import "pkg:/components/views/menu/MenuItemViewModel.bs"
 
+' Buttons
+import "pkg:/components/views/buttons/BaseButton.bs"
+
 
 sub init()
     ' Setup observers for launch and input events
-    m.top.observeField("launchParams", "launchEventHandler")
-    m.top.observeField("inputParams", "inputEventHandler")
+    m.top.observeField("launchArgs", "launchEventHandler")
+    m.top.observeField("inputArgs", "inputEventHandler")
 end sub
 
 ' ========== LAUNCH EVENT HANDLER ===========
 
 sub launchEventHandler(msg)
-    params = msg.getData()
-    Utils.BasicLogger(`[LAUNCH EVENT] params: ${FormatJson(params)}`)
-    InitApplication()
+    args = msg.getData()
+    Utils.BasicLogger(`[LAUNCH EVENT] args: ${FormatJson(args)}`)
+    ' Process deeplink parameters if valid deeplink properties are present
+    initApplication(isDeepLinking(args) ? args : invalid)
 end sub
 
 ' ========== INPUT EVENT HANDLER ===========
 
 sub inputEventHandler(msg)
-    params = msg.getData()
-    Utils.BasicLogger(`[INPUT EVENT] params: ${FormatJson(params)}`)
+    args = msg.getData()
+    Utils.BasicLogger(`[INPUT EVENT] args: ${FormatJson(args)}`)
+    ' Process deeplink parameters if valid deeplink properties are present
+    if isDeepLinking(args)
+        performDeepLinking(args)
+    end if
 end sub
+
+function isDeepLinking(args as object)
+    ' Check if deep linking args is valid
+    return args <> invalid and args.mediaType <> invalid and args.mediaType <> "" and args.contentId <> invalid and args.contentId <> ""
+end function
 
 ' =====================================================
 ' Initialize and show the app driven by Rotor Framework
 ' =====================================================
 
-sub InitApplication()
+sub initApplication(deeplinkArgs = invalid as object)
 
     m.fw = new Rotor.Framework({
         tasks: ["AppTask"]
@@ -78,11 +91,24 @@ sub InitApplication()
     m.fw.render([
         {
             id: "appContainer",
-            viewModel: ViewModels.LayoutViewModel
+            viewModel: ViewModels.LayoutViewModel,
+            props: {
+                deeplinkArgs: deeplinkArgs
+            }
         }
     ])
 end sub
 
+sub performDeepLinking(deeplinkArgs)
+    m.fw.render({
+        id: "appContainer",
+        props: {
+            deeplinkArgs: deeplinkArgs
+        }
+    })
+end sub
+
+' Native key handler remains functional; Rotor's focus plugin can work in hybrid mode with native focus.
 function onKeyEvent(key as string, press as boolean) as boolean
     result = m.fw.plugins.focus.onKeyEventHandler(key, press)
 

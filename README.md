@@ -49,12 +49,11 @@ This starter template includes everything you need to build professional Roku ap
 
 - ✅ **Rotor Framework v0.3.6** - Modern MVI architecture for Roku
 - ✅ **BrighterScript** - Enhanced BrightScript with modern language features
-- ✅ **Material Design Theme** - Beautiful, customizable color system and typography
 - ✅ **Multi-language Support** - i18n ready with 5 languages (EN, ES, FR, HU, NL)
 - ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
 - ✅ **Hybrid Architecture Demo** - Shows native RowList integration with Rotor ViewModels
 - ✅ **Build System** - Automated theme and translation generation
-- ✅ **Development Tools** - Linting, coverage, and deployment scripts
+- ✅ **Development Tools** - Linting and Static Channel Analysis runner
 
 ---
 
@@ -64,6 +63,7 @@ This starter template includes everything you need to build professional Roku ap
 
 - **Node.js** (v14 or higher)
 - **npm** or **yarn**
+- **ropm** (Roku Package Manager) - Install globally: `npm install -g ropm`
 - **Roku device** or simulator
 
 ### Installation
@@ -73,14 +73,15 @@ This starter template includes everything you need to build professional Roku ap
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 cd YOUR_REPO_NAME
 
-# Install dependencies
+# Install ropm globally (if not already installed)
+npm install -g ropm
+
+# Install npm dependencies
 npm install
 
-# Build for development
-npm run build-dev
+# Install Roku dependencies via ropm
+ropm install
 
-# Deploy to Roku device (configure .env first)
-# See roku-deploy documentation for setup
 ```
 
 ### First Build
@@ -172,9 +173,6 @@ npm run build-dev
 
 # Production build (optimized)
 npm run build-prod
-
-# Run tests
-npm run build-tests
 ```
 
 ### 3. Access Generated Constants
@@ -185,8 +183,10 @@ Theme and translations are automatically available:
 ' In any BrighterScript file
 UI.colors.primary           ' Access theme colors
 UI.typography.titleLarge_aa ' Access typography
-@l10n.appTitle              ' Access translations (in templates)
+@l10n.appTitle              ' Access translations (see Fields Plugin doc)
 ```
+
+**Note:** The `@` operator for accessing translations uses the Fields Plugin. See the [Fields Plugin Documentation](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-fields-plugin.opt.yaml) for details on string interpolation and viewModelState references.
 
 ---
 
@@ -257,11 +257,8 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 | `npm install` | Install dependencies |
 | `npm run build-dev` | Development build with source maps |
 | `npm run build-prod` | Production build (optimized) |
-| `npm run build-tests` | Build with tests |
 | `npm run lint` | Lint BrighterScript code |
-| `npm run analyze` | Run Roku Static Analysis Tool |
-| `npm run build-analyze` | Build and analyze in one command |
-| `npm run coverage` | Generate coverage report |
+| `npm run sca` | Build and run Static Channel Analysis |
 
 ---
 
@@ -366,6 +363,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Happy Coding! 🎉**
+## 🔧 Requirements
 
-Built with ❤️ using the Rotor Framework
+-   Roku SceneGraph (firmware 10.5+ recommended)
+-   BrighterScript V1
+
+---
+
+## 📄 License
+
+Rotor Framework™ is licensed under the [MIT License](LICENSE).
+
+© 2025 Balázs Molnár — Rotor Framework™

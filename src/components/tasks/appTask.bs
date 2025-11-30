@@ -6,8 +6,8 @@ import "pkg:/components/common/Constants.bs"
 import "pkg:/components/common/IntentTypes.bs"
 
 ' Import Models and Reducers
-import "pkg:/components/tasks/contentReader/ContentReaderModel.bs"
-import "pkg:/components/tasks/contentReader/ContentReaderReducer.bs"
+import "pkg:/components/tasks/dispatchers/contentReader/ContentReaderModel.bs"
+import "pkg:/components/tasks/dispatchers/contentReader/ContentReaderReducer.bs"
 
 
 sub init()
