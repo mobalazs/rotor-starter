@@ -18,16 +18,15 @@ sub fetch()
         ' Simulate network delay in debug mode
         sleep(200)
         response = {
-            json: ReadAsciiFile(url),
+            jsonString: ReadAsciiFile(url),
             ok: true,
             statusCode: 200
         }
-        json = ParseJson(response.json)
+        json = ParseJson(response.jsonString)
+        response.json = json
     #else
         response = Requests().get(url)
-        json = response.json
     #end if
-
 
     ' Note: This is exactly the point where the new Data-Transfer APIs will help:
     ' they provide a more efficient way to pass data between request tasks,
@@ -37,19 +36,14 @@ sub fetch()
     ' to convert responses into ContentNode structures as early as possible, since
     ' they transfer more efficiently between threads and avoid unnecessary
     ' rendezvous overhead.
-    parsedResponse = parse(json)
-
-    ' Add request state
-    parsedResponse.append({
-        ok: response.ok,
-        statusCode: response.statusCode
-    })
+    parsedResponse = parse(response)
 
     m.top.response = parsedResponse
-
 end sub
 
-function parse(json) as Object
+function parse(response) as Object
+
+    json = response.json
 
     ' Convert to desired node structure
     ' Build a lookup of content nodes by contentId
@@ -94,6 +88,8 @@ function parse(json) as Object
     end if
 
     return {
-        listContentNode: listContentNode
+        listContentNode: listContentNode,
+        ok: response.ok,
+        statusCode: response.statusCode
     }
 end function
