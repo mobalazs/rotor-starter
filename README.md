@@ -1,5 +1,9 @@
 [![build status](https://img.shields.io/github/actions/workflow/status/mobalazs/rotor-starter/main-workflow.yml?branch=main&logo=github&label=build)](https://github.com/mobalazs/rotor-starter/actions/workflows/main-workflow.yml)
-![template](https://img.shields.io/badge/repository-template-blue?style=flat)
+![use template](https://img.shields.io/badge/use_this-template-brightgreen)
+![license](https://img.shields.io/github/license/mobalazs/rotor-starter)
+![code style](https://img.shields.io/badge/lint-bslint-yellow)
+![code size](https://img.shields.io/github/languages/code-size/mobalazs/rotor-starter)
+
 # 🚀 Rotor Starter
 
 **A professional starter template for building Roku applications with the [Rotor Framework](https://github.com/mobalazs/rotor-framework).**
