@@ -54,17 +54,15 @@ A **GitHub template repository** is a special type of repository that serves as 
 
 This starter template includes everything you need to build professional Roku applications:
 
-- ✅ **Rotor Framework v0.3.6** - Modern MVI architecture for Roku
-- ✅ **BrighterScript** - Enhanced BrightScript with modern language features
-- ✅ **Multi-language Support** - i18n ready with 5 languages (EN, ES, FR, HU, NL)
-- ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
-- ✅ **Hybrid Architecture Demo** - Shows native RowList integration with Rotor ViewModels
-- ✅ **Deeplink Flow** - Prepared deeplink handling for launch and input events
-- ✅ **App Launch Beacon** - Implemented AppLaunchComplete beacon on show content
-- ✅ **Page Transitions** - Smooth page transitions with fade animations
-- ✅ **Content Loader** - Example async content loading pattern
 - ✅ **Build System** - Automated theme and translation generation
-- ✅ **Development Tools** - Linting and Static Channel Analysis runner
+- ✅ **Page Transitions** - Smooth page transitions with fade animations
+- ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
+- ✅ **Content Loader** - Example async content loading pattern
+- ✅ **Request Task** - Dispatcher compatible request task
+- ✅ **App Launch Beacon** - Implemented AppLaunchComplete beacon on show content
+- ✅ **Deeplink Flow** - Prepared deeplink handling for launch and input events
+- ✅ **Hybrid Architecture Demo** - Shows native RowList integration with Rotor ViewModels
+- ✅ **Development Tools** - Static Channel Analysis runner from CLI and workflow
 
 ---
 
