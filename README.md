@@ -15,17 +15,17 @@ This GitHub template repository provides a complete boilerplate with best practi
 
 ## 📋 Table of Contents
 
-- [What is a GitHub Template Repository?](#what-is-a-github-template-repository)
-- [Features](#features)
-- [Quick Start](#quick-start)
-- [Project Structure](#project-structure)
-- [Development Workflow](#development-workflow)
-- [What's Included](#whats-included)
-- [Rotor Framework Documentation](#rotor-framework-documentation)
-- [Build Commands](#build-commands)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
+- [What is a GitHub Template Repository?](#-what-is-a-github-template-repository)
+- [Features](#-features)
+- [Quick Start](#-quick-start)
+- [Project Structure](#-project-structure)
+- [Development Workflow](#️-development-workflow)
+- [What's Included](#-whats-included)
+- [Rotor Framework Documentation](#-rotor-framework-documentation)
+- [Build Commands](#-build-commands)
+- [Customization](#-customization)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
@@ -195,7 +195,7 @@ UI.typography.titleLarge_aa ' Access typography
 @l10n.appTitle              ' Access translations (see Fields Plugin doc)
 ```
 
-**Note:** The `@` operator for accessing translations uses the Fields Plugin. See the [Fields Plugin Documentation](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-fields-plugin.opt.yaml) for details on string interpolation and viewModelState references.
+**Note:** The `@` operator for accessing translations uses the Fields Plugin. See the [Fields Plugin Documentation](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-fields-plugin.md) for details on string interpolation and viewModelState references.
 
 ---
 
@@ -237,8 +237,6 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 
 ### Official Documentation
 
-🌱 **[AI-Friendly Documentation Index](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/index.yaml)**
-
 📖 **[Full Framework Documentation](https://github.com/mobalazs/rotor-framework)**
 
 ### Key Concepts
@@ -250,12 +248,12 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 
 ### Quick Links
 
-- [Framework Overview & Quick Start](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/readme.opt.yaml)
-- [Framework Initialization](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/framework-initialization.opt.yaml)
-- [Cross-Thread MVI Architecture](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/cross-thread-mvi.opt.yaml)
-- [ViewBuilder Overview](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-overview.opt.yaml)
-- [Widget Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-widget-reference.opt.yaml)
-- [ViewModel Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-viewmodel-reference.opt.yaml)
+- [Framework Overview & Quick Start](https://github.com/mobalazs/rotor-framework/blob/main/docs/readme.md)
+- [Framework Initialization](https://github.com/mobalazs/rotor-framework/blob/main/docs/framework-initialization.md)
+- [Cross-Thread MVI Architecture](https://github.com/mobalazs/rotor-framework/blob/main/docs/cross-thread-mvi.md)
+- [ViewBuilder Overview](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-overview.md)
+- [Widget Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-widget-reference.md)
+- [ViewModel Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-viewmodel-reference.md)
 
 ---
 
