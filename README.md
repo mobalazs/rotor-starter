@@ -11,6 +11,8 @@
 
 This GitHub template repository provides a complete boilerplate with best practices, example implementations, and a modern development workflow to help you kickstart your Roku app development journey.
 
+![Rotor Starter template preview](docs/images/rotor-starter-template.jpg)
+
 ---
 
 ## 📋 Table of Contents
