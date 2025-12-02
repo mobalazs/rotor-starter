@@ -34,6 +34,10 @@ import "pkg:/components/views/menu/MenuItemViewModel.bs"
 ' Buttons
 import "pkg:/components/views/buttons/BaseButton.bs"
 
+' Pickers
+import "pkg:/components/views/pickers/SimplePickerViewModel.bs"
+
+
 
 sub init()
     ' Setup observers for launch and input events

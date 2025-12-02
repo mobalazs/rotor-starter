@@ -16,6 +16,12 @@ module.exports = function () {
 		buttons: {
 			clickMe: 'Click Me',
 		},
+		picker: {
+			selectPlaceholder: 'Select...',
+		},
+		settings: {
+			language: 'Language',
+		},
 		menu: {
 			home: 'Home',
 			movies: 'Movies',
@@ -48,6 +54,12 @@ For more information, contact the author.',
 		helloWorld: '¡Hola Mundo!',
 		buttons: {
 			clickMe: 'Haz Clic',
+		},
+		picker: {
+			selectPlaceholder: 'Seleccionar...',
+		},
+		settings: {
+			language: 'Idioma',
 		},
 		menu: {
 			home: 'Inicio',
@@ -82,6 +94,12 @@ Para más información, contacte al autor.',
 		buttons: {
 			clickMe: 'Cliquez Ici',
 		},
+		picker: {
+			selectPlaceholder: 'Sélectionner...',
+		},
+		settings: {
+			language: 'Langue',
+		},
 		menu: {
 			home: 'Accueil',
 			movies: 'Films',
@@ -115,6 +133,12 @@ Pour plus d'informations, contactez l'auteur.",
 		buttons: {
 			clickMe: 'Kattints Ide',
 		},
+		picker: {
+			selectPlaceholder: 'Válassz...',
+		},
+		settings: {
+			language: 'Nyelv',
+		},
 		menu: {
 			home: 'Kezdőlap',
 			movies: 'Filmek',
@@ -147,6 +171,12 @@ További információért vegye fel a kapcsolatot a szerzővel.',
 		helloWorld: 'Hallo Wereld!',
 		buttons: {
 			clickMe: 'Klik Hier',
+		},
+		picker: {
+			selectPlaceholder: 'Selecteer...',
+		},
+		settings: {
+			language: 'Taal',
 		},
 		menu: {
 			home: 'Home',

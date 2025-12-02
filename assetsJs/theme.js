@@ -168,9 +168,20 @@ module.exports = function () {
 			iconUri: {
 				home: 'pkg:/assets/images/menuIcons/home_32dp_FFFFFF.png',
 				movies: 'pkg:/assets/images/menuIcons/movie_32dp_FFFFFF.png',
-				settings: 'pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png',
+				settings:
+					'pkg:/assets/images/menuIcons/settings_32dp_FFFFFF.png',
 				exit: 'pkg:/assets/images/menuIcons/exit_to_app_32dp_FFFFFF.png',
-			}
+			},
+		},
+	};
+
+	let settings = {
+		settingIcon: {
+			iconSize: 32,
+			iconUri: {
+				language:
+					'pkg:/assets/images/settingIcons/language_32dp_FFFFFF.png',
+			},
 		},
 	};
 
@@ -182,6 +193,7 @@ module.exports = function () {
 		motion: motion,
 		components: {
 			menuBar: menuBar,
+			settings: settings,
 		},
 	};
 };

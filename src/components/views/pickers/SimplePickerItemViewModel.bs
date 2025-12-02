@@ -1,0 +1,82 @@
+namespace ViewModels
+
+    '''''''''
+    ' SimplePickerItemViewModel
+    '
+    ' Represents a single selectable item in the picker menu
+    '
+    ' props:
+    '   @item {object} Item object with { text, key }
+    '   @isSelected {boolean} Whether this item is currently selected
+    '''''''''
+    class SimplePickerItemViewModel extends Rotor.ViewModel
+
+        props = {
+            item: invalid,
+            isSelected: false
+        }
+
+        viewModelState = {
+            isFocused: false
+        }
+
+        override function template() as object
+            fontStyle = UI.typography.labelLarge_aa
+            itemPaddings = [8, 16]
+            itemHeight = fontStyle.size + 2 * itemPaddings[0]
+
+            return {
+                nodeType: "Group",
+                focus: {
+                    onFocusChanged: sub(isFocused as boolean) typecast m as ViewModels.SimplePickerItemViewModel
+                        m.children.itemBg.refresh("fields.color")
+                        m.children.itemLabel.refresh("fields.color")
+                    end sub,
+                    onSelected: sub() typecast m as ViewModels.SimplePickerItemViewModel
+                        ' Notify parent picker of selection
+                        m.getParentViewModel().onItemSelected(m.props.item)
+                    end sub
+                },
+                children: [
+                    {
+                        id: "itemBg",
+                        nodeType: "Rectangle",
+                        fields: {
+                            color: function() as string
+                                if m.viewModelState.isFocused
+                                    return UI.colors.primaryHover
+                                end if
+                                return UI.colors.surface
+                            end function,
+                            width: 300,
+                            height: itemHeight
+                        }
+                    },
+                    {
+                        id: "itemLabel",
+                        nodeType: "Label",
+                        fontStyle: fontStyle,
+                        fields: {
+                            text: m.props.item.text,
+                            color: function() as string
+                                if m.viewModelState.isFocused
+                                    return UI.colors.onPrimary
+                                else if m.props.isSelected
+                                    return UI.colors.secondary
+                                end if
+                                return UI.colors.onSurface
+                            end function,
+                            width: 300 - 2 * itemPaddings[1],
+                            height: itemHeight,
+                            horizAlign: "left",
+                            vertAlign: "center",
+                            translation: [itemPaddings[1], 0]
+                        }
+                    }
+                ]
+            }
+        end function
+
+    end class
+
+end namespace

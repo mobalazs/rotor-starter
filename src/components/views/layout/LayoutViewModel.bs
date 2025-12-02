@@ -12,7 +12,7 @@ namespace ViewModels
 
         props = {
             deeplinkArgs: invalid,
-            activePageId: "" ' It will be set in onCreateView() based on Model.navState.
+            activePageId: "" ' It will be set in onCreateView() based on Interfaces.navState.
         }
 
         ' ========== ViewModel Variables ==========
@@ -32,10 +32,10 @@ namespace ViewModels
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
-                shouldUpdate: function(props, state as Models.NavState)
+                shouldUpdate: function(props, state as Interfaces.NavState)
                     return props.activePageId <> state.activePageId and state.activePageId <> ""
                 end function,
-                mapStateToProps: sub(props, state as Models.NavState)
+                mapStateToProps: sub(props, state as Interfaces.NavState)
                     props.activePageId = state.activePageId
                 end sub,
                 callback: m.onNavigationChanged
@@ -43,7 +43,7 @@ namespace ViewModels
 
             ' Listen for exit app flag
             m.navDispatcher.addListener({
-                shouldUpdate: function(props, state as Models.NavState)
+                shouldUpdate: function(props, state as Interfaces.NavState)
                     return state.shouldExitApp = true
                 end function,
                 callback: m.onExitApp
@@ -95,7 +95,8 @@ namespace ViewModels
                                     return `${m.props.activePageId}`
                                 end function,
                                 ' Focus target to menu if user click "left" on RC
-                                left: `menu`
+                                left: `menu`,
+                                back: `menu`
                             }
                         }
                     },
@@ -141,7 +142,7 @@ namespace ViewModels
         private sub startPageTransition()
             pageContainer = m.getWidget("pageContainer")
             pagesToRender = []
-            navState = m.navDispatcher.getState() as Models.NavState
+            navState = m.navDispatcher.getState() as Interfaces.NavState
             shouldDiscardInactivePage = pageContainer.children[m.viewModelState.currentPageId] <> invalid
 
             ' Render new active page

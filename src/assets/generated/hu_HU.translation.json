@@ -11,6 +11,12 @@
   "buttons": {
     "clickMe": "Kattints Ide"
   },
+  "picker": {
+    "selectPlaceholder": "Válassz..."
+  },
+  "settings": {
+    "language": "Nyelv"
+  },
   "menu": {
     "home": "Kezdőlap",
     "movies": "Filmek",

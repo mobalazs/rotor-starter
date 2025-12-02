@@ -1,13 +1,14 @@
 import "BasePage.bs"
-import "../buttons/BaseButton.bs"
+import "../pickers/SettingSelectorViewModel.bs"
 
 namespace ViewModels
     class SettingsPage extends ViewModels.BasePage
 
         override function template() as object
             return {
-                nodeType: "Group",
+                nodeType: "LayoutGroup",
                 fields: {
+                    itemSpacings: [20, 30],
                     translation: m.props.pageTranslation
                 },
                 focus: {
@@ -21,7 +22,6 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.title",
-                            translation: [0, 0],
                             color: UI.colors.onBackground
                         },
                         fontStyle: UI.typography.displaySmall_aa
@@ -31,7 +31,6 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.content",
-                            translation: [0, 80],
                             color: UI.colors.onBackground
                         },
                         fontStyle: UI.typography.bodyLarge_aa
@@ -42,8 +41,25 @@ namespace ViewModels
                         props: {
                             text: "@l10n.buttons.clickMe"
                         },
-                        fields: {
-                            translation: [0, 150]
+                        focus: {
+                            down: "languageSelector"
+                        }
+                    },
+                    {
+                        id: "languageSelector",
+                        viewModel: ViewModels.SettingSelectorViewModel,
+                        props: {
+                            iconUri: UI.components.settings.settingIcon.iconUri.language,
+                            labelText: "@l10n.settings.language",
+                            pickerStack: [
+                                { text: "English", key: "en_US" },
+                                { text: "Español", key: "es_ES" },
+                                { text: "Français", key: "fr_FR" },
+                                { text: "Magyar", key: "hu_HU" },
+                                { text: "Nederlands", key: "nl_NL" }
+                            ] as Interfaces.PickerObject[],
+                            initialKey: m.viewModelState.locale,
+                            includeLocale: true
                         }
                     }
                 ]

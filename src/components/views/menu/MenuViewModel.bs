@@ -6,7 +6,7 @@ namespace ViewModels
     class MenuViewModel extends Rotor.ViewModel
 
         props = {
-            ' Note: This menBar viewModel is compatible with dispatcher based on Models.NavState:
+            ' Note: This menBar viewModel is compatible with dispatcher based on Interfaces.NavState:
             navDispatcherId: "", ' Dispatcher ID for navigation
             activePageId: "" ' Currently active page ID
         }
@@ -26,7 +26,7 @@ namespace ViewModels
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
-                shouldUpdate: function(props, state as Models.NavState)
+                shouldUpdate: function(props, state as Interfaces.NavState)
                     return props.activePageId <> state.activePageId and state.activePageId <> ""
                 end function,
                 mapStateToProps: sub(props, state)
@@ -36,7 +36,7 @@ namespace ViewModels
             })
 
             ' Get initial activePageId
-            navState = m.navDispatcher.getState() as Models.NavState
+            navState = m.navDispatcher.getState() as Interfaces.NavState
             m.props.activePageId = navState.activePageId
         end sub
 
@@ -60,7 +60,7 @@ namespace ViewModels
         end sub
 
         override function template() as object
-            navState = m.navDispatcher.getState() as Models.NavState
+            navState = m.navDispatcher.getState() as Interfaces.NavState
 
             ' Build menu items dynamically
             menuItems = []

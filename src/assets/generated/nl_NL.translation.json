@@ -11,6 +11,12 @@
   "buttons": {
     "clickMe": "Klik Hier"
   },
+  "picker": {
+    "selectPlaceholder": "Selecteer..."
+  },
+  "settings": {
+    "language": "Taal"
+  },
   "menu": {
     "home": "Home",
     "movies": "Films",
