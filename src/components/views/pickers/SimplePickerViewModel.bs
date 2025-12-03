@@ -1,0 +1,247 @@
+import "SimplePickerItemViewModel.bs"
+
+namespace Interfaces
+    interface PickerObject
+        text as string ' current active page ID
+        key as string ' array of page IDs strings
+    end interface
+end namespace
+
+namespace ViewModels
+
+    '''''''''
+    ' SimplePickerViewModel
+    '
+    ' A general-purpose object picker component.
+    ' Displays a button showing the selected item's text.
+    ' When activated, expands to show a menu of selectable items.
+    '
+    ' props:
+    '   @pickerStack {array} Array of objects with { text: string, key: string }
+    '   @initialKey {string} Initial selected item key (optional)
+    '
+    ' Item schema:
+    '   text: Display text shown in UI
+    '   key: Unique identifier for the item
+    '''''''''
+    class SimplePickerViewModel extends Rotor.ViewModel
+
+        props = {
+            pickerStack: [] as Interfaces.PickerObject[], ' Array of selectable items
+            initialKey: "", ' Initial selected key
+            onItemSelected: invalid as function,
+            width: 300
+        }
+
+        viewModelState = {
+            pickerValue: invalid as Interfaces.PickerObject, ' Currently selected item object
+            isExpanded: false, ' Whether menu is open
+            isFocused: false ' Whether picker button has focus
+        }
+
+        onItemSelectedCallback as function
+
+        override sub onCreateView()
+            ' Set initial picker value
+            if m.props.initialKey <> ""
+                for each item in m.props.pickerStack
+                    if item.key = m.props.initialKey
+                        m.viewModelState.pickerValue = item
+                        exit for
+                    end if
+                end for
+            end if
+        end sub
+
+        override function template() as object
+            fontStyle = UI.typography.labelLarge_aa
+            buttonPaddings = [10, 24]
+            buttonHeight = fontStyle.size + 2 * buttonPaddings[0]
+            pickerArrowIconSize = UI.components.settings.pickerArrow.iconSize
+
+            return {
+                nodeType: "Group",
+                focus: {
+                    onFocusChanged: sub(isFocused as boolean) typecast m as ViewModels.SimplePickerViewModel
+                        m.children.pickerButtonBg.refresh("fields.color")
+                        m.children.pickerButtonLabel.refresh("fields.color")
+                        m.children.pickerArrowIcon.refresh("fields.color")
+                    end sub,
+                    onSelected: sub() typecast m as ViewModels.SimplePickerViewModel
+                        m.onPickerSelected()
+                    end sub
+                },
+                children: [
+                    ' Picker button background
+                    {
+                        id: "pickerButtonBg",
+                        nodeType: "Rectangle",
+                        fields: {
+                            color: function() as string
+                                return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surface
+                            end function,
+                            width: m.props.width,
+                            height: buttonHeight
+                        }
+                    },
+                    ' Picker button label
+                    {
+                        id: "pickerButtonLabel",
+                        nodeType: "Label",
+                        fontStyle: fontStyle,
+                        fields: {
+                            text: function() as string
+                                if m.viewModelState.pickerValue <> invalid
+                                    return m.viewModelState.pickerValue.text
+                                end if
+                                return "@l10n.picker.selectPlaceholder"
+                            end function,
+                            color: function() as string
+                                return m.viewModelState.isFocused ? UI.colors.onPrimary : UI.colors.onSurface
+                            end function,
+                            width: m.props.width - 2 * buttonPaddings[1] - pickerArrowIconSize,
+                            height: buttonHeight,
+                            horizAlign: "left",
+                            vertAlign: "center",
+                            translation: [buttonPaddings[1], 0]
+                        }
+                    },
+                    ' Picker arrow icon
+                    {
+                        id: "pickerArrowIcon",
+                        nodeType: "Poster",
+                        fields: {
+                            uri: function() as string
+                                if m.viewModelState.isExpanded
+                                    return UI.components.settings.pickerArrow.iconUri.up
+                                end if
+                                return UI.components.settings.pickerArrow.iconUri.down
+                            end function,
+                            width: pickerArrowIconSize,
+                            height: pickerArrowIconSize,
+                            loadWidth: pickerArrowIconSize,
+                            loadHeight: pickerArrowIconSize,
+                            translation: [m.props.width - buttonPaddings[1] - pickerArrowIconSize, (buttonHeight - pickerArrowIconSize) / 2],
+                            color: function() as string
+                                return m.viewModelState.isFocused ? UI.colors.onPrimary : UI.colors.onSurface
+                            end function
+                        }
+                    },
+                    ' Menu container (items generated dynamically)
+                    {
+                        id: "pickerMenu",
+                        nodeType: "LayoutGroup",
+                        fields: {
+                            translation: [0, buttonHeight + 4] ' 4px spacing below button
+                        },
+                        focus: {
+                            group: {
+                                back: function() as boolean typecast m as Rotor.ViewModel
+                                    m.getViewModel().closeMenu()
+                                    return true ' Consume back event
+                                end function,
+                                up: function() as boolean typecast m as Rotor.ViewModel
+                                    m.getViewModel().closeMenu()
+                                    return true ' Consume back event
+                                end function,
+                                left: true,
+                                right: true,
+                                down: true
+                            }
+                        },
+                        children: [] ' Initially empty, populated on demand
+                    }
+                ]
+            }
+        end function
+
+        '''''''''
+        ' onPickerSelected: Handles picker button press
+        ' Expands the menu and generates item widgets dynamically
+        '''''''''
+        sub onPickerSelected()
+            if m.viewModelState.isExpanded
+                return ' Already expanded
+            end if
+
+            m.viewModelState.isExpanded = true
+
+            ' Update arrow icon
+            m.children.pickerArrowIcon.refresh("fields.uri")
+
+            ' Generate menu items dynamically
+            menuItems = []
+            itemIndex = 0
+            selectedItemIndex = 0
+            for each item in m.props.pickerStack
+                isSelected = (m.viewModelState.pickerValue <> invalid and item.key = m.viewModelState.pickerValue.key)
+
+                ' Track which item should be focused
+                if isSelected
+                    selectedItemIndex = itemIndex
+                end if
+
+                menuItems.push({
+                    id: `pickerItem_${itemIndex}`,
+                    viewModel: ViewModels.SimplePickerItemViewModel,
+                    props: {
+                        item: item,
+                        isSelected: isSelected,
+                        itemIndex: itemIndex
+                    }
+                })
+                itemIndex++
+            end for
+
+            ' Update default focus to selected item
+            m.children.pickerMenu.render({
+                children: menuItems,
+                focus: {
+                    group: {
+                        defaultFocusId: `pickerItem_${selectedItemIndex}`
+                    }
+                }
+            })
+
+            ' Transfer focus to picker menu widget (which has focus group setup)
+            m.children.pickerMenu.plugins.focus.setFocus()
+        end sub
+
+        '''''''''
+        ' onSelect: Handles item selection from menu
+        ' @param {object} selectedItem - The selected item object
+        '''''''''
+        sub onSelect(selectedItem as object)
+            m.viewModelState.pickerValue = selectedItem
+            m.closeMenu()
+            ' Call on self scope
+            m.onItemSelectedCallback = m.props.onItemSelected
+            m.onItemSelectedCallback(selectedItem)
+        end sub
+
+        '''''''''
+        ' closeMenu: Closes the menu and returns focus to picker button
+        '''''''''
+        sub closeMenu()
+            if not m.viewModelState.isExpanded
+                return
+            end if
+
+            m.viewModelState.isExpanded = false
+
+            ' Update arrow icon
+            m.children.pickerArrowIcon.refresh("fields.uri")
+
+            ' Clear menu items
+            m.children.pickerMenu.erase(m.children.pickerMenu.children.keys())
+
+            ' Update picker button text
+            m.children.pickerButtonLabel.refresh("fields.text")
+
+            ' Return focus to picker itself
+            m.plugins.focus.setFocus()
+        end sub
+
+    end class
+
+end namespace

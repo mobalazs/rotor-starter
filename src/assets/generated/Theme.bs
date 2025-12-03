@@ -118,6 +118,21 @@ namespace components
 			end enum
 		end namespace
 	end namespace
+	namespace settings
+		namespace settingIcon
+			const iconSize = 32
+			enum iconUri
+				language = "pkg:/assets/images/settingIcons/language_32dp_FFFFFF.png"
+			end enum
+		end namespace
+		namespace pickerArrow
+			const iconSize = 24
+			enum iconUri
+				down = "pkg:/assets/images/settingIcons/arrow_drop_down_24dp_FFFFFF.png"
+				up = "pkg:/assets/images/settingIcons/arrow_drop_up_24dp_FFFFFF.png"
+			end enum
+		end namespace
+	end namespace
 end namespace
 end namespace
 

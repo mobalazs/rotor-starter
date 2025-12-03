@@ -34,6 +34,10 @@ import "pkg:/components/views/menu/MenuItemViewModel.bs"
 ' Buttons
 import "pkg:/components/views/buttons/BaseButton.bs"
 
+' Pickers
+import "pkg:/components/views/pickers/SimplePickerViewModel.bs"
+
+
 
 sub init()
     ' Setup observers for launch and input events
@@ -77,10 +81,7 @@ sub initApplication(deeplinkArgs = invalid as object)
     })
 
     ' Load English translations synchronously from JSON file
-    translationJson = ReadAsciiFile("pkg:/assets/generated/en_US.translation.json")
-    translationData = ParseJson(translationJson)
-    m.fw.i18nService.setL10n(translationData)
-    m.fw.i18nService.setLocale("en_US")
+    loadLanguage("en_US")
 
     ' Create Navigation dispatcher in render thread (UI-specific state)
     navModel = new Models.NavigationModel()
@@ -108,6 +109,14 @@ sub performDeepLinking(deeplinkArgs)
     })
 end sub
 
+sub loadLanguage(locale as string)
+    ' Load English translations synchronously from JSON file
+    translationJson = ReadAsciiFile(`pkg:/assets/generated/${locale}.translation.json`)
+    translationData = ParseJson(translationJson)
+    m.fw.i18nService.setL10n(translationData)
+    m.fw.i18nService.setLocale(locale)
+end sub
+
 ' Native key handler remains functional; Rotor's focus plugin can work in hybrid mode with native focus.
 function onKeyEvent(key as string, press as boolean) as boolean
     result = m.fw.plugins.focus.onKeyEventHandler(key, press)
@@ -122,3 +131,6 @@ function onKeyEvent(key as string, press as boolean) as boolean
     end if
     return false
 end function
+
+
+

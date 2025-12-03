@@ -1,0 +1,92 @@
+import "SimplePickerViewModel.bs"
+
+namespace ViewModels
+
+    '''''''''
+    ' SettingSelectorViewModel
+    '
+    ' A setting selector component with icon, label, and picker.
+    ' Displays a horizontal layout with icon and label, then a picker below.
+    '
+    ' props:
+    '   @iconUri {string} Icon URI for the setting
+    '   @labelText {string} Label text for the setting
+    '   @pickerStack {array} Array of picker options
+    '   @initialKey {string} Initial selected key (optional)
+    '   @includeLocale {boolean} Whether to include locale in picker (optional)
+    '''''''''
+    class SettingSelectorViewModel extends Rotor.ViewModel
+
+        props = {
+            iconUri: "",
+            labelText: "",
+            initialKey: "",
+            pickerStack: [] as Interfaces.PickerObject[],
+            onItemSelected: invalid as function,
+            includeLocale: false,
+            labelBtmMargin: 8, ' Spacing between header and picker
+            iconRightMargin: 12,
+            width: 300
+        }
+
+        override function template() as object
+            iconSize = UI.components.settings.settingIcon.iconSize
+
+            return {
+                nodeType: "Group",
+                children: [
+                    ' Horizontal layout for icon and label
+                    {
+                        id: "settingHeader",
+                        nodeType: "LayoutGroup",
+                        fields: {
+                            layoutDirection: "horiz",
+                            itemSpacings: [m.props.iconRightMargin]
+                        },
+                        children: [
+                            {
+                                id: "settingIcon",
+                                nodeType: "Poster",
+                                fields: {
+                                    uri: m.props.iconUri,
+                                    width: iconSize,
+                                    height: iconSize,
+                                    loadWidth: iconSize,
+                                    loadHeight: iconSize
+                                }
+                            },
+                            {
+                                id: "settingLabel",
+                                nodeType: "Label",
+                                fontStyle: UI.typography.bodyLarge_aa,
+                                fields: {
+                                    text: m.props.labelText,
+                                    color: UI.colors.onBackground,
+                                    vertAlign: "center",
+                                    height: iconSize,
+                                    width: m.props.width - iconSize - m.props.iconRightMargin
+                                }
+                            }
+                        ]
+                    },
+                    ' Picker below the header
+                    {
+                        id: "settingPicker",
+                        viewModel: ViewModels.SimplePickerViewModel,
+                        props: {
+                            pickerStack: m.props.pickerStack,
+                            initialKey: m.props.initialKey,
+                            onItemSelected: m.props.onItemSelected,
+                            width: m.props.width
+                        },
+                        fields: {
+                            translation: [0, iconSize + m.props.labelBtmMargin]
+                        }
+                    }
+                ]
+            }
+        end function
+
+    end class
+
+end namespace

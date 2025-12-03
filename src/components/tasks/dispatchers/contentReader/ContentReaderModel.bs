@@ -1,10 +1,13 @@
-namespace Models
-
+namespace Interfaces
     interface ContentReaderState
         listContentNode as roSGNodeNode[]
         statusCode as integer
         ok as boolean
     end interface
+
+end namespace
+
+namespace Models
 
     class ContentReaderModel extends Rotor.Model
 
@@ -12,7 +15,7 @@ namespace Models
             listContentNode: [],
             statusCode: 0,
             ok: false
-        } as ContentReaderState
+        } as Interfaces.ContentReaderState
 
     end class
 

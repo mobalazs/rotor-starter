@@ -11,6 +11,12 @@
   "buttons": {
     "clickMe": "Haz Clic"
   },
+  "picker": {
+    "selectPlaceholder": "Seleccionar..."
+  },
+  "settings": {
+    "language": "Idioma"
+  },
   "menu": {
     "home": "Inicio",
     "movies": "Películas",

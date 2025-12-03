@@ -1,13 +1,14 @@
 import "BasePage.bs"
-import "../buttons/BaseButton.bs"
+import "../pickers/SettingSelectorViewModel.bs"
 
 namespace ViewModels
     class SettingsPage extends ViewModels.BasePage
 
         override function template() as object
             return {
-                nodeType: "Group",
+                nodeType: "LayoutGroup",
                 fields: {
+                    itemSpacings: [20, 30],
                     translation: m.props.pageTranslation
                 },
                 focus: {
@@ -21,7 +22,6 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.title",
-                            translation: [0, 0],
                             color: UI.colors.onBackground
                         },
                         fontStyle: UI.typography.displaySmall_aa
@@ -31,7 +31,6 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.content",
-                            translation: [0, 80],
                             color: UI.colors.onBackground
                         },
                         fontStyle: UI.typography.bodyLarge_aa
@@ -42,8 +41,20 @@ namespace ViewModels
                         props: {
                             text: "@l10n.buttons.clickMe"
                         },
-                        fields: {
-                            translation: [0, 150]
+                        focus: {
+                            down: "languageSelector"
+                        }
+                    },
+                    {
+                        id: "languageSelector",
+                        viewModel: ViewModels.SettingSelectorViewModel,
+                        props: {
+                            iconUri: UI.components.settings.settingIcon.iconUri.language,
+                            labelText: "@l10n.settings.language",
+                            pickerStack: m.getViewModel().getMappedLanguages(),
+                            initialKey: m.getLocale(),
+                            width: 300,
+                            onItemSelected: m.getViewModel().onLanguageSelected
                         }
                     }
                 ]
@@ -57,5 +68,30 @@ namespace ViewModels
         override sub onDestroyView()
             Utils.BasicLogger("[SettingsPage] Destroyed")
         end sub
+
+        private function getMappedLanguages() as Interfaces.PickerObject[]
+            mappedLanguages = [] as Interfaces.PickerObject[]
+            languages = m.viewModelState.l10n.languages
+            for each key in languages
+                mappedLanguages.push({
+                    key: key,
+                    text: languages[key]
+                })
+            end for
+            mappedLanguages.SortBy("key")
+            return mappedLanguages
+        end function
+
+        private sub onLanguageSelected(selectedItem as Interfaces.PickerObject)
+            newLocale = selectedItem.key
+            loadLanguage(newLocale)
+
+            subTree = m.getSubtreeClone("./*", ["fields.text"])
+
+            root = m.getRootWidget()
+            root.children.appContainer.render(subTree)
+
+        end sub
+
     end class
 end namespace

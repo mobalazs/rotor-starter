@@ -1,5 +1,4 @@
-namespace Models
-
+namespace Interfaces
     interface pageSettings
         viewModel as function ' Rotor.ViewModel
         iconUri as string[] ' array of icon uris
@@ -12,6 +11,11 @@ namespace Models
         pageSettings as pageSettings[] ' associative array of page settings
         shouldExitApp as boolean ' flag to trigger app exit
     end interface
+
+end namespace
+
+namespace Models
+
 
     class NavigationModel extends Rotor.Model
         state = {
@@ -48,6 +52,6 @@ namespace Models
                 ' class: ViewModels.Dialog
             }
 
-        } as NavState
+        } as Interfaces.NavState
     end class
 end namespace
