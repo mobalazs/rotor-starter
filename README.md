@@ -356,22 +356,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🙏 Acknowledgments
-
-- **[Rotor Framework](https://github.com/mobalazs/rotor-framework)** by [@mobalazs](https://github.com/mobalazs)
-- **[BrighterScript](https://github.com/rokucommunity/brighterscript)** - Enhanced BrightScript compiler
-- **[roku-requests](https://github.com/rolandoislas/roku-requests)** - HTTP request library
-
----
-
-## 📞 Support
-
-- **Rotor Framework Issues**: [GitHub Issues](https://github.com/mobalazs/rotor-framework/issues)
-- **Starter Template Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/rotor-starter/issues)
-- **Roku Developer Documentation**: [developer.roku.com](https://developer.roku.com)
-
----
-
 ## 🔧 Requirements
 
 -   Roku SceneGraph (firmware 10.5+ recommended)
