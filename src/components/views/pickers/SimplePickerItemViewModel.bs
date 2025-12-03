@@ -34,7 +34,7 @@ namespace ViewModels
                     end sub,
                     onSelected: sub() typecast m as ViewModels.SimplePickerItemViewModel
                         ' Notify parent picker of selection
-                        m.getParentViewModel().onItemSelected(m.props.item)
+                        m.getParentViewModel().onSelect(m.props.item)
                     end sub
                 },
                 children: [

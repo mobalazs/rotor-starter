@@ -183,6 +183,13 @@ module.exports = function () {
 					'pkg:/assets/images/settingIcons/language_32dp_FFFFFF.png',
 			},
 		},
+		pickerArrow: {
+			iconSize: 24,
+			iconUri: {
+				down: 'pkg:/assets/images/settingIcons/arrow_drop_down_24dp_FFFFFF.png',
+				up: 'pkg:/assets/images/settingIcons/arrow_drop_up_24dp_FFFFFF.png',
+			},
+		},
 	};
 
 	return {

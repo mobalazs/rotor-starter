@@ -20,8 +20,9 @@ namespace ViewModels
         props = {
             iconUri: "",
             labelText: "",
-            pickerStack: [] as Interfaces.PickerObject[],
             initialKey: "",
+            pickerStack: [] as Interfaces.PickerObject[],
+            onItemSelected: invalid as function,
             includeLocale: false,
             labelBtmMargin: 8, ' Spacing between header and picker
             iconRightMargin: 12,
@@ -75,6 +76,7 @@ namespace ViewModels
                         props: {
                             pickerStack: m.props.pickerStack,
                             initialKey: m.props.initialKey,
+                            onItemSelected: m.props.onItemSelected,
                             width: m.props.width
                         },
                         fields: {

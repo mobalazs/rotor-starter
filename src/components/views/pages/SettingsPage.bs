@@ -48,15 +48,13 @@ namespace ViewModels
                     {
                         id: "languageSelector",
                         viewModel: ViewModels.SettingSelectorViewModel,
-                        i18n: {
-                            includeLocale: true
-                        },
                         props: {
                             iconUri: UI.components.settings.settingIcon.iconUri.language,
                             labelText: "@l10n.settings.language",
                             pickerStack: m.getViewModel().getMappedLanguages(),
                             initialKey: m.getLocale(),
-                            width: 300
+                            width: 300,
+                            onItemSelected: m.getViewModel().onLanguageSelected
                         }
                     }
                 ]
@@ -83,6 +81,15 @@ namespace ViewModels
             mappedLanguages.SortBy("key")
             return mappedLanguages
         end function
+
+        private sub onLanguageSelected(selectedItem as Interfaces.PickerObject)
+            newLocale = selectedItem.key
+            loadLanguage(newLocale)
+
+            ' subtree = m.getSubtreeClone("", "fields.text")
+
+
+        end sub
 
     end class
 end namespace
