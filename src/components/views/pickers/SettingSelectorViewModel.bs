@@ -22,20 +22,17 @@ namespace ViewModels
             labelText: "",
             pickerStack: [] as Interfaces.PickerObject[],
             initialKey: "",
-            includeLocale: false
+            includeLocale: false,
+            labelBtmMargin: 8, ' Spacing between header and picker
+            iconRightMargin: 12,
+            width: 300
         }
 
         override function template() as object
             iconSize = UI.components.settings.settingIcon.iconSize
-            spacing = 8 ' Spacing between header and picker
 
             return {
                 nodeType: "Group",
-                ' focus: {
-                '     onFocus: sub() ' delegate focus to the wrapped selector
-                '         m.children.settingPicker.plugins.focus.setFocus()
-                '     end sub
-                ' },
                 children: [
                     ' Horizontal layout for icon and label
                     {
@@ -43,7 +40,7 @@ namespace ViewModels
                         nodeType: "LayoutGroup",
                         fields: {
                             layoutDirection: "horiz",
-                            itemSpacings: [12]
+                            itemSpacings: [m.props.iconRightMargin]
                         },
                         children: [
                             {
@@ -65,7 +62,8 @@ namespace ViewModels
                                     text: m.props.labelText,
                                     color: UI.colors.onBackground,
                                     vertAlign: "center",
-                                    height: iconSize
+                                    height: iconSize,
+                                    width: m.props.width - iconSize - m.props.iconRightMargin
                                 }
                             }
                         ]
@@ -74,15 +72,13 @@ namespace ViewModels
                     {
                         id: "settingPicker",
                         viewModel: ViewModels.SimplePickerViewModel,
-                        i18n: {
-                            includeLocale: m.props.includeLocale
-                        },
                         props: {
                             pickerStack: m.props.pickerStack,
-                            initialKey: m.props.initialKey
+                            initialKey: m.props.initialKey,
+                            width: m.props.width
                         },
                         fields: {
-                            translation: [0, iconSize + spacing]
+                            translation: [0, iconSize + m.props.labelBtmMargin]
                         }
                     }
                 ]

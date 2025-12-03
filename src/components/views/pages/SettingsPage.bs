@@ -48,18 +48,15 @@ namespace ViewModels
                     {
                         id: "languageSelector",
                         viewModel: ViewModels.SettingSelectorViewModel,
+                        i18n: {
+                            includeLocale: true
+                        },
                         props: {
                             iconUri: UI.components.settings.settingIcon.iconUri.language,
                             labelText: "@l10n.settings.language",
-                            pickerStack: [
-                                { text: "English", key: "en_US" },
-                                { text: "Español", key: "es_ES" },
-                                { text: "Français", key: "fr_FR" },
-                                { text: "Magyar", key: "hu_HU" },
-                                { text: "Nederlands", key: "nl_NL" }
-                            ] as Interfaces.PickerObject[],
-                            initialKey: m.viewModelState.locale,
-                            includeLocale: true
+                            pickerStack: m.getViewModel().getMappedLanguages(),
+                            initialKey: m.getLocale(),
+                            width: 300
                         }
                     }
                 ]
@@ -73,5 +70,19 @@ namespace ViewModels
         override sub onDestroyView()
             Utils.BasicLogger("[SettingsPage] Destroyed")
         end sub
+
+        private function getMappedLanguages() as Interfaces.PickerObject[]
+            mappedLanguages = [] as Interfaces.PickerObject[]
+            languages = m.viewModelState.l10n.languages
+            for each key in languages
+                mappedLanguages.push({
+                    key: key,
+                    text: languages[key]
+                })
+            end for
+            mappedLanguages.SortBy("key")
+            return mappedLanguages
+        end function
+
     end class
 end namespace

@@ -28,7 +28,8 @@ namespace ViewModels
 
         props = {
             pickerStack: [] as Interfaces.PickerObject[], ' Array of selectable items
-            initialKey: "" ' Initial selected key
+            initialKey: "", ' Initial selected key
+            width: 300
         }
 
         viewModelState = {
@@ -47,12 +48,6 @@ namespace ViewModels
                     end if
                 end for
             end if
-
-            ' If no initial value set, default to first item
-            ' if m.viewModelState.pickerValue = invalid and m.props.pickerStack.count() > 0
-            '     m.viewModelState.pickerValue = m.props.pickerStack[0]
-            '     m.props.initialKey = m.props.pickerStack[0].key
-            ' end if
         end sub
 
         override function template() as object
@@ -80,7 +75,7 @@ namespace ViewModels
                             color: function() as string
                                 return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surface
                             end function,
-                            width: 300, ' Fixed width for now
+                            width: m.props.width, ' Fixed width for now
                             height: buttonHeight
                         }
                     },
@@ -99,7 +94,7 @@ namespace ViewModels
                             color: function() as string
                                 return m.viewModelState.isFocused ? UI.colors.onPrimary : UI.colors.onSurface
                             end function,
-                            width: 300 - 2 * buttonPaddings[1],
+                            width: m.props.width - 2 * buttonPaddings[1],
                             height: buttonHeight,
                             horizAlign: "left",
                             vertAlign: "center",
