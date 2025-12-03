@@ -20,7 +20,7 @@ namespace Models
     class NavigationModel extends Rotor.Model
         state = {
 
-            activePageId: "settings",
+            activePageId: "home",
 
             shouldExitApp: false,
 

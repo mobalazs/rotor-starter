@@ -86,8 +86,10 @@ namespace ViewModels
             newLocale = selectedItem.key
             loadLanguage(newLocale)
 
-            ' subtree = m.getSubtreeClone("", "fields.text")
+            subTree = m.getSubtreeClone("./*", ["fields.text"])
 
+            root = m.getRootWidget()
+            root.children.appContainer.render(subTree)
 
         end sub
 

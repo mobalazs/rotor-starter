@@ -35,9 +35,9 @@ namespace ViewModels
 
                 ' Auto width based on text
                 textWidth = labelNode.localBoundingRect().width
-
                 ' Update widths
                 buttonBgNode.width = textWidth + 2 * m.props.paddings[1]
+
                 ' Ensure proper horizontal padding from left (update safe solution)
                 labelNode.translation = [m.props.paddings[1], 0]
             end sub
@@ -71,7 +71,6 @@ namespace ViewModels
                             color: function() as string
                                 return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surface
                             end function,
-                            width: 0,
                             height: height
                         }
                     },
