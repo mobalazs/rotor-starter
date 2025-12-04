@@ -339,33 +339,8 @@ de_DE: {
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome! If you have improvements or bug fixes:
-
-1. Fork this repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🔧 Requirements
-
--   Roku SceneGraph (firmware 10.5+ recommended)
--   BrighterScript V1
-
----
-
-## 📄 License
-
-Rotor Framework™ is licensed under the [MIT License](LICENSE).
-
+This project is licensed under the MIT License — see the [LICENSE](LICENSE)￼ file for details.
 © 2025 Balázs Molnár — Rotor Framework™
+
