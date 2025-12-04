@@ -207,7 +207,7 @@ UI.typography.titleLarge_aa ' Access typography
 
 1. **HomePage** - Demonstrates hybrid architecture with native RowList
 2. **MoviesPage** - Example content browsing page
-3. **SettingsPage** - Example settings interface
+3. **SettingsPage** - Example settings interface with language picker
 
 ### Navigation System
 
@@ -219,6 +219,7 @@ UI.typography.titleLarge_aa ' Access typography
 
 - **BaseButton** - Reusable button with focus states and auto-sizing
 - **BasePage** - Base class for all pages with transition support
+- **SettingSelectorViewModel** - Reusable setting picker with icon and label (used for language selection)
 
 ### Background Tasks
 
