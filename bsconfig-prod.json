@@ -22,7 +22,7 @@
 
     "plugins": [
         "@rokucommunity/bslint",
-        "./scripts/manifestPlugin.ts"
+        "./scripts/manifestPlugin.js"
     ]
 
 }

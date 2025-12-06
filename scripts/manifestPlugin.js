@@ -1,10 +1,12 @@
-import * as fs from 'fs';
-import * as path from 'path';
+const fs = require('fs');
+const path = require('path');
 
-export class ManifestPlugin {
-    public name = 'ManifestPlugin';
+class ManifestPlugin {
+    constructor() {
+        this.name = 'ManifestPlugin';
+    }
 
-    afterProgramTranspile(program: any) {
+    afterProgramTranspile(program) {
         try {
             // Read config.json
             const configPath = path.join(process.cwd(), 'config.json');
@@ -53,6 +55,6 @@ export class ManifestPlugin {
     }
 }
 
-export default function() {
+module.exports = function() {
     return new ManifestPlugin();
-}
+};
