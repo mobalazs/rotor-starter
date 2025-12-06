@@ -11,7 +11,7 @@
 
 This GitHub template repository provides a complete boilerplate with best practices, example implementations, and a modern development workflow to help you kickstart your Roku app development journey.
 
-![Rotor Starter template preview](docs/images/rotor-starter-template-demo-031225.gif)
+![Rotor Starter template preview](docs/images/rotor-starter-template-demo-061225.gif)
 
 ---
 
@@ -22,7 +22,6 @@ This GitHub template repository provides a complete boilerplate with best practi
 - [Quick Start](#-quick-start)
 - [Project Structure](#-project-structure)
 - [Development Workflow](#️-development-workflow)
-- [What's Included](#-whats-included)
 - [Rotor Framework Documentation](#-rotor-framework-documentation)
 - [Build Commands](#-build-commands)
 - [Customization](#-customization)
@@ -59,8 +58,9 @@ This starter template includes everything you need to build professional Roku ap
 - ✅ **Build System** - Automated theme and translation generation
 - ✅ **Page Transitions** - Smooth page transitions with fade animations
 - ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
-- ✅ **Content Loader** - Example async content loading pattern
-- ✅ **Request Task** - Dispatcher compatible request task
+- ✅ **TMDB Integration** - Real movie data from The Movie Database API with localization
+- ✅ **Parallel Request Pool** - Async content loading with parallel roUrlTransfer requests example
+- ✅ **MVI Architecture** - Cross-thread dispatcher pattern with reducer and middleware support
 - ✅ **App Launch Beacon** - Implemented AppLaunchComplete beacon on show content
 - ✅ **Deeplink Flow** - Prepared deeplink handling for launch and input events
 - ✅ **Hybrid Architecture Demo** - Shows native RowList integration with Rotor ViewModels
@@ -95,6 +95,45 @@ ropm install
 
 ```
 
+### Configuration
+
+Before your first build, set up your TMDB API configuration:
+
+#### 1. Get a TMDB API Key
+
+The starter template uses **The Movie Database (TMDB)** API to display real movie content on the home page. To use this feature, you need a free API key:
+
+1. **Create a TMDB account** at [https://www.themoviedb.org/signup](https://www.themoviedb.org/signup)
+2. **Verify your email** and log in
+3. **Navigate to API settings** at [https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api)
+4. **Request an API key**:
+   - Click "Request an API Key"
+   - Choose "Developer" (for non-commercial use) or "Commercial" (for commercial projects)
+   - Fill out the application form
+   - Accept the Terms of Use
+5. **Copy your API Key (v3 auth)**
+
+#### 2. Configure the Project
+
+```bash
+# Copy the example config file
+cp config.example.json config.json
+```
+
+Edit `config.json` and add your TMDB API key:
+
+```json
+{
+  "TMDB_API_KEY": "your_api_key_here"
+}
+```
+
+> **Important Notes:**
+> - The `config.json` file is gitignored to keep your API keys secure
+> - The API key will be automatically injected into the app manifest during build
+> - Movie data is fetched in the user's selected language with English fallback
+> - By using TMDB API, you agree to comply with [TMDB's Terms of Use](https://www.themoviedb.org/terms-of-use)
+
 ### First Build
 
 ```bash
@@ -104,52 +143,9 @@ npm run build-dev
 This will:
 1. Generate theme constants from `assetsJs/theme.js`
 2. Generate translations from `assetsJs/translation.js`
-3. Compile BrighterScript to BrightScript
-4. Create a deployable package in `/out`
-
----
-
-## 📁 Project Structure
-
-```
-rotor-starter/
-├── src/
-│   ├── components/
-│   │   ├── scene/              # Main scene components
-│   │   │   ├── MainScene.bs
-│   │   │   └── MainScene.xml
-│   │   ├── views/
-│   │   │   ├── pages/          # Page ViewModels
-│   │   │   │   ├── HomePage.bs
-│   │   │   │   ├── MoviesPage.bs
-│   │   │   │   └── SettingsPage.bs
-│   │   │   ├── layout/         # Layout ViewModel
-│   │   │   │   └── LayoutViewModel.bs
-│   │   │   ├── menu/           # Navigation menu
-│   │   │   │   └── MenuViewModel.bs
-│   │   │   └── buttons/        # Reusable button components
-│   │   │       └── BaseButton.bs
-│   │   └── tasks/              # Background tasks
-│   │       ├── appTask/        # Main application task
-│   │       └── contentReader/  # Content loading example
-│   ├── assets/
-│   │   ├── mockups/            # Mock data for development
-│   │   └── generated/          # Auto-generated constants
-│   └── source/
-│       ├── Main.brs            # App entry point
-│       └── roku_modules/       # Rotor framework modules
-├── assetsJs/
-│   ├── theme.js                # Material Design theme config
-│   └── translation.js          # i18n translations
-├── scripts/
-│   └── generateBsConstFromJs.ts # Build-time code generation
-├── .claude/
-│   ├── CLAUDE.md               # AI assistant instructions
-│   └── settings.local.json     # Claude Code settings
-├── bsconfig.json               # BrighterScript configuration
-├── package.json
-└── README.md
-```
+3. Inject API keys from `config.json` into the manifest
+4. Compile BrighterScript to BrightScript
+5. Create a deployable package in `/out`
 
 ---
 
@@ -201,39 +197,6 @@ UI.typography.titleLarge_aa ' Access typography
 
 ---
 
-## 📦 What's Included
-
-### Example Pages
-
-1. **HomePage** - Demonstrates hybrid architecture with native RowList
-2. **MoviesPage** - Example content browsing page
-3. **SettingsPage** - Example settings interface with language picker
-
-### Navigation System
-
-- **MenuViewModel** - Vertical icon-based navigation menu
-- **LayoutViewModel** - Page transition controller with fade animations
-- **Navigation State Management** - Global dispatcher-based routing
-
-### Components
-
-- **BaseButton** - Reusable button with focus states and auto-sizing
-- **BasePage** - Base class for all pages with transition support
-- **SettingSelectorViewModel** - Reusable setting picker with icon and label (used for language selection)
-
-### Background Tasks
-
-- **AppTask** - Main application task with multiple dispatchers
-- **ContentReader** - Example async content loading with RequestTask
-
-### Styling System
-
-- **Material Design Colors** - Primary, secondary, background, surface colors with variants
-- **Typography Scale** - Display, headline, title, body, and label styles
-- **Motion System** - Duration and easing configurations
-
----
-
 ## 📚 Rotor Framework Documentation
 
 This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framework for Roku applications.
@@ -241,34 +204,6 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 ### Official Documentation
 
 📖 **[Full Framework Documentation](https://github.com/mobalazs/rotor-framework)**
-
-### Key Concepts
-
-- **MVI Architecture** - Model-View-Intent pattern with cross-thread state management
-- **ViewBuilder** - Declarative UI construction without XML
-- **Dispatcher & Reducer** - Predictable state management
-- **Plugins** - Extensible system (Fields, Focus, Observer, FontStyle)
-
-### Quick Links
-
-- [Framework Overview & Quick Start](https://github.com/mobalazs/rotor-framework/blob/main/docs/readme.md)
-- [Framework Initialization](https://github.com/mobalazs/rotor-framework/blob/main/docs/framework-initialization.md)
-- [Cross-Thread MVI Architecture](https://github.com/mobalazs/rotor-framework/blob/main/docs/cross-thread-mvi.md)
-- [ViewBuilder Overview](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-overview.md)
-- [Widget Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-widget-reference.md)
-- [ViewModel Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-viewmodel-reference.md)
-
----
-
-## 🔧 Build Commands
-
-| Command | Description |
-|---------|-------------|
-| `npm install` | Install dependencies |
-| `npm run build-dev` | Development build with source maps |
-| `npm run build-prod` | Production build (optimized) |
-| `npm run lint` | Lint BrighterScript code |
-| `npm run sca` | Build and run Static Channel Analysis |
 
 ---
 

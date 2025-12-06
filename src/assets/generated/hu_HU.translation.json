@@ -36,5 +36,12 @@
       "title": "Beállítások Oldal",
       "content": "Állítsa be az alkalmazás beállításait."
     }
+  },
+  "categories": {
+    "popularMovies": "Népszerű Filmek",
+    "topRated": "Legjobb Értékelésűek",
+    "nowPlaying": "Most a Mozikban",
+    "upcoming": "Hamarosan",
+    "trendingThisWeek": "A Hét Slágerei"
   }
 }

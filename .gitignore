@@ -9,6 +9,9 @@ node_modules
 src/source/roku_modules
 src/components/roku_modules
 
+# Source specific files
+config.json
+
 # IDE specific
 .vscode/*
 !.vscode/tasks.json

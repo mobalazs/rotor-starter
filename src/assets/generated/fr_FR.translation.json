@@ -36,5 +36,12 @@
       "title": "Page des Paramètres",
       "content": "Ajustez les paramètres de votre application."
     }
+  },
+  "categories": {
+    "popularMovies": "Films Populaires",
+    "topRated": "Mieux Notés",
+    "nowPlaying": "À l'Affiche",
+    "upcoming": "À Venir",
+    "trendingThisWeek": "Tendances de la Semaine"
   }
 }

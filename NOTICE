@@ -24,21 +24,6 @@ https://fonts.google.com/icons
 No modifications have been made to these icons.
 
 ---------------------------------------------------------------------
-roku-requests (RokuCommunity)
-https://github.com/rokucommunity/roku-requests
-
-Licensed under the MIT License:
-Copyright (c) RokuCommunity
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software…
-
-No modifications have been made to this library.
-
----------------------------------------------------------------------
 roku-animate (original work by HaystackTV Inc.)
 https://github.com/haystacknews/roku-animate
 
@@ -53,14 +38,19 @@ https://github.com/mobalazs/roku-animate-patched/tree/patches
 The original MIT license terms apply to both the original and modified versions.
 
 ---------------------------------------------------------------------
-Picsum Photos (Lorem Picsum)
-https://picsum.photos/
+The Movie Database (TMDB) API
 
-Free stock photos used in test/mockup data.
-https://unsplash.com/license
+This product uses the TMDB API but is not endorsed or certified by TMDB.
 
-The images are provided by Unsplash and Lorem Picsum service.
-No modifications have been made to these images.
-Images are used for development and testing purposes only.
+Terms of Use: https://www.themoviedb.org/terms-of-use
+API Terms: https://www.themoviedb.org/documentation/api/terms-of-use
+
+TMDB API Key Required:
+To use this application, you must obtain your own TMDB API key:
+1. Create an account at https://www.themoviedb.org/
+2. Request an API key at https://www.themoviedb.org/settings/api
+3. Add your API key to config.json (see config.example.json)
+
+By using the TMDB API, you agree to comply with TMDB's Terms of Use.
 
 ---------------------------------------------------------------------

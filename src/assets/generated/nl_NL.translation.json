@@ -36,5 +36,12 @@
       "title": "Instellingenpagina",
       "content": "Pas uw applicatie-instellingen aan."
     }
+  },
+  "categories": {
+    "popularMovies": "Populaire Films",
+    "topRated": "Best Beoordeeld",
+    "nowPlaying": "Nu in de Bioscoop",
+    "upcoming": "Binnenkort",
+    "trendingThisWeek": "Trending deze Week"
   }
 }

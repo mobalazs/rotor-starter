@@ -91,6 +91,14 @@ namespace ViewModels
             root = m.getRootWidget()
             root.children.appContainer.render(subTree)
 
+            ' Notify Home ContentReader to reload content in new locale
+            m.dispatchTo("contentReaderDispatcher", {
+                type: IntentTypes.ContentReader.SET_LOCALE,
+                payload: {
+                    locale: newLocale
+                }
+            })
+
         end sub
 
     end class

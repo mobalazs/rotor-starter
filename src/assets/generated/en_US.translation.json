@@ -36,5 +36,12 @@
       "title": "Settings Page",
       "content": "Adjust your application settings."
     }
+  },
+  "categories": {
+    "popularMovies": "Popular Movies",
+    "topRated": "Top Rated",
+    "nowPlaying": "Now Playing",
+    "upcoming": "Upcoming",
+    "trendingThisWeek": "Trending This Week"
   }
 }

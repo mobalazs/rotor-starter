@@ -46,6 +46,13 @@ For more information, contact the author.',
 				content: 'Adjust your application settings.',
 			},
 		},
+		categories: {
+			popularMovies: 'Popular Movies',
+			topRated: 'Top Rated',
+			nowPlaying: 'Now Playing',
+			upcoming: 'Upcoming',
+			trendingThisWeek: 'Trending This Week',
+		},
 	};
 
 	let es_ES = {
@@ -84,6 +91,13 @@ Para más información, contacte al autor.',
 				title: 'Página de Configuración',
 				content: 'Ajusta la configuración de tu aplicación.',
 			},
+		},
+		categories: {
+			popularMovies: 'Películas Populares',
+			topRated: 'Mejor Valoradas',
+			nowPlaying: 'En Cartelera',
+			upcoming: 'Próximamente',
+			trendingThisWeek: 'Tendencias de la Semana',
 		},
 	};
 
@@ -124,6 +138,13 @@ Pour plus d'informations, contactez l'auteur.",
 				content: 'Ajustez les paramètres de votre application.',
 			},
 		},
+		categories: {
+			popularMovies: 'Films Populaires',
+			topRated: 'Mieux Notés',
+			nowPlaying: 'À l\'Affiche',
+			upcoming: 'À Venir',
+			trendingThisWeek: 'Tendances de la Semaine',
+		},
 	};
 
 	let hu_HU = {
@@ -163,6 +184,13 @@ További információért vegye fel a kapcsolatot a szerzővel.',
 				content: 'Állítsa be az alkalmazás beállításait.',
 			},
 		},
+		categories: {
+			popularMovies: 'Népszerű Filmek',
+			topRated: 'Legjobb Értékelésűek',
+			nowPlaying: 'Most a Mozikban',
+			upcoming: 'Hamarosan',
+			trendingThisWeek: 'A Hét Slágerei',
+		},
 	};
 
 	let nl_NL = {
@@ -201,6 +229,13 @@ Voor meer informatie, neem contact op met de auteur.',
 				title: 'Instellingenpagina',
 				content: 'Pas uw applicatie-instellingen aan.',
 			},
+		},
+		categories: {
+			popularMovies: 'Populaire Films',
+			topRated: 'Best Beoordeeld',
+			nowPlaying: 'Nu in de Bioscoop',
+			upcoming: 'Binnenkort',
+			trendingThisWeek: 'Trending deze Week',
 		},
 	};
 

@@ -6,7 +6,10 @@ namespace IntentTypes
     end enum
 
     enum ContentReader
+        SET_LOCALE = "set_locale"
         LOAD_CONTENT = "load_content"
+        FETCH_DONE = "fetch_done"
+        FETCH_ERROR = "fetch_error"
         CONTENT_LOADED = "content_loaded"
         CONTENT_LOAD_ERROR = "content_load_error"
     end enum

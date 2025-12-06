@@ -1,6 +1,7 @@
 namespace Interfaces
     interface ContentReaderState
-        listContentNode as roSGNodeNode[]
+        locale as string
+        rowListContent as roSGNode
         statusCode as integer
         ok as boolean
     end interface
@@ -12,7 +13,8 @@ namespace Models
     class ContentReaderModel extends Rotor.Model
 
         state = {
-            listContentNode: [],
+            locale: "en_US",
+            rowListContent: invalid,
             statusCode: 0,
             ok: false
         } as Interfaces.ContentReaderState

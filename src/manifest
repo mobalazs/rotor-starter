@@ -31,3 +31,6 @@ supports_etc_next=1
 ### Supporting Instant Resume
 sdk_instant_resume=0
 run_as_process=1
+
+### API keys
+tmdb_api_key=
