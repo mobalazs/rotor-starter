@@ -13,7 +13,8 @@
 	"autoImportComponentScript": true,
 
 	"plugins": [
-		"@rokucommunity/bslint"
+		"@rokucommunity/bslint",
+		"./scripts/manifestPlugin.ts"
 	],
 
 	"files": [

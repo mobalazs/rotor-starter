@@ -36,5 +36,12 @@
       "title": "Página de Configuración",
       "content": "Ajusta la configuración de tu aplicación."
     }
+  },
+  "categories": {
+    "popularMovies": "Películas Populares",
+    "topRated": "Mejor Valoradas",
+    "nowPlaying": "En Cartelera",
+    "upcoming": "Próximamente",
+    "trendingThisWeek": "Tendencias de la Semana"
   }
 }

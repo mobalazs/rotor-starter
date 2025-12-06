@@ -6,7 +6,7 @@ namespace ViewModels
         props = {
             isActive: false,
             pageTranslation: [UI.components.menuBar.pageOffset, UI.safeArea.y + UI.components.menuBar.rightPadding],
-            listContentNode: invalid
+            rowListContent: invalid
         }
 
         ' Define Content Reader Dispatcher
@@ -21,7 +21,7 @@ namespace ViewModels
                 },
                 focus: {
                     group: {
-                        defaultFocusId: "contentList"
+                        defaultFocusId: "homeCarousel"
                     }
                 },
                 children: [
@@ -47,11 +47,11 @@ namespace ViewModels
                         fontStyle: UI.typography.bodySmall_aa
                     },
                     {
-                        id: "contentList",
+                        id: "homeCarousel",
                         nodeType: "RowList",
                         fields: {
                             itemComponentName: "SimpleRowListItem",
-                            content: m.props.listContentNode,
+                            content: m.props.rowListContent,
                             itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
                             rowItemSize: [200, 300],
                             rowItemSpacing: [5, 0],
@@ -103,7 +103,11 @@ namespace ViewModels
 
                 ' If state has already been isReady then immediately perform the transition VIA super method
                 crState = m.crDispatcher.getState()
-                if crState.ok = true and m.props.listContentNode <> invalid
+
+                if crState.ok = true
+
+                    ' Set props from dispatcher state
+                    m.props.rowListContent = crState.rowListContent
 
                     m.setContent()
                     super.performPageTransition()
@@ -113,11 +117,11 @@ namespace ViewModels
                     ' Listen to Content Reader Dispatcher
                     m.crDispatcher.addListener({
                         shouldUpdate: function(props, state as Interfaces.ContentReaderState)
-                            return state.ok and state.listContentNode <> invalid
+                            return state.ok and state.rowListContent <> invalid
                         end function,
-                        mapStateToProps: sub(props, state as Interfaces.ContentReaderState)
-                            props.listContentNode = state.listContentNode
-                        end sub,
+                        ' mapStateToProps: sub(props, state as Interfaces.ContentReaderState)
+                        '     props.rowListContent = state.rowListContent
+                        ' end sub,
                         callback: m.onUpdateView,
                         once: true
                     })
@@ -137,7 +141,14 @@ namespace ViewModels
         end sub
 
         sub setContent()
-            m.children.contentList.node.content = m.props.listContentNode
+            ' Translate row titles (not translated by TMDB API)
+            categories = m.viewModelState.l10n.categories
+            for each rowNode in m.props.rowListContent.getChildren(-1, 0)
+                rowNode.title = categories[rowNode.title]
+            end for
+
+            ' Set content to RowList
+            m.children.homeCarousel.node.content = m.props.rowListContent
         end sub
 
     end class

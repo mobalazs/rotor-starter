@@ -29,12 +29,23 @@
 
         </Poster>
 
-        <Label
+        <Rectangle
+            id="labelBackground"
+            translation="[0, 250]"
+            color="0x000000FF"
+            opacity="0.0"
+            width="200"
+            height="50"/>
+
+        <ScrollingLabel
             id="itemLabel"
-            translation="[20, 250]"
+            translation="[10, 258]"
             horizAlign="left"
+            vertAlign="center"
             font = "font:SmallestSystemFont"
-            width="160"
+            maxWidth="180"
+            height="40"
+            repeatCount="-1"
             opacity="0.0"/>
 
     </children>

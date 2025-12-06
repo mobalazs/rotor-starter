@@ -2,6 +2,7 @@ sub init()
     m.itemposter = m.top.findNode("itemPoster")
     m.itemmask = m.top.findNode("itemMask")
     m.itemlabel = m.top.findNode("itemLabel")
+    m.labelBackground = m.top.findNode("labelBackground")
 
     ' Set initial unfocused scale on the whole Group
     m.top.scale = [0.95, 0.95]
@@ -26,4 +27,5 @@ end sub
 sub showrowfocus()
     m.itemmask.opacity = 0.75 - (m.top.rowFocusPercent * 0.75)
     m.itemlabel.opacity = m.top.rowFocusPercent
+    m.labelBackground.opacity = m.top.rowFocusPercent * 0.9
 end sub

@@ -95,6 +95,25 @@ ropm install
 
 ```
 
+### Configuration
+
+Before your first build, set up your configuration:
+
+```bash
+# Copy the example config file
+cp config.example.json config.json
+```
+
+Edit `config.json` and add your API keys:
+
+```json
+{
+  "TMDB_API_KEY": "your_tmdb_api_key_here"
+}
+```
+
+> **Note:** The `config.json` file is gitignored to keep your API keys secure. Get your TMDB API key from [https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api)
+
 ### First Build
 
 ```bash
@@ -104,8 +123,9 @@ npm run build-dev
 This will:
 1. Generate theme constants from `assetsJs/theme.js`
 2. Generate translations from `assetsJs/translation.js`
-3. Compile BrighterScript to BrightScript
-4. Create a deployable package in `/out`
+3. Inject API keys from `config.json` into the manifest
+4. Compile BrighterScript to BrightScript
+5. Create a deployable package in `/out`
 
 ---
 
@@ -142,7 +162,10 @@ rotor-starter/
 │   ├── theme.js                # Material Design theme config
 │   └── translation.js          # i18n translations
 ├── scripts/
-│   └── generateBsConstFromJs.ts # Build-time code generation
+│   ├── generateBsConstFromJs.ts # Build-time code generation
+│   └── manifestPlugin.ts       # BSC plugin for manifest injection
+├── config.example.json         # Example configuration file
+├── config.json                 # Your API keys (gitignored)
 ├── .claude/
 │   ├── CLAUDE.md               # AI assistant instructions
 │   └── settings.local.json     # Claude Code settings

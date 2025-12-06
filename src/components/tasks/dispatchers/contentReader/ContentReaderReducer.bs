@@ -9,8 +9,15 @@ namespace Reducers
             Utils.BasicLogger(`[CONTENT_READER] dispatcherId: ${m.ownerDispatcherId}, type: ${intent.type}`)
         end sub
 
-        requestTask = CreateObject("roSGNode", "RequestTask")
+        transferPool = {}
 
+        rows = [
+            { titleKeys: "popularMovies", endpoint: "/movie/popular", data: invalid },
+            { titleKeys: "topRated", endpoint: "/movie/top_rated", data: invalid },
+            { titleKeys: "nowPlaying", endpoint: "/movie/now_playing", data: invalid },
+            { titleKeys: "upcoming", endpoint: "/movie/upcoming", data: invalid },
+            { titleKeys: "trendingThisWeek", endpoint: "/trending/movie/week", data: invalid }
+        ]
 
         ' ======================
         ' Dispatcher Middlewares
@@ -27,31 +34,68 @@ namespace Reducers
 
                 ' Async content reader middleware
                 function(intent, state) as Intent
-
                     if intent.type = IntentTypes.ContentReader.LOAD_CONTENT
-
-                        m.startAsyncTask()
-
-                        ' Prevent intent propagation
+                        ' clear previous data
+                        for each row in m.rows
+                            row.data = invalid
+                        end for
+                        m.startAsyncRequests()
                         return invalid
-
                     end if
 
                     return intent ' NEXT
                 end function,
 
-                ' Catch response error middleware
                 function(intent, state) as Intent
-                    if intent.type = IntentTypes.ContentReader.CONTENT_LOADED
-                        if intent.payload.response.statusCode <> 200
-                            Utils.BasicLogger(`[CONTENT_READER] Error loading content: statusCode=${intent.payload.response.statusCode}`)
-                            ' Modify intent to indicate error
-                            intent.type = IntentTypes.ContentReader.CONTENT_LOAD_ERROR
+                    if intent.type = IntentTypes.ContentReader.FETCH_DONE
+
+                        json = intent.payload.json
+                        row = intent.payload.context
+                        statusCode = intent.payload.statusCode
+                        row.data = json.results
+
+                        allFetched = true
+                        for each row in m.rows
+                            allFetched = allFetched and row.data <> invalid
+                        end for
+
+                        if allFetched
+                            rowListContent = CreateObject("roSGNode", "ContentNode")
+                            for each row in m.rows
+                                rowNode = m.createRowWithCards(row.data, row.titleKeys)
+                                rowListContent.appendChild(rowNode)
+                            end for
+
+                            ' Modify intent
+                            intent.type = IntentTypes.ContentReader.CONTENT_LOADED
+                            intent.payload = {
+                                rowListContent: rowListContent,
+                                statusCode: statusCode
+                            }
+                            return intent ' NEXT
+                        else
+                            return invalid ' Prevent further processing until all data fetched
                         end if
                     end if
 
                     return intent ' NEXT
                 end function,
+
+                ' Response error middleware
+                function(intent, state) as Intent
+                    if intent.type = IntentTypes.ContentReader.FETCH_ERROR
+
+                        ' Modify intent
+                        intent.type = IntentTypes.ContentReader.CONTENT_LOAD_ERROR
+                        intent.payload = {
+                            reason: intent.payload.reason,
+                            statusCode: intent.payload.statusCode
+                        }
+
+                    end if
+                    return intent ' NEXT
+                end function
+
 
             ]
         end function
@@ -61,19 +105,22 @@ namespace Reducers
         ' ==================
 
         override function reducer(state, intent)
-
             if intent.type = IntentTypes.ContentReader.CONTENT_LOADED
-                state.listContentNode = intent.payload.response.listContentNode
-                state.gridContentNode = intent.payload.response.gridContentNode
-                state.statusCode = intent.payload.response.statusCode
-                state.ok = intent.payload.response.ok
+                state.rowListContent = intent.payload.rowListContent
+                state.statusCode = intent.payload.statusCode
+                state.ok = true
 
             else if intent.type = IntentTypes.ContentReader.CONTENT_LOAD_ERROR
-                ' Handle error state if needed
-                state.statusCode = intent.payload.response.statusCode
-                state.ok = intent.payload.response.ok
-            end if
+                state.statusCode = intent.payload.statusCode
+                state.ok = false
 
+            else if intent.type = IntentTypes.ContentReader.SET_LOCALE
+                state.locale = intent.payload.locale
+                ' Reload home content
+                m.dispatch({
+                    type: IntentTypes.ContentReader.LOAD_CONTENT
+                })
+            end if
 
             return state
         end function
@@ -83,41 +130,89 @@ namespace Reducers
         ' Async helper methods
         ' ====================
 
-        sub startAsyncTask()
-            ' In your project, you can implement your own fetch pool.
-            ' This is a simple example showing how to use a single-request task:
-            ' The "dispatcherId" extra field is required so the response can be routed back
-            ' to the correct dispatcher.
-            ' The task observes the "response" field using the framework’s shared port,
-            ' which triggers the dispatcher's asyncReducerCallback with the incoming message.
+        sub startAsyncRequests()
+            appInfo = CreateObject("roAppInfo")
+            apiKey = appInfo.GetValue("tmdb_api_key")
 
-            if m.requestTask.state = "run" then m.requestTask.control = "stop"
-            #if debug
-                url = "pkg:/assets/mockups/test-feed.json"
-            #else
-                url = "https://example.com/api/content"
-            #end if
-            m.requestTask.request = {
-                url: url
-            }
-            m.requestTask.dispatcherId = "contentReaderDispatcher" ' Identifies the dispatcher that should receive this response
-            m.requestTask.observeFieldScoped("response", m.port, ["dispatcherId"])
-            m.requestTask.control = "run"
+            if apiKey = invalid or apiKey = ""
+                Utils.BasicLogger("[CONTENT_READER] ERROR: tmdb_api_key not found in manifest")
+                return
+            end if
 
+            ' Launch all requests using roUrlTransfer
+            for each row in m.rows
+                locale = m.getState().locale
+                locale = locale.Replace("_", "-") ' api requires hyphen format
+                url = `https://api.themoviedb.org/3${row.endpoint}?api_key=${apiKey}&language=${locale},en-US&include_image_language=${locale},null&page=1`
+
+                m.transferPool[row.endpoint] = CreateObject("roUrlTransfer")
+                transfer = m.transferPool[row.endpoint]
+                transfer.SetUrl(url)
+                Utils.BasicLogger(`[CONTENT_READER] Starting async request url: ${url}`)
+
+                transfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
+                transfer.SetMessagePort(m.port)
+
+                ' Register transfer with framework before async call
+                m.registerAsyncTransfer(transfer, row)
+
+                transfer.AsyncGetToString()
+            end for
         end sub
 
         override sub asyncReducerCallback(msg)
-            response = msg.getData()
+            if msg.type = "roUrlEvent"
+                event = msg.event
+                context = msg.context
+                statusCode = event.GetResponseCode()
 
-            ' Dispatch CONTENT_LOADED intent with parsed data
-            m.dispatch({
-                type: IntentTypes.ContentReader.CONTENT_LOADED,
-                payload: {
-                    response: response
-                }
-            })
+                if statusCode = 200
+                    jsonString = event.GetString()
+                    json = ParseJson(jsonString)
+
+                    m.dispatch({
+                        type: IntentTypes.ContentReader.FETCH_DONE,
+                        payload: {
+                            json: json,
+                            context: context,
+                            statusCode: statusCode
+                        }
+                    })
+                else
+                    Utils.BasicLogger(`[CONTENT_READER] HTTP Error ${event.GetResponseCode()}: ${context}`)
+                    m.dispatch({
+                        type: IntentTypes.ContentReader.FETCH_ERROR,
+                        payload: {
+                            reason: event.GetFailureReason(),
+                            context: context,
+                            statusCode: statusCode
+                        }
+                    })
+                end if
+            end if
         end sub
 
+        ' ====================
+        ' Helper methods
+        ' ====================
+
+        function createRowWithCards(cards, rowTitleKey as String) as Object
+            rowNode = CreateObject("roSGNode", "ContentNode")
+            rowNode.title = rowTitleKey
+
+            for each card in cards
+                if card.poster_path <> invalid and card.poster_path <> ""
+                    cardNode = CreateObject("roSGNode", "ContentNode")
+                    cardNode.title = card.title
+                    cardNode.description = card?.overview ?? ""
+                    cardNode.HDPosterUrl = `https://image.tmdb.org/t/p/w200` + card.poster_path
+
+                    rowNode.appendChild(cardNode)
+                end if
+            end for
+
+            return rowNode
+        end function
 
     end class
 
