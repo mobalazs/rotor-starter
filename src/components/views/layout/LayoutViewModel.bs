@@ -89,28 +89,24 @@ namespace ViewModels
                     {
                         id: "pageContainer",
                         nodeType: "Group",
-                        focus: {
-                            group: {
-                                defaultFocusId: function() as string
-                                    return `${m.props.activePageId}`
-                                end function,
-                                ' Focus target to menu if user click "left" on RC
-                                left: `menu`,
-                                back: `menu`
-                            }
+                        focusGroup: {
+                            defaultFocusId: function() as string
+                                return `${m.props.activePageId}`
+                            end function,
+                            ' Focus target to menu if user click "left" on RC
+                            left: `menu`,
+                            back: `menu`
                         }
                     },
                     ' Navigation bar - left side vertical menu
                     {
                         id: "menu",
                         viewModel: ViewModels.MenuViewModel,
-                        focus: {
-                            group: {
-                                ' Focus target to pageContainer if user click "right" on RC
-                                right: function() as string
-                                    return `pageContainer`
-                                end function
-                            }
+                        focusGroup: {
+                            ' Focus target to pageContainer if user click "right" on RC
+                            right: function() as string
+                                return `pageContainer`
+                            end function
                         },
                         props: {
                             navDispatcherId: "navigation"

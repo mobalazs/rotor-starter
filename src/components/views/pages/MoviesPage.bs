@@ -10,10 +10,8 @@ namespace ViewModels
                 fields: {
                     translation: m.props.pageTranslation
                 },
-                focus: {
-                    group: {
-                        defaultFocusId: "exampleButton"
-                    }
+                focusGroup: {
+                    defaultFocusId: "exampleButton"
                 },
                 children: [
                     {

@@ -134,20 +134,18 @@ namespace ViewModels
                         fields: {
                             translation: [0, buttonHeight + 4] ' 4px spacing below button
                         },
-                        focus: {
-                            group: {
-                                back: function() as boolean typecast m as Rotor.ViewModel
-                                    m.getViewModel().closeMenu()
-                                    return true ' Consume back event
-                                end function,
-                                up: function() as boolean typecast m as Rotor.ViewModel
-                                    m.getViewModel().closeMenu()
-                                    return true ' Consume back event
-                                end function,
-                                left: true,
-                                right: true,
-                                down: true
-                            }
+                        focusGroup: {
+                            back: function() as boolean typecast m as Rotor.ViewModel
+                                m.getViewModel().closeMenu()
+                                return true ' Consume back event
+                            end function,
+                            up: function() as boolean typecast m as Rotor.ViewModel
+                                m.getViewModel().closeMenu()
+                                return true ' Consume back event
+                            end function,
+                            left: true,
+                            right: true,
+                            down: true
                         },
                         children: [] ' Initially empty, populated on demand
                     }
@@ -196,15 +194,13 @@ namespace ViewModels
             ' Update default focus to selected item
             m.children.pickerMenu.render({
                 children: menuItems,
-                focus: {
-                    group: {
-                        defaultFocusId: `pickerItem_${selectedItemIndex}`
-                    }
+                focusGroup: {
+                    defaultFocusId: `pickerItem_${selectedItemIndex}`
                 }
             })
 
             ' Transfer focus to picker menu widget (which has focus group setup)
-            m.children.pickerMenu.plugins.focus.setFocus()
+            m.children.pickerMenu.setFocus()
         end sub
 
         '''''''''
@@ -239,7 +235,7 @@ namespace ViewModels
             m.children.pickerButtonLabel.refresh("fields.text")
 
             ' Return focus to picker itself
-            m.plugins.focus.setFocus()
+            m.setFocus()
         end sub
 
     end class

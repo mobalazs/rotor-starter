@@ -11,10 +11,8 @@ namespace ViewModels
                     itemSpacings: [20, 30],
                     translation: m.props.pageTranslation
                 },
-                focus: {
-                    group: {
-                        defaultFocusId: "exampleButton"
-                    }
+                focusGroup: {
+                    defaultFocusId: "exampleButton"
                 },
                 children: [
                     {
@@ -52,7 +50,7 @@ namespace ViewModels
                             iconUri: UI.components.settings.settingIcon.iconUri.language,
                             labelText: "@l10n.settings.language",
                             pickerStack: m.getViewModel().getMappedLanguages(),
-                            initialKey: m.getLocale(),
+                            initialKey: m.getViewModel().getLocale(),
                             width: 300,
                             onItemSelected: m.getViewModel().onLanguageSelected
                         }

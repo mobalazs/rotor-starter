@@ -37,7 +37,9 @@ namespace ViewModels
 
         sub delegateFocusToPage()
             ' Set focus to defaultFocusId defined by top widget
-            if m.props.isActive then m.plugins.focus.setFocus()
+            if m.props.isActive
+                m.setFocus()
+            end if
         end sub
 
         sub animateIsActiveState()

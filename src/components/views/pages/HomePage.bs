@@ -19,10 +19,8 @@ namespace ViewModels
                     itemSpacings: [15, 30],
                     translation: m.props.pageTranslation
                 },
-                focus: {
-                    group: {
-                        defaultFocusId: "homeCarousel"
-                    }
+                focusGroup: {
+                    defaultFocusId: "homeCarousel"
                 },
                 children: [
                     {

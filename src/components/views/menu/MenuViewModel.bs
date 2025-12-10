@@ -64,6 +64,7 @@ namespace ViewModels
 
             ' Build menu items dynamically
             menuItems = []
+            itemIndex = 0
             for each pageId in navState.pageIds
 
                 pageSettings = navState.pageSettings[pageId]
@@ -75,20 +76,21 @@ namespace ViewModels
                         pageId: pageId,
                         iconUri: pageSettings.iconUri,
                         intentType: pageSettings.intentType,
-                        dispatcherId: m.props.navDispatcherId
+                        dispatcherId: m.props.navDispatcherId,
+                        itemIndex: itemIndex, ' for TTS
+                        itemCount: navState.pageIds.Count() ' for TTS
                     }
                 })
+                itemIndex++
             end for
 
             return {
                 nodeType: "Group",
-                focus: {
-                    group: {
-                        defaultFocusId: "menuItem_home",
-                        onFocusChanged: sub(isFocused as boolean)
-                            m.animateMenuState(isFocused)
-                        end sub
-                    }
+                focusGroup: {
+                    defaultFocusId: "menuItem_home",
+                    onFocusChanged: sub(isFocused as boolean)
+                        m.animateMenuState(isFocused)
+                    end sub
                 },
                 children: [
                     {
