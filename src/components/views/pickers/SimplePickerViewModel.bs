@@ -200,7 +200,6 @@ namespace ViewModels
             })
 
             ' Transfer focus to picker menu widget (which has focus group setup)
-            print " /// [CUSTOM DEBUG] pickers/SimplePickerViewModel.bs [203] :: == Transfer --------------------------== "
             m.children.pickerMenu.setFocus()
         end sub
 
