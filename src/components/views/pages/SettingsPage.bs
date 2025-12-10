@@ -50,7 +50,7 @@ namespace ViewModels
                             iconUri: UI.components.settings.settingIcon.iconUri.language,
                             labelText: "@l10n.settings.language",
                             pickerStack: m.getViewModel().getMappedLanguages(),
-                            initialKey: m.getViewModel().getLocale(),
+                            initialKey: m.getViewModel().i18n().locale,
                             width: 300,
                             onItemSelected: m.getViewModel().onLanguageSelected
                         }

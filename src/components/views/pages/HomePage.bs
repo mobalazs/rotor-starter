@@ -20,7 +20,16 @@ namespace ViewModels
                     translation: m.props.pageTranslation
                 },
                 focusGroup: {
-                    defaultFocusId: "homeCarousel"
+                    defaultFocusId: "homeCarousel",
+                    onFocus: sub()
+                        homeTranslation = m.viewModelState?.l10n?.pages?.home
+                        m.tts().speak({
+                            say: homeTranslation?.title + ". " + homeTranslation?.content,
+                            flush: true,
+                            ' overrideNextFlush: true,
+                            dontRepeat: true
+                        })
+                    end sub
                 },
                 children: [
                     {

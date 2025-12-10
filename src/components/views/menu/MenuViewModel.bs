@@ -90,6 +90,14 @@ namespace ViewModels
                     defaultFocusId: "menuItem_home",
                     onFocusChanged: sub(isFocused as boolean)
                         m.animateMenuState(isFocused)
+                        if isFocused
+                            m.tts().speak({
+                                say: m.viewModelState?.l10n?.menu?.title,
+                                flush: true,
+                                overrideNextFlush: true,
+                                dontRepeat: true
+                            })
+                        end if
                     end sub
                 },
                 children: [

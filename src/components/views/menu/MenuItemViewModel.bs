@@ -6,7 +6,9 @@ namespace ViewModels
             iconUri: "", ' Icon URI for menu item
             intentType: "", ' Define intent type for CTA
             dispatcherId: "", ' Dispatcher ID for navigation
-            isSelected: false
+            isSelected: false,
+            itemIndex: 0, ' zero-based index for TTS
+            itemCount: 0 ' total items for TTS
         }
 
         viewModelState = {
@@ -38,7 +40,19 @@ namespace ViewModels
                 dispatcher: "navigation",
                 focus: {
                     onFocusChanged: sub(isFocused as boolean): typecast m as ViewModels.MenuItemViewModel
+                        m.viewModelState.isFocused = isFocused
                         m.onUpdateView()
+                        if isFocused
+                        end if
+                    end sub,
+
+                    onFocus: sub(): typecast m as ViewModels.MenuItemViewModel
+                        m.tts().speak({
+                            say: `@l10n.menu.${m.props.pageId}, ${m.props.itemIndex + 1} @l10n.menu.of ${m.props.itemCount}`,
+                            flush: true,
+                            dontRepeat: true,
+                            context: m
+                        })
                     end sub,
 
                     onSelected: sub() typecast m as ViewModels.MenuItemViewModel
@@ -90,5 +104,6 @@ namespace ViewModels
                 ]
             }
         end function
+
     end class
 end namespace

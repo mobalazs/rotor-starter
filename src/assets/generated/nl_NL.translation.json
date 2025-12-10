@@ -18,6 +18,8 @@
     "language": "Taal"
   },
   "menu": {
+    "title": "Hoofdmenu",
+    "of": "van",
     "home": "Home",
     "movies": "Films",
     "settings": "Instellingen",

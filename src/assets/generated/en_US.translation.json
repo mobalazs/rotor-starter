@@ -18,6 +18,8 @@
     "language": "Language"
   },
   "menu": {
+    "title": "Main menu",
+    "of": "of",
     "home": "Home",
     "movies": "Movies",
     "settings": "Settings",

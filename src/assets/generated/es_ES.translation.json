@@ -18,6 +18,8 @@
     "language": "Idioma"
   },
   "menu": {
+    "title": "Menú principal",
+    "of": "de",
     "home": "Inicio",
     "movies": "Películas",
     "settings": "Configuración",

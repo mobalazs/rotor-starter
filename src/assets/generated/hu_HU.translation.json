@@ -18,6 +18,8 @@
     "language": "Nyelv"
   },
   "menu": {
+    "title": "Főmenü",
+    "of": "a",
     "home": "Kezdőlap",
     "movies": "Filmek",
     "settings": "Beállítások",

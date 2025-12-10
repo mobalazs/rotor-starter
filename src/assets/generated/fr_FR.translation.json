@@ -18,6 +18,8 @@
     "language": "Langue"
   },
   "menu": {
+    "title": "Menu principal",
+    "of": "sur",
     "home": "Accueil",
     "movies": "Films",
     "settings": "Paramètres",
