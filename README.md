@@ -44,33 +44,19 @@ A **GitHub template repository** is a special type of repository that serves as 
    cd YOUR_REPO_NAME
    ```
 4. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+    ```bash
+    # Install ropm globally (if not already installed)
+    npm install -g ropm
+
+    # Install npm dependencies
+    npm install
+
+    # Install Roku dependencies via ropm
+    ropm install
+    ```
 5. **Start developing!** 🎉
 
 ---
-
-## ✨ Features
-
-This starter template includes everything you need to build professional Roku applications:
-
-- ✅ **Material Design 3** - Dynamic theming generated from seed colors
-- ✅ **CTV-Optimized Design** - Calculated elevation using overlay alpha (no shadows)
-- ✅ **Build System** - Automated theme and translation generation with watch mode
-- ✅ **Page Transitions** - Smooth page transitions with fade animations
-- ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
-- ✅ **TMDB Integration** - Real movie data from The Movie Database API with localization
-- ✅ **Parallel Request Pool** - Async content loading with parallel roUrlTransfer requests example
-- ✅ **MVI Architecture** - Cross-thread dispatcher pattern with reducer and middleware support
-- ✅ **App Launch Beacon** - Implemented AppLaunchComplete beacon on show content
-- ✅ **Deeplink Flow** - Prepared deeplink handling for launch and input events
-- ✅ **Hybrid Architecture Demo** - Shows native RowList integration with Rotor ViewModels
-- ✅ **Development Tools** - Static Channel Analysis runner from CLI and workflow
-
----
-
-## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -78,28 +64,9 @@ This starter template includes everything you need to build professional Roku ap
 - **npm** or **yarn**
 - **ropm** (Roku Package Manager) - Install globally: `npm install -g ropm`
 - **Roku device** or simulator
-
-### Installation
-
-```bash
-# Clone your repository (after creating from template)
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
-
-# Install ropm globally (if not already installed)
-npm install -g ropm
-
-# Install npm dependencies
-npm install
-
-# Install Roku dependencies via ropm
-ropm install
-
-```
+- **TMDB** API key before your first build, set up your TMDB API configuration:
 
 ### Configuration
-
-Before your first build, set up your TMDB API configuration:
 
 #### 1. Get a TMDB API Key
 
@@ -135,6 +102,15 @@ Edit `config.json` and add your TMDB API key:
 > - The API key will be automatically injected into the app manifest during build
 > - Movie data is fetched in the user's selected language with English fallback
 > - By using TMDB API, you agree to comply with [TMDB's Terms of Use](https://www.themoviedb.org/terms-of-use)
+
+
+#### Set your local Roku Device access (`.env`)
+
+```bash
+cp sample.env .env
+```
+
+Replace the placeholders in `.env` with your Roku device's IP and developer password so the CLI scripts can sideload builds to your box. The `.env` file is gitignored; keep it local.
 
 ### First Build
 
@@ -324,4 +300,3 @@ de_DE: {
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE)￼ file for details.
 © 2025 Balázs Molnár — Rotor Framework™
-
