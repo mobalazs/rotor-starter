@@ -26,7 +26,7 @@ namespace ViewModels
                         m.tts().speak({
                             say: homeTranslation?.title + ". " + homeTranslation?.content,
                             flush: true,
-                            ' overrideNextFlush: true,
+                            onceKey: "homePageIntro",
                             dontRepeat: true
                         })
                     end sub
@@ -55,18 +55,20 @@ namespace ViewModels
                     },
                     {
                         id: "homeCarousel",
-                            nodeType: "RowList",
-                            fields: {
-                                itemComponentName: "SimpleRowListItem",
-                                content: m.props.rowListContent,
-                                itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
-                                rowItemSize: [200, 300],
-                                rowItemSpacing: [5, 0],
-                                itemSpacing: [0, 0],
-                                rowLabelOffset: [0, 10],
-                                showRowLabel: [true],
+                        nodeType: "RowList",
+                        fields: {
+                            itemComponentName: "SimpleRowListItem",
+                            content: m.props.rowListContent,
+                            itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
+                            rowItemSize: [200, 300],
+                            rowItemSpacing: [5, 0],
+                            itemSpacing: [0, 0],
+                            rowLabelOffset: [0, 10],
+                            showRowLabel: [true],
                             rowLabelFont: "font:SmallestBoldSystemFont",
-                            numRows: 3
+                            numRows: 3,
+                            muteAudioGuide: false
+
                         },
                         focus: {
                             enableNativeFocus: true
@@ -86,11 +88,15 @@ namespace ViewModels
         end sub
 
         override sub onMountView()
+            ' Clear onceKey cache if page disappeared
             super.onMountView()
             ' Additional logic for HomePage can be added here
         end sub
 
         override sub onUpdateView()
+            if m.props.isActive = false
+                m.tts().removeOnceKey("homePageIntro")
+            end if
             super.onUpdateView()
             ' Additional logic for HomePage can be added here
         end sub

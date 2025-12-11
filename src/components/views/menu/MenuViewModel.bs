@@ -94,7 +94,7 @@ namespace ViewModels
                             m.tts().speak({
                                 say: m.viewModelState?.l10n?.menu?.title,
                                 flush: true,
-                                overrideNextFlush: true,
+                                preventNextFlush: true,
                                 dontRepeat: true
                             })
                         end if
