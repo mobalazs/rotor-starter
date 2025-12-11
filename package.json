@@ -52,7 +52,7 @@
 	},
 	"dependencies": {
 		"@material/material-color-utilities": "^0.3.0",
-		"rotor-framework": "^0.5.3"
+		"rotor-framework": "^0.5.4"
 	},
 	"main": "index.js"
 }
