@@ -38,7 +38,7 @@ namespace ViewModels
                         fields: {
                             text: "@l10n.pages.home.title",
                             translation: [0, 0],
-                            color: UI.colors.onBackground
+                            color: UI.colors.onSurface
                         },
                         fontStyle: UI.typography.displaySmall_aa
                     },
@@ -49,22 +49,22 @@ namespace ViewModels
                             width: 1000,
                             wrap: true,
                             text: "@l10n.pages.home.content",
-                            color: UI.colors.onBackground
+                            color: UI.colors.onSurfaceVariant
                         },
                         fontStyle: UI.typography.bodySmall_aa
                     },
                     {
                         id: "homeCarousel",
-                        nodeType: "RowList",
-                        fields: {
-                            itemComponentName: "SimpleRowListItem",
-                            content: m.props.rowListContent,
-                            itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
-                            rowItemSize: [200, 300],
-                            rowItemSpacing: [5, 0],
-                            itemSpacing: [0, 0],
-                            rowLabelOffset: [0, 10],
-                            showRowLabel: [true],
+                            nodeType: "RowList",
+                            fields: {
+                                itemComponentName: "SimpleRowListItem",
+                                content: m.props.rowListContent,
+                                itemSize: [UI.designResolution.w - UI.components.menuBar.pageOffset, 360],
+                                rowItemSize: [200, 300],
+                                rowItemSpacing: [5, 0],
+                                itemSpacing: [0, 0],
+                                rowLabelOffset: [0, 10],
+                                showRowLabel: [true],
                             rowLabelFont: "font:SmallestBoldSystemFont",
                             numRows: 3
                         },

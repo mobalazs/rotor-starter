@@ -20,7 +20,7 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.title",
-                            color: UI.colors.onBackground
+                            color: UI.colors.onSurface
                         },
                         fontStyle: UI.typography.displaySmall_aa
                     },
@@ -29,7 +29,7 @@ namespace ViewModels
                         nodeType: "Label",
                         fields: {
                             text: "@l10n.pages.settings.content",
-                            color: UI.colors.onBackground
+                            color: UI.colors.onSurfaceVariant
                         },
                         fontStyle: UI.typography.bodyLarge_aa
                     },

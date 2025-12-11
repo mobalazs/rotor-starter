@@ -1,11 +1,32 @@
 /**
  * Rotor Starter Theme Configuration
  *
- * Material Design inspired theme system for Roku applications
- * Includes: Colors, Typography, Layout, Motion specifications
+ * Material Design 3 aligned theme system for Roku applications.
+ * Colors are generated from seed colors via Material color utilities.
  */
 
+const {
+	argbFromHex,
+	hexFromArgb,
+	CorePalette,
+	DynamicScheme,
+} = require('@material/material-color-utilities');
+
+// Convert ARGB int to Roku hex string (0xRRGGBBAA)
+function argbToRokuHex(argb) {
+	const hexRgb = hexFromArgb(argb).replace('#', '').toUpperCase();
+	const alpha = ((argb >> 24) & 0xff).toString(16).padStart(2, '0').toUpperCase();
+	return `0x${hexRgb}${alpha}`;
+}
+
 module.exports = function () {
+	// Seed colors (primary/secondary/tertiary) for palette generation
+	const seedColors = {
+		primary: '#4CAF50',
+		secondary: '#78A999',
+		tertiary: '#A1D7E7',
+	};
+
 	// Layout
 	let safeArea = {
 		x: 90,
@@ -17,34 +38,163 @@ module.exports = function () {
 		h: 1080,
 	};
 
-	// Material Design Color Palette
+	// Generate palettes from seed colors
+	const primaryPalette = CorePalette.of(argbFromHex(seedColors.primary));
+	const secondaryPalette = CorePalette.of(argbFromHex(seedColors.secondary));
+	const tertiaryPalette = CorePalette.of(argbFromHex(seedColors.tertiary));
+
+	// Build a dark DynamicScheme using custom palettes (primary/secondary/tertiary seeds)
+	const dynamicScheme = new DynamicScheme({
+		sourceColorArgb: argbFromHex(seedColors.primary),
+		variant: 2, // Variant.TONAL_SPOT
+		contrastLevel: 0,
+		isDark: true,
+		primaryPalette: primaryPalette.a1,
+		secondaryPalette: secondaryPalette.a2,
+		tertiaryPalette: tertiaryPalette.a3,
+		neutralPalette: primaryPalette.n1,
+		neutralVariantPalette: primaryPalette.n2,
+	});
+
+	// Material Design 3 color roles (dark theme, generated)
+	// Also you can hard coded the colors if you want to customize them manually
 	let colors = {
-		// Primary colors
-		primary: '0x4CAF50FF',
-		primaryHover: '0x66BB6AFF',
-		primaryPressed: '0x388E3CFF',
-		onPrimary: '0xFFFFFFFF',
+		// Core brand
+		primary: argbToRokuHex(dynamicScheme.primary),
+		onPrimary: argbToRokuHex(dynamicScheme.onPrimary),
+		primaryContainer: argbToRokuHex(dynamicScheme.primaryContainer),
+		onPrimaryContainer: argbToRokuHex(dynamicScheme.onPrimaryContainer),
 
-		// Secondary colors
-		secondary: '0x78a999FF',
-		secondaryHover: '0x8BB9A9FF',
-		secondaryPressed: '0x659488FF',
-		onSecondary: '0x000000FF',
+		secondary: argbToRokuHex(dynamicScheme.secondary),
+		onSecondary: argbToRokuHex(dynamicScheme.onSecondary),
+		secondaryContainer: argbToRokuHex(dynamicScheme.secondaryContainer),
+		onSecondaryContainer: argbToRokuHex(dynamicScheme.onSecondaryContainer),
 
-		// Background colors
-		background: '0x283E30FF',
-		onBackground: '0xFFFFFFFF',
+		tertiary: argbToRokuHex(dynamicScheme.tertiary),
+		onTertiary: argbToRokuHex(dynamicScheme.onTertiary),
+		tertiaryContainer: argbToRokuHex(dynamicScheme.tertiaryContainer),
+		onTertiaryContainer: argbToRokuHex(dynamicScheme.onTertiaryContainer),
 
-		// Surface colors
-		surface: '0x0F1A17FF',
-		surfaceHover: '0x1A2621FF',
-		onSurface: '0xFFFFFFFF',
+		// Neutral / surfaces
+		background: argbToRokuHex(dynamicScheme.background),
+		onBackground: argbToRokuHex(dynamicScheme.onBackground),
+		surface: argbToRokuHex(dynamicScheme.surface),
+		surfaceDim: argbToRokuHex(dynamicScheme.surfaceDim),
+		surfaceBright: argbToRokuHex(dynamicScheme.surfaceBright),
+		surfaceContainerLowest: argbToRokuHex(dynamicScheme.surfaceContainerLowest),
+		surfaceContainerLow: argbToRokuHex(dynamicScheme.surfaceContainerLow),
+		surfaceContainer: argbToRokuHex(dynamicScheme.surfaceContainer),
+		surfaceContainerHigh: argbToRokuHex(dynamicScheme.surfaceContainerHigh),
+		surfaceContainerHighest: argbToRokuHex(dynamicScheme.surfaceContainerHighest),
+		surfaceVariant: argbToRokuHex(dynamicScheme.surfaceVariant),
+		onSurface: argbToRokuHex(dynamicScheme.onSurface),
+		onSurfaceVariant: argbToRokuHex(dynamicScheme.onSurfaceVariant),
+		outline: argbToRokuHex(dynamicScheme.outline),
+		outlineVariant: argbToRokuHex(dynamicScheme.outlineVariant),
 
-		// Error colors
-		error: '0xB00020FF',
-		errorHover: '0xCF002FFF',
-		errorPressed: '0x8B0019FF',
-		onError: '0xFFFFFFFF',
+		// Status
+		error: argbToRokuHex(dynamicScheme.error),
+		onError: argbToRokuHex(dynamicScheme.onError),
+		errorContainer: argbToRokuHex(dynamicScheme.errorContainer),
+		onErrorContainer: argbToRokuHex(dynamicScheme.onErrorContainer),
+
+		// Inverse and depth
+		inverseSurface: argbToRokuHex(dynamicScheme.inverseSurface),
+		inverseOnSurface: argbToRokuHex(dynamicScheme.inverseOnSurface),
+		inversePrimary: argbToRokuHex(dynamicScheme.inversePrimary),
+		scrim: argbToRokuHex(dynamicScheme.scrim),
+		shadow: argbToRokuHex(dynamicScheme.shadow),
+
+		// Hover/pressed variants derived from tonal palettes
+		primaryHover: argbToRokuHex(primaryPalette.a1.tone(90)),
+		primaryPressed: argbToRokuHex(primaryPalette.a1.tone(70)),
+		secondaryHover: argbToRokuHex(secondaryPalette.a2.tone(90)),
+		secondaryPressed: argbToRokuHex(secondaryPalette.a2.tone(70)),
+	};
+
+	// Elevation overlay (use overlay alpha to tint surfaces)
+	let elevation = {
+		level0: { overlayAlpha: 0 },
+		level1: { overlayAlpha: 0.05 },
+		level2: { overlayAlpha: 0.08 },
+		level3: { overlayAlpha: 0.11 },
+		level4: { overlayAlpha: 0.12 },
+		level5: { overlayAlpha: 0.14 },
+	};
+
+	// Utility: blend overlay on top of a base Roku hex color (0xRRGGBBAA)
+	function applyOverlay(baseHex, overlayHex, overlayAlpha) {
+		let toRgba = function (hex) {
+			let v = hex.replace(/^0x/, '');
+			return {
+				r: parseInt(v.slice(0, 2), 16),
+				g: parseInt(v.slice(2, 4), 16),
+				b: parseInt(v.slice(4, 6), 16),
+				a: parseInt(v.slice(6, 8), 16) / 255,
+			};
+		};
+
+		let toHex = function (rgba) {
+			let channels = [rgba.r, rgba.g, rgba.b, Math.round(rgba.a * 255)];
+			let hex = channels
+				.map(function (c) {
+					return c.toString(16).padStart(2, '0').toUpperCase();
+				})
+				.join('');
+			return '0x' + hex;
+		};
+
+		let base = toRgba(baseHex);
+		let overlay = toRgba(overlayHex);
+		let oa = overlayAlpha * overlay.a;
+
+		let out = {
+			r: Math.round((1 - oa) * base.r + oa * overlay.r),
+			g: Math.round((1 - oa) * base.g + oa * overlay.g),
+			b: Math.round((1 - oa) * base.b + oa * overlay.b),
+			a: base.a, // keep base alpha
+		};
+		return toHex(out);
+	}
+
+	// Precomputed elevation surfaces for dark mode (white overlay on surface)
+	const overlayColor = '0xFFFFFFFF';
+	let elevationSurfaces = {
+		level0: colors.surface,
+		level1: applyOverlay(
+			colors.surface,
+			overlayColor,
+			elevation.level1.overlayAlpha
+		),
+		level2: applyOverlay(
+			colors.surface,
+			overlayColor,
+			elevation.level2.overlayAlpha
+		),
+		level3: applyOverlay(
+			colors.surface,
+			overlayColor,
+			elevation.level3.overlayAlpha
+		),
+		level4: applyOverlay(
+			colors.surface,
+			overlayColor,
+			elevation.level4.overlayAlpha
+		),
+		level5: applyOverlay(
+			colors.surface,
+			overlayColor,
+			elevation.level5.overlayAlpha
+		),
+	};
+	colors.elevationSurfaces = elevationSurfaces;
+
+	// Material Design state-layer opacities
+	let stateLayers = {
+		hover: 0.08,
+		focus: 0.12,
+		pressed: 0.12,
+		dragged: 0.16,
 	};
 
 	// Typography - Font families
@@ -52,65 +202,64 @@ module.exports = function () {
 		regular: 'pkg:/assets/fonts/Roboto-Regular.ttf',
 		medium: 'pkg:/assets/fonts/Roboto-Medium.ttf',
 		bold: 'pkg:/assets/fonts/Roboto-Bold.ttf',
-		light: 'pkg:/assets/fonts/Roboto-Light.ttf',
 	};
 
-	// Typography - Material Design Type Scale
+	// Typography - Material Design 3 type scale
 	let typography = {
 		// Display styles
 		displayLarge_aa: {
-			uri: fonts.light,
-			size: 70,
+			uri: fonts.regular,
+			size: 86,
 		},
 		displayMedium_aa: {
 			uri: fonts.regular,
-			size: 56,
+			size: 68,
 		},
 		displaySmall_aa: {
 			uri: fonts.regular,
-			size: 44,
+			size: 54,
 		},
 
 		// Headline styles
 		headlineLarge_aa: {
 			uri: fonts.regular,
-			size: 40,
+			size: 48,
 		},
 		headlineMedium_aa: {
 			uri: fonts.regular,
-			size: 32,
+			size: 42,
 		},
 		headlineSmall_aa: {
 			uri: fonts.regular,
-			size: 28,
+			size: 36,
 		},
 		headlineSmall_bold_aa: {
 			uri: fonts.bold,
-			size: 28,
+			size: 36,
 		},
 
 		// Title styles
 		titleLarge_aa: {
 			uri: fonts.medium,
-			size: 24,
+			size: 33,
 		},
 		titleMedium_aa: {
 			uri: fonts.medium,
-			size: 20,
+			size: 24,
 		},
 		titleSmall_aa: {
 			uri: fonts.medium,
-			size: 18,
+			size: 21,
 		},
 
 		// Body styles
 		bodyLarge_aa: {
 			uri: fonts.regular,
-			size: 22,
+			size: 24,
 		},
 		bodyMedium_aa: {
 			uri: fonts.regular,
-			size: 20,
+			size: 21,
 		},
 		bodySmall_aa: {
 			uri: fonts.regular,
@@ -120,7 +269,7 @@ module.exports = function () {
 		// Label styles
 		labelLarge_aa: {
 			uri: fonts.medium,
-			size: 20,
+			size: 21,
 		},
 		labelMedium_aa: {
 			uri: fonts.medium,
@@ -128,7 +277,7 @@ module.exports = function () {
 		},
 		labelSmall_aa: {
 			uri: fonts.medium,
-			size: 16,
+			size: 17,
 		},
 	};
 
@@ -158,6 +307,7 @@ module.exports = function () {
 		// Sharp - Quick, responsive animations
 		easingSharp: 'outQuartic',
 	};
+
 	// Images - Application image assets
 	let menuBar = {
 		rightPadding: 18,
@@ -196,6 +346,7 @@ module.exports = function () {
 		safeArea: safeArea,
 		designResolution: designResolution,
 		colors: colors,
+		stateLayers: stateLayers,
 		typography: typography,
 		motion: motion,
 		components: {

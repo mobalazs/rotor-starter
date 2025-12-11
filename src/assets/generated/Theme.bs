@@ -8,73 +8,110 @@ enum designResolution
 	w = 1920
 	h = 1080
 end enum
-enum colors
-	primary = "0x4CAF50FF"
-	primaryHover = "0x66BB6AFF"
-	primaryPressed = "0x388E3CFF"
-	onPrimary = "0xFFFFFFFF"
-	secondary = "0x78a999FF"
-	secondaryHover = "0x8BB9A9FF"
-	secondaryPressed = "0x659488FF"
-	onSecondary = "0x000000FF"
-	background = "0x283E30FF"
-	onBackground = "0xFFFFFFFF"
-	surface = "0x0F1A17FF"
-	surfaceHover = "0x1A2621FF"
-	onSurface = "0xFFFFFFFF"
-	error = "0xB00020FF"
-	errorHover = "0xCF002FFF"
-	errorPressed = "0x8B0019FF"
-	onError = "0xFFFFFFFF"
+namespace colors
+	const primary = "0x78DC77FF"
+	const onPrimary = "0x00390AFF"
+	const primaryContainer = "0x005313FF"
+	const onPrimaryContainer = "0x94F990FF"
+	const secondary = "0xB2CCC2FF"
+	const onSecondary = "0x1D352EFF"
+	const secondaryContainer = "0x344C44FF"
+	const onSecondaryContainer = "0xCDE9DEFF"
+	const tertiary = "0xBFC4EBFF"
+	const onTertiary = "0x292E4DFF"
+	const tertiaryContainer = "0x3F4565FF"
+	const onTertiaryContainer = "0xDEE1FFFF"
+	const background = "0x121411FF"
+	const onBackground = "0xE2E3DDFF"
+	const surface = "0x121411FF"
+	const surfaceDim = "0x121411FF"
+	const surfaceBright = "0x383A36FF"
+	const surfaceContainerLowest = "0x0C0F0CFF"
+	const surfaceContainerLow = "0x1A1C19FF"
+	const surfaceContainer = "0x1E201DFF"
+	const surfaceContainerHigh = "0x282B27FF"
+	const surfaceContainerHighest = "0x333531FF"
+	const surfaceVariant = "0x424940FF"
+	const onSurface = "0xE2E3DDFF"
+	const onSurfaceVariant = "0xC2C9BDFF"
+	const outline = "0x8C9388FF"
+	const outlineVariant = "0x424940FF"
+	const error = "0xFFB4ABFF"
+	const onError = "0x690005FF"
+	const errorContainer = "0x93000AFF"
+	const onErrorContainer = "0xFFDAD6FF"
+	const inverseSurface = "0xE2E3DDFF"
+	const inverseOnSurface = "0x2F312DFF"
+	const inversePrimary = "0x006E1CFF"
+	const scrim = "0x000000FF"
+	const shadow = "0x000000FF"
+	const primaryHover = "0x94F990FF"
+	const primaryPressed = "0x5DC05EFF"
+	const secondaryHover = "0xCDE9DEFF"
+	const secondaryPressed = "0x97B1A7FF"
+	enum elevationSurfaces
+		level0 = "0x121411FF"
+		level1 = "0x1E201DFF"
+		level2 = "0x252724FF"
+		level3 = "0x2C2E2BFF"
+		level4 = "0x2E302EFF"
+		level5 = "0x333532FF"
+	end enum
+end namespace
+enum stateLayers
+	hover = 0.08
+	focus = 0.12
+	pressed = 0.12
+	dragged = 0.16
 end enum
 namespace typography
 	const displayLarge_aa = {
-		uri: "pkg:/assets/fonts/Roboto-Light.ttf"
-		size: 70
+		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
+		size: 86
 	}
 	const displayMedium_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 56
+		size: 68
 	}
 	const displaySmall_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 44
+		size: 54
 	}
 	const headlineLarge_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 40
+		size: 48
 	}
 	const headlineMedium_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 32
+		size: 42
 	}
 	const headlineSmall_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 28
+		size: 36
 	}
 	const headlineSmall_bold_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Bold.ttf"
-		size: 28
+		size: 36
 	}
 	const titleLarge_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
-		size: 24
+		size: 33
 	}
 	const titleMedium_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
-		size: 20
+		size: 24
 	}
 	const titleSmall_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
-		size: 18
+		size: 21
 	}
 	const bodyLarge_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 22
+		size: 24
 	}
 	const bodyMedium_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
-		size: 20
+		size: 21
 	}
 	const bodySmall_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Regular.ttf"
@@ -82,7 +119,7 @@ namespace typography
 	}
 	const labelLarge_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
-		size: 20
+		size: 21
 	}
 	const labelMedium_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
@@ -90,7 +127,7 @@ namespace typography
 	}
 	const labelSmall_aa = {
 		uri: "pkg:/assets/fonts/Roboto-Medium.ttf"
-		size: 16
+		size: 17
 	}
 end namespace
 namespace motion

@@ -128,12 +128,28 @@ rotor-starter/
 
 ## Theme System
 
-Material Design inspired theme configuration at `assetsJs/theme.js`:
+**Material Design 3 (MD3)** dynamic theming system at `assetsJs/theme.js`:
 
-- **Colors**: Primary, Secondary, Background, Surface, Error with hover/pressed states
+### Dynamic Color Generation
+- Uses `@material/material-color-utilities` for algorithmic color generation
+- Only requires **seed colors** (primary, secondary, tertiary) as input
+- Automatically generates full color palette with tonal variants
+- All MD3 color roles: primary, secondary, tertiary, surface, error, outline, etc.
+- State layers (hover, focus, pressed, dragged) with MD3 opacity values
+
+### CTV/Roku Optimized
+- **Calculated elevation**: Uses overlay alpha blending instead of shadows (CTV-compatible)
+- Pre-computed elevation surfaces (level0-level5) for dark mode
+- Roku hex color format (0xRRGGBBAA) for optimal SceneGraph compatibility
+- Native Roku Animation easing functions for motion
+
+### Features
+- **Colors**: Full MD3 color roles with hover/pressed states
 - **Typography**: Material Design Type Scale (Display, Headline, Title, Body, Label)
-- **Motion**: Duration and easing configurations for animations
+- **Motion**: Duration and easing configurations (standard, decelerate, accelerate, emphasized)
+- **Elevation**: Six elevation levels using white overlay tinting
 - **Layout**: Safe area and design resolution settings
+- **Components**: Theme tokens for menuBar, settings, etc.
 
 ## Translations
 
@@ -149,6 +165,8 @@ Multi-language support at `assetsJs/translation.js`:
 
 ```bash
 npm install              # Install dependencies
+npm run watch            # Watch assetsJs/ for changes and auto-regenerate UI constants
+npm run precompiler      # Manually generate UI constants from assetsJs/
 npm run build-dev        # Development build
 npm run build-prod       # Production build
 npm run build-tests      # Tests build
@@ -156,9 +174,16 @@ npm run lint             # Lint code
 npm run coverage         # Coverage report
 ```
 
+### Development Workflow
+
+Use `npm run watch` during development to automatically regenerate theme and translation files when you modify `assetsJs/theme.js` or `assetsJs/translation.js`. The watch process monitors these files and runs the precompiler automatically on changes.
+
 ## Development Notes
 
 - This project uses the Rotor framework's MVI (Model-View-Intent) pattern
 - Components are written in BrighterScript (.bs) with SceneGraph XML
-- Theme and translations are generated at build time from JS files
+- Theme uses Material Design 3 with dynamic color generation from seed colors
+- Theme and translations are generated at build time from JS files (`assetsJs/`)
+- Use `npm run watch` during development to auto-regenerate UI constants
+- Elevation is calculated using overlay alpha blending (no shadows, CTV-compatible)
 - Native Roku Animation easing functions are used for motion

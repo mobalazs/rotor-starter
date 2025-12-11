@@ -61,7 +61,7 @@ namespace ViewModels
                                 fontStyle: UI.typography.bodyLarge_aa,
                                 fields: {
                                     text: m.props.labelText,
-                                    color: UI.colors.onBackground,
+                                    color: UI.colors.onSurface,
                                     vertAlign: "center",
                                     height: iconSize,
                                     width: m.props.width - iconSize - m.props.iconRightMargin

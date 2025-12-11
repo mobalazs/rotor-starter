@@ -50,8 +50,10 @@ namespace ViewModels
             ' @param {boolean} isFocused - True when button gains focus, false when loses focus
             '''''''''
             onFocusChanged = sub(isFocused as boolean) typecast m as ViewModels.BaseButton
+                m.viewModelState.isFocused = isFocused
                 ' Using Rotor render cycle to update colors via function expression in fields
                 m.children.buttonBg.refresh("fields.color")
+                m.children.buttonLabel.refresh("fields.color")
 
                 ' Alternative approach - direct node manipulation:
                 ' m.children.buttonBg.node.color = isFocused ? UI.colors.primary : UI.colors.surface
@@ -69,7 +71,7 @@ namespace ViewModels
                         nodeType: "Rectangle",
                         fields: {
                             color: function() as string
-                                return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surface
+                                return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.primaryContainer
                             end function,
                             height: height
                         }
@@ -81,7 +83,9 @@ namespace ViewModels
                         fields: {
                             enableRenderTracking: true,
                             text: m.props.text,
-                            color: UI.colors.onPrimary,
+                            color: function() as string
+                                return m.viewModelState.isFocused ? UI.colors.onPrimary : UI.colors.onPrimaryContainer
+                            end function,
                             horizAlign: "center",
                             vertAlign: "center",
                             height: height,

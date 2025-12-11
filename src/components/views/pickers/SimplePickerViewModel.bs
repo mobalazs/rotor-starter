@@ -63,6 +63,7 @@ namespace ViewModels
                 nodeType: "Group",
                 focus: {
                     onFocusChanged: sub(isFocused as boolean) typecast m as ViewModels.SimplePickerViewModel
+                        m.viewModelState.isFocused = isFocused
                         m.children.pickerButtonBg.refresh("fields.color")
                         m.children.pickerButtonLabel.refresh("fields.color")
                         m.children.pickerArrowIcon.refresh("fields.color")
@@ -78,7 +79,7 @@ namespace ViewModels
                         nodeType: "Rectangle",
                         fields: {
                             color: function() as string
-                                return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surface
+                                return m.viewModelState.isFocused ? UI.colors.primary : UI.colors.surfaceContainerHigh
                             end function,
                             width: m.props.width,
                             height: buttonHeight
@@ -123,7 +124,7 @@ namespace ViewModels
                             loadHeight: pickerArrowIconSize,
                             translation: [m.props.width - buttonPaddings[1] - pickerArrowIconSize, (buttonHeight - pickerArrowIconSize) / 2],
                             color: function() as string
-                                return m.viewModelState.isFocused ? UI.colors.onPrimary : UI.colors.onSurface
+                                return m.viewModelState.isFocused ? UI.colors.onPrimary : UI.colors.onSurfaceVariant
                             end function
                         }
                     },

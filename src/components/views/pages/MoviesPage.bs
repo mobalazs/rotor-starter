@@ -20,7 +20,7 @@ namespace ViewModels
                         fields: {
                             text: "@l10n.pages.movies.title",
                             translation: [0, 0],
-                            color: UI.colors.onBackground
+                            color: UI.colors.onSurface
                         },
                         fontStyle: UI.typography.displaySmall_aa
                     },
@@ -30,7 +30,7 @@ namespace ViewModels
                         fields: {
                             text: "@l10n.pages.movies.content",
                             translation: [0, 80],
-                            color: UI.colors.onBackground
+                            color: UI.colors.onSurfaceVariant
                         },
                         fontStyle: UI.typography.bodyLarge_aa
                     },

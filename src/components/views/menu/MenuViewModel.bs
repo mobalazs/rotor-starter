@@ -107,8 +107,8 @@ namespace ViewModels
                         fields: {
                             width: m.getBgWidth(m.viewModelState.isFocused),
                             height: UI.designResolution.h,
-                            color: UI.colors.surface,
-                            opacity: 0.9,
+                            color: UI.colors.surfaceContainer,
+                            opacity: 1,
                             translation: [0, 0]
                         }
                     },

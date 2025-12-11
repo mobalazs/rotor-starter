@@ -55,7 +55,9 @@ A **GitHub template repository** is a special type of repository that serves as 
 
 This starter template includes everything you need to build professional Roku applications:
 
-- ✅ **Build System** - Automated theme and translation generation
+- ✅ **Material Design 3** - Dynamic theming generated from seed colors
+- ✅ **CTV-Optimized Design** - Calculated elevation using overlay alpha (no shadows)
+- ✅ **Build System** - Automated theme and translation generation with watch mode
 - ✅ **Page Transitions** - Smooth page transitions with fade animations
 - ✅ **Example Components** - Working examples of pages, navigation, and UI patterns
 - ✅ **TMDB Integration** - Real movie data from The Movie Database API with localization
@@ -151,17 +153,29 @@ This will:
 
 ## 🛠️ Development Workflow
 
-### 1. Modify Theme or Translations
+### 1. Watch Mode (Recommended for Development)
+
+Use watch mode to automatically regenerate theme and translation constants:
+
+```bash
+npm run watch
+```
+
+This monitors `assetsJs/` for changes and automatically regenerates UI constants when you modify `theme.js` or `translation.js`.
+
+### 2. Modify Theme or Translations
 
 Edit the JavaScript files in `assetsJs/`:
 
 **Theme (`assetsJs/theme.js`):**
 ```javascript
-colors: {
+// Material Design 3 - Only seed colors needed!
+const seedColors = {
     primary: '#6200EE',
     secondary: '#03DAC6',
-    // ... customize colors
-}
+    tertiary: '#A1D7E7'
+};
+// Full color palette auto-generated from seeds
 ```
 
 **Translations (`assetsJs/translation.js`):**
@@ -172,9 +186,12 @@ en_US: {
 }
 ```
 
-### 2. Build
+### 3. Manual Build
 
 ```bash
+# Manually generate UI constants
+npm run precompiler
+
 # Development build (with source maps)
 npm run build-dev
 
@@ -204,6 +221,24 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 ### Official Documentation
 
 📖 **[Full Framework Documentation](https://github.com/mobalazs/rotor-framework)**
+
+---
+
+## 🔧 Build Commands
+
+```bash
+# Development
+npm run watch            # Watch assetsJs/ and auto-regenerate on changes
+npm run precompiler      # Manually generate theme/translation constants
+npm run build-dev        # Development build with source maps
+
+# Production
+npm run build-prod       # Optimized production build
+
+# Code Quality
+npm run lint             # Lint BrighterScript code
+npm run sca              # Run Static Channel Analysis
+```
 
 ---
 
@@ -248,17 +283,28 @@ pageSettings: {
 
 ### Modifying Colors
 
+The starter uses **Material Design 3 (MD3)** with dynamic color generation. You only need to specify **seed colors**:
+
 Edit `assetsJs/theme.js`:
 
 ```javascript
-colors: {
-    primary: '#YOUR_COLOR',
-    secondary: '#YOUR_COLOR',
-    // ... customize
-}
+const seedColors = {
+    primary: '#YOUR_PRIMARY_COLOR',
+    secondary: '#YOUR_SECONDARY_COLOR',
+    tertiary: '#YOUR_TERTIARY_COLOR'
+};
 ```
 
-Run `npm run build-dev` to regenerate constants.
+The system automatically generates:
+- Full color palette with tonal variants
+- All MD3 color roles (primary, secondary, surface, error, etc.)
+- Hover/pressed states
+- Elevation surfaces (6 levels using overlay alpha blending)
+- State layers (hover, focus, pressed, dragged)
+
+**CTV-Optimized:** Elevation uses calculated overlay alpha instead of shadows for Roku compatibility.
+
+Run `npm run watch` (recommended) or `npm run build-dev` to regenerate constants.
 
 ### Adding Languages
 

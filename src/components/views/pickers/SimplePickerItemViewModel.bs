@@ -29,6 +29,7 @@ namespace ViewModels
                 nodeType: "Group",
                 focus: {
                     onFocusChanged: sub(isFocused as boolean) typecast m as ViewModels.SimplePickerItemViewModel
+                        m.viewModelState.isFocused = isFocused
                         m.children.itemBg.refresh("fields.color")
                         m.children.itemLabel.refresh("fields.color")
                     end sub,
@@ -44,9 +45,11 @@ namespace ViewModels
                         fields: {
                             color: function() as string
                                 if m.viewModelState.isFocused
-                                    return UI.colors.primaryHover
+                                    return UI.colors.secondaryContainer
+                                else if m.props.isSelected
+                                    return UI.colors.surfaceContainer
                                 end if
-                                return UI.colors.surface
+                                return UI.colors.surfaceContainerLow
                             end function,
                             width: 300,
                             height: itemHeight
@@ -60,9 +63,9 @@ namespace ViewModels
                             text: m.props.item.text,
                             color: function() as string
                                 if m.viewModelState.isFocused
-                                    return UI.colors.onPrimary
+                                    return UI.colors.onSecondaryContainer
                                 else if m.props.isSelected
-                                    return UI.colors.secondary
+                                    return UI.colors.primary
                                 end if
                                 return UI.colors.onSurface
                             end function,
