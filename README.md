@@ -298,5 +298,8 @@ de_DE: {
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE)￼ file for details.
-© 2025 Balázs Molnár — Rotor Framework™
+This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
+
+Built with [Rotor Framework](https://github.com/mobalazs/rotor-framework).
+
+© 2025 Balázs Molnár

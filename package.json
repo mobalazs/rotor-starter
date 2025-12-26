@@ -34,7 +34,7 @@
 		"ropm"
 	],
 	"author": "Balázs Molnár",
-	"license": "MIT",
+	"license": "Apache-2.0",
 	"bugs": {
 		"url": "https://github.com/mobalazs/magic-whitelabel/issues"
 	},
@@ -52,7 +52,7 @@
 	},
 	"dependencies": {
 		"@material/material-color-utilities": "^0.3.0",
-		"rotor-framework": "^0.5.4"
+		"rotor-framework": "^0.6.0"
 	},
 	"main": "index.js"
 }
