@@ -160,14 +160,12 @@ namespace Reducers
             end for
         end sub
 
-        override sub asyncReducerCallback(msg)
-            if msg.type = "roUrlEvent"
-                event = msg.event
-                context = msg.context
-                statusCode = event.GetResponseCode()
+        override sub asyncReducerCallback(msg, context)
+            if type(msg) = "roUrlEvent"
+                statusCode = msg.GetResponseCode()
 
                 if statusCode = 200
-                    jsonString = event.GetString()
+                    jsonString = msg.GetString()
                     json = ParseJson(jsonString)
 
                     m.dispatch({
@@ -179,11 +177,11 @@ namespace Reducers
                         }
                     })
                 else
-                    Utils.BasicLogger(`[CONTENT_READER] HTTP Error ${event.GetResponseCode()}: ${context}`)
+                    Utils.BasicLogger(`[CONTENT_READER] HTTP Error ${msg.GetResponseCode()}: ${context}`)
                     m.dispatch({
                         type: IntentTypes.ContentReader.FETCH_ERROR,
                         payload: {
-                            reason: event.GetFailureReason(),
+                            reason: msg.GetFailureReason(),
                             context: context,
                             statusCode: statusCode
                         }

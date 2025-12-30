@@ -33,7 +33,7 @@ namespace ViewModels
                         m.children.itemBg.refresh("fields.color")
                         m.children.itemLabel.refresh("fields.color")
                     end sub,
-                    onSelected: sub() typecast m as ViewModels.SimplePickerItemViewModel
+                    onSelect: sub() typecast m as ViewModels.SimplePickerItemViewModel
                         ' Notify parent picker of selection
                         m.getParentViewModel().onSelect(m.props.item)
                     end sub

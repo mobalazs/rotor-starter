@@ -21,7 +21,7 @@ namespace ViewModels
             m.children.menuLabel.refresh(["fontStyle", "fields.color"])
         end sub
 
-        sub onSelected()
+        sub onSelect()
             ' Navigate to page
             m.getDispatcher(m.props.dispatcherId).dispatch({
                 type: m.props.intentType,
@@ -55,8 +55,8 @@ namespace ViewModels
                         })
                     end sub,
 
-                    onSelected: sub() typecast m as ViewModels.MenuItemViewModel
-                        m.onSelected()
+                    onSelect: sub() typecast m as ViewModels.MenuItemViewModel
+                        m.onSelect()
                     end sub
                 },
                 children: [

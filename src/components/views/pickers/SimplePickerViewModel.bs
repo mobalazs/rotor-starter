@@ -68,7 +68,7 @@ namespace ViewModels
                         m.children.pickerButtonLabel.refresh("fields.color")
                         m.children.pickerArrowIcon.refresh("fields.color")
                     end sub,
-                    onSelected: sub() typecast m as ViewModels.SimplePickerViewModel
+                    onSelect: sub() typecast m as ViewModels.SimplePickerViewModel
                         m.onPickerSelected()
                     end sub
                 },
