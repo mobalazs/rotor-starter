@@ -26,7 +26,7 @@ class ManifestPlugin {
             }
 
             // Read manifest file from staging directory
-            const stagingDir = program.options?.stagingDir || 'dist';
+            const stagingDir = program.options?.outDir || program.options?.stagingDir || 'dist';
             const manifestPath = path.join(stagingDir, 'manifest');
 
             if (!fs.existsSync(manifestPath)) {

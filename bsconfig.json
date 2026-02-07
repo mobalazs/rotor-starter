@@ -1,6 +1,6 @@
 {
 	"rootDir": "src",
-	"stagingDir": "dist",
+	"outDir": "dist",
 
 	"bs_const": {
 		"debug": true,
