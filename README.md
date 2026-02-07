@@ -175,7 +175,7 @@ npm run build-dev
 npm run build-prod
 ```
 
-### 3. Access Generated Constants
+### 4. Access Generated Constants
 
 Theme and translations are automatically available:
 

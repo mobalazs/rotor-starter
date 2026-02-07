@@ -19,7 +19,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mobalazs/magic-whitelabel.git"
+		"url": "git+https://github.com/mobalazs/rotor-starter.git"
 	},
 	"keywords": [
 		"roku",
@@ -36,9 +36,9 @@
 	"author": "Balázs Molnár",
 	"license": "Apache-2.0",
 	"bugs": {
-		"url": "https://github.com/mobalazs/magic-whitelabel/issues"
+		"url": "https://github.com/mobalazs/rotor-starter/issues"
 	},
-	"homepage": "https://github.com/mobalazs/magic-whitelabel#readme",
+	"homepage": "https://github.com/mobalazs/rotor-starter#readme",
 	"devDependencies": {
 		"@rokucommunity/bslint": "1.0.0-alpha.50",
 		"@rokucommunity/promises": "^0.6.6",
