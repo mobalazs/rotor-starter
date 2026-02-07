@@ -6,10 +6,10 @@ namespace Reducers
     class ContentReaderReducer extends Rotor.Reducer
 
         sub logIntent(intent)
-            Utils.BasicLogger(`[CONTENT_READER] dispatcherId: ${m.ownerDispatcherId}, type: ${intent.type}`)
+            Utils.BasicLogger(`[CONTENT_READER] dispatcherId: ${m.dispatcherId}, type: ${intent.type}`)
         end sub
 
-        transferPool = {}
+        transferRowMap = {}
 
         rows = [
             { titleKeys: "popularMovies", endpoint: "/movie/popular", data: invalid },
@@ -18,6 +18,16 @@ namespace Reducers
             { titleKeys: "upcoming", endpoint: "/movie/upcoming", data: invalid },
             { titleKeys: "trendingThisWeek", endpoint: "/trending/movie/week", data: invalid }
         ]
+
+        override sub onCreateDispatcher()
+            ' Create and register roUrlTransfer objects once
+            for each row in m.rows
+                transfer = CreateObject("roUrlTransfer")
+                transfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
+                m.registerSourceObject(transfer)
+                row.transfer = transfer
+            end for
+        end sub
 
         ' ======================
         ' Dispatcher Middlewares
@@ -50,7 +60,7 @@ namespace Reducers
                     if intent.type = IntentTypes.ContentReader.FETCH_DONE
 
                         json = intent.payload.json
-                        row = intent.payload.context
+                        row = intent.payload.row
                         statusCode = intent.payload.statusCode
                         row.data = json.results
 
@@ -139,29 +149,28 @@ namespace Reducers
                 return
             end if
 
-            ' Launch all requests using roUrlTransfer
+            ' Launch all requests using pre-registered roUrlTransfer objects
             for each row in m.rows
                 locale = m.getState().locale
                 locale = locale.Replace("_", "-") ' api requires hyphen format
                 url = `https://api.themoviedb.org/3${row.endpoint}?api_key=${apiKey}&language=${locale},en-US&include_image_language=${locale},null&page=1`
 
-                m.transferPool[row.endpoint] = CreateObject("roUrlTransfer")
-                transfer = m.transferPool[row.endpoint]
+                transfer = row.transfer
                 transfer.SetUrl(url)
                 Utils.BasicLogger(`[CONTENT_READER] Starting async request url: ${url}`)
 
-                transfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
-                transfer.SetMessagePort(m.port)
-
-                ' Register transfer with framework before async call
-                m.registerAsyncTransfer(transfer, row)
+                m.transferRowMap[transfer.GetIdentity().toStr()] = row
 
                 transfer.AsyncGetToString()
             end for
         end sub
 
-        override sub asyncReducerCallback(msg, context)
+        override sub onSourceEvent(msg as object)
             if type(msg) = "roUrlEvent"
+                rowKey = msg.GetSourceIdentity().toStr()
+                row = m.transferRowMap[rowKey]
+                m.transferRowMap.Delete(rowKey)
+
                 statusCode = msg.GetResponseCode()
 
                 if statusCode = 200
@@ -172,17 +181,17 @@ namespace Reducers
                         type: IntentTypes.ContentReader.FETCH_DONE,
                         payload: {
                             json: json,
-                            context: context,
+                            row: row,
                             statusCode: statusCode
                         }
                     })
                 else
-                    Utils.BasicLogger(`[CONTENT_READER] HTTP Error ${msg.GetResponseCode()}: ${context}`)
+                    Utils.BasicLogger(`[CONTENT_READER] HTTP Error ${msg.GetResponseCode()}: ${row}`)
                     m.dispatch({
                         type: IntentTypes.ContentReader.FETCH_ERROR,
                         payload: {
                             reason: msg.GetFailureReason(),
-                            context: context,
+                            row: row,
                             statusCode: statusCode
                         }
                     })

@@ -39,6 +39,7 @@ namespace ViewModels
                 nodeType: "Group",
                 dispatcher: "navigation",
                 focus: {
+                    enableSpatialNavigation: true,
                     onFocusChanged: sub(isFocused as boolean): typecast m as ViewModels.MenuItemViewModel
                         m.viewModelState.isFocused = isFocused
                         m.onUpdateView()
