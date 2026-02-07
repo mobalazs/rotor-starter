@@ -40,14 +40,15 @@
 	},
 	"homepage": "https://github.com/mobalazs/magic-whitelabel#readme",
 	"devDependencies": {
-		"@rokucommunity/bslint": "1.0.0-alpha.48",
+		"@rokucommunity/bslint": "1.0.0-alpha.50",
 		"@rokucommunity/promises": "^0.6.6",
 		"@types/node": "^20.8.2",
-		"brighterscript": "1.0.0-alpha.48",
+		"brighterscript": "1.0.0-alpha.50",
 		"nodemon": "^3.1.11",
 		"obj-keypath": "^1.1.0",
 		"ts-node": "^10.9.1",
 		"ts-node-cwd": "^10.9.2",
+		"roku-deploy": "^3.16.1",
 		"typescript": "^5.2.2"
 	},
 	"dependencies": {
