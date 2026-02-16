@@ -125,7 +125,7 @@ namespace ViewModels
                         ' Set proper width for menu background based on menu items container width (adapt to different text lengths)
                         observer: {
                             fieldId: "renderTracking",
-                            callback: sub(payload)
+                            handler: sub()
                                 menuBackgroundNode = m.getSiblingWidget("menuBackground").node
                                 ' Set menu background width to match menu items container width
                                 menuBackgroundNode.width = m.getViewModel().getBgWidth(m.viewModelState.isFocused)

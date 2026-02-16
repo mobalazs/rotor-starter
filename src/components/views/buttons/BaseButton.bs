@@ -25,11 +25,11 @@ namespace ViewModels
             height = fontStyle.size + 2 * m.props.paddings[0]
 
             '''''''''
-            ' autoSizeObserverCallback: Observer callback for auto-sizing button width based on text content.
+            ' autoSizeObserverHandler: Observer handler for auto-sizing button width based on text content.
             ' Triggered when renderTracking or text field changes.
             ' Updates both button background and label width to match text width plus horizontal padding.
             '''''''''
-            autoSizeObserverCallback = sub(payload) typecast m as Rotor.Widget ' buttonLabel
+            autoSizeObserverHandler = sub() typecast m as Rotor.Widget ' buttonLabel
                 buttonBgNode = m.getSiblingWidget("buttonBg").node
                 labelNode = m.node
 
@@ -93,10 +93,10 @@ namespace ViewModels
                         },
                         observer: [{
                             fieldId: "renderTracking",
-                            callback: autoSizeObserverCallback
+                            handler: autoSizeObserverHandler
                         }, {
                             fieldId: "text",
-                            callback: autoSizeObserverCallback
+                            handler: autoSizeObserverHandler
                         }]
                     }
                 ]
