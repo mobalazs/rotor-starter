@@ -40,12 +40,15 @@ namespace ViewModels
                             text: "@l10n.buttons.clickMe"
                         },
                         focus: {
-                            down: "languageSelector"
+                            enableSpatialNavigation: true
                         }
                     },
                     {
                         id: "languageSelector",
                         viewModel: ViewModels.SettingSelectorViewModel,
+                        focusGroup: {
+                            enableSpatialNavigation: true
+                        },
                         props: {
                             iconUri: UI.components.settings.settingIcon.iconUri.language,
                             labelText: "@l10n.settings.language",

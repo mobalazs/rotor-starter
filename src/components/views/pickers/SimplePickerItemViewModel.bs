@@ -28,6 +28,7 @@ namespace ViewModels
             return {
                 nodeType: "Group",
                 focus: {
+                    enableSpatialNavigation: true,
                     onFocusChanged: sub(isFocused as boolean) typecast m as ViewModels.SimplePickerItemViewModel
                         m.viewModelState.isFocused = isFocused
                         m.children.itemBg.refresh("fields.color")
