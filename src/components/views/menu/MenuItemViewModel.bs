@@ -23,7 +23,7 @@ namespace ViewModels
 
         sub onSelect()
             ' Navigate to page
-            m.getDispatcher(m.props.dispatcherId).dispatch({
+            m.connectDispatcher(m.props.dispatcherId).dispatch({
                 type: m.props.intentType,
                 payload: { pageId: m.props.pageId }
             })

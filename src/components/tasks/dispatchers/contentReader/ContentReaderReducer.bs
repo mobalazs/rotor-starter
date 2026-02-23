@@ -22,9 +22,8 @@ namespace Reducers
         override sub onCreateDispatcher()
             ' Create and register roUrlTransfer objects once
             for each row in m.rows
-                transfer = CreateObject("roUrlTransfer")
+                transfer = m.registerSourceObject("roUrlTransfer")
                 transfer.SetCertificatesFile("common:/certs/ca-bundle.crt")
-                m.registerSourceObject(transfer)
                 row.transfer = transfer
             end for
         end sub

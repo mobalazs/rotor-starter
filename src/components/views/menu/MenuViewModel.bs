@@ -22,7 +22,7 @@ namespace ViewModels
 
         override sub onCreateView()
             Utils.BasicLogger("[MenuViewModel] Create menu")
-            m.navDispatcher = m.getDispatcher(m.props.navDispatcherId)
+            m.navDispatcher = m.connectDispatcher(m.props.navDispatcherId)
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
@@ -54,7 +54,7 @@ namespace ViewModels
 
         override sub onDestroyView()
             Utils.BasicLogger("[MenuViewModel] Update menu")
-            m.navDispatcher.destroy()
+            m.navDispatcher.release()
             m.menuBackgroundWidget = invalid
             m.menuLabels = invalid
         end sub

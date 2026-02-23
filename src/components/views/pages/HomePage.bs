@@ -84,7 +84,7 @@ namespace ViewModels
 
         override sub onCreateView()
             ' Get Content Reader Dispatcher
-            m.crDispatcher = m.getDispatcher("contentReaderDispatcher")
+            m.crDispatcher = m.connectDispatcher("contentReaderDispatcher")
         end sub
 
         override sub onMountView()
@@ -103,7 +103,7 @@ namespace ViewModels
 
         override sub onDestroyView()
             ' Destroy Content Reader Dispatcher
-            m.crDispatcher.destroy()
+            m.crDispatcher.release()
         end sub
 
         ' ==============

@@ -28,7 +28,7 @@ namespace ViewModels
             Utils.BasicLogger("[LayoutViewModel] Creating layout controller")
 
             ' Get reference to dispatcher
-            m.navDispatcher = m.getDispatcher("navigation")
+            m.navDispatcher = m.connectDispatcher("navigation")
 
             ' Listen for navigation state changes
             m.navDispatcher.addListener({
@@ -118,7 +118,7 @@ namespace ViewModels
 
         override sub onDestroyView()
             Utils.BasicLogger("[LayoutViewModel] Destroying layout controller")
-            m.navDispatcher.destroy()
+            m.navDispatcher.release()
         end sub
 
         ' ==========================================
