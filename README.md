@@ -1,13 +1,13 @@
-[![build status](https://img.shields.io/github/actions/workflow/status/mobalazs/rotor-starter/main-workflow.yml?branch=main&logo=github&label=build)](https://github.com/mobalazs/rotor-starter/actions/workflows/main-workflow.yml)
+[![build status](https://img.shields.io/github/actions/workflow/status/thepurpleplatform/rotor-starter/main-workflow.yml?branch=main&logo=github&label=build)](https://github.com/thepurpleplatform/rotor-starter/actions/workflows/main-workflow.yml)
 ![use template](https://img.shields.io/badge/use_this-template-brightgreen)
-![license](https://img.shields.io/github/license/mobalazs/rotor-starter)
+![license](https://img.shields.io/github/license/thepurpleplatform/rotor-starter)
 ![code style](https://img.shields.io/badge/lint-bslint-yellow)
-![code size](https://img.shields.io/github/languages/code-size/mobalazs/rotor-starter)
+![code size](https://img.shields.io/github/languages/code-size/thepurpleplatform/rotor-starter)
 [![Slack](https://img.shields.io/badge/Slack-RokuDevelopers-4A154B?logo=slack)](https://rokudevelopers.slack.com)
 
 # 🚀 Rotor Starter
 
-**A professional starter template for building Roku applications with the [Rotor Framework](https://github.com/mobalazs/rotor-framework).**
+**A professional starter template for building Roku applications with the [Rotor Framework](https://github.com/thepurpleplatform/rotor-framework).**
 
 This GitHub template repository provides a complete boilerplate with best practices, example implementations, and a modern development workflow to help you kickstart your Roku app development journey.
 
@@ -186,7 +186,7 @@ UI.typography.titleLarge_aa ' Access typography
 @l10n.appTitle              ' Access translations (see Fields Plugin doc)
 ```
 
-**Note:** The `@` operator for accessing translations uses the Fields Plugin. See the [Fields Plugin Documentation](https://github.com/mobalazs/rotor-framework/blob/main/docs/view-builder-fields-plugin.md) for details on string interpolation and viewModelState references.
+**Note:** The `@` operator for accessing translations uses the Fields Plugin. See the [Fields Plugin Documentation](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/view-builder-fields-plugin.md) for details on string interpolation and viewModelState references.
 
 ---
 
@@ -196,7 +196,7 @@ This starter uses the **Rotor Framework** - a modern, ViewModel-first UI framewo
 
 ### Official Documentation
 
-📖 **[Full Framework Documentation](https://github.com/mobalazs/rotor-framework)**
+📖 **[Full Framework Documentation](https://github.com/thepurpleplatform/rotor-framework)**
 
 ---
 
@@ -300,6 +300,6 @@ de_DE: {
 
 This project is licensed under the Apache License 2.0 — see the [LICENSE](LICENSE) file for details.
 
-Built with [Rotor Framework](https://github.com/mobalazs/rotor-framework).
+Built with [Rotor Framework](https://github.com/thepurpleplatform/rotor-framework).
 
 © 2025 Balázs Molnár

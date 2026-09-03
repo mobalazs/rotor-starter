@@ -8,21 +8,21 @@ This is a **Rotor Framework** starter project for building Roku applications usi
 
 **IMPORTANT**: Full Rotor Framework documentation for AI learning is available here:
 
-🌱 **[Token-effective Rotor Framework Documentation Index](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/index.yaml)**
+🌱 **[Token-effective Rotor Framework Documentation Index](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/index.yaml)**
 
 ### Core Documentation (MUST READ)
 
-1. **[Framework Overview & Quick Start](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/readme.opt.yaml)**
+1. **[Framework Overview & Quick Start](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/readme.opt.yaml)**
    - ViewModel-first UI framework for Roku
    - Declarative view construction without XML
    - Quick start examples
 
-2. **[Framework Initialization](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/framework-initialization.opt.yaml)**
+2. **[Framework Initialization](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/framework-initialization.opt.yaml)**
    - Configuration options (rootNode, tasks, callbacks)
    - 10-step lifecycle process
    - Node pool setup and optimization
 
-3. **[Cross-Thread MVI Architecture](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/cross-thread-mvi.opt.yaml)**
+3. **[Cross-Thread MVI Architecture](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/cross-thread-mvi.opt.yaml)**
    - Model-View-Intent pattern for Roku
    - State flow: Render Thread → Task Thread → Render Thread
    - Dispatcher, Reducer, Middleware concepts
@@ -30,18 +30,18 @@ This is a **Rotor Framework** starter project for building Roku applications usi
 
 ### ViewBuilder System
 
-4. **[ViewBuilder Overview](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-overview.opt.yaml)**
+4. **[ViewBuilder Overview](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-overview.opt.yaml)**
    - Three-layer architecture (Engine, Virtual Tree, Plugins)
    - Widget and ViewModel concepts
    - Rendering lifecycle and HID system
 
-5. **[Widget Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-widget-reference.opt.yaml)**
+5. **[Widget Reference](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-widget-reference.opt.yaml)**
    - Widget configuration properties (id, nodeType, fields, children)
    - Lifecycle hooks (onMountWidget, onUpdateWidget, onDestroyWidget)
    - Navigation methods (getWidget, findWidgets, getSiblingWidget)
    - State management methods (getDispatcher, createDispatcher)
 
-6. **[ViewModel Reference](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-viewmodel-reference.opt.yaml)**
+6. **[ViewModel Reference](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-viewmodel-reference.opt.yaml)**
    - Props and viewModelState concepts
    - template() method for defining UI structure
    - Lifecycle hooks (onCreateView, onTemplateCreated, onUpdateView, onDestroyView)
@@ -49,30 +49,30 @@ This is a **Rotor Framework** starter project for building Roku applications usi
 
 ### Plugin System
 
-7. **[Fields Plugin](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-fields-plugin.opt.yaml)**
+7. **[Fields Plugin](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-fields-plugin.opt.yaml)**
    - Declarative field management
    - @ operator for viewModelState references
    - String interpolation with backticks
    - Function expressions for dynamic values
 
-8. **[Focus Plugin](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-focus-plugin.opt.yaml)**
+8. **[Focus Plugin](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-focus-plugin.opt.yaml)**
    - Navigation strategies (Bubbling, Capturing, Spatial)
    - FocusItem and FocusGroup configuration
    - Direction overrides (up/down/left/right/back)
    - Callbacks (onFocusChanged, onFocus, onSelected)
 
-9. **[Observer Plugin](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-observer-plugin.opt.yaml)**
+9. **[Observer Plugin](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-observer-plugin.opt.yaml)**
    - Field observation patterns
    - Single/multiple observers per widget
    - Configuration (fieldId, callback, once, until, parsePayload)
    - Automatic lifecycle management
 
-10. **[FontStyle Plugin](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/view-builder-fontstyle-plugin.opt.yaml)**
+10. **[FontStyle Plugin](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/view-builder-fontstyle-plugin.opt.yaml)**
     - Typography configuration
 
 ### Features
 
-11. **[i18n Support](https://github.com/mobalazs/rotor-framework/blob/main/docs/ai/i18n-support.opt.yaml)**
+11. **[i18n Support](https://github.com/thepurpleplatform/rotor-framework/blob/main/docs/ai/i18n-support.opt.yaml)**
     - Internationalization system
 
 ### Key Concepts Summary
